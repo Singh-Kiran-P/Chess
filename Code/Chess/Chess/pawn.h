@@ -10,14 +10,13 @@ public:
 	void setName(std::string name);
 	void setColor(Color color);
 
-	//Color getColor();
+	Color getColor();
 
 private:
 	bool check_move(Position moveTo);
 
 	std::string m_name =".";
 	bool m_firstTurn;
-	Position m_position;
 	Color m_color;
 	bool m_killed;
 };

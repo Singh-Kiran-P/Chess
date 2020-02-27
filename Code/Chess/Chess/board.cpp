@@ -1,5 +1,4 @@
 #include "board.h"
-#include "color.h"
 #include <iostream>
 
 Pawn Board::getPiece(Position position) {
@@ -15,13 +14,13 @@ void Board::move(std::string currentpos, std::string moveTo) {
     current.setpos(currentpos);
     next.setpos(moveTo);
 
-    Pawn piece = getPiece(current.getx(), current.gety());
-    if (piece.getName() != "." ) {
-       m_board[next.getx()][next.gety()] = piece;
-       Pawn emptypawn;
-       m_board[current.getx()][current.gety()] = emptypawn;
+    if (getPiece(next).getColor() != getPiece(current).getColor() || getPiece(next).getName() == ".") {
+        Pawn piece = getPiece(current.getx(), current.gety());
+        m_board[next.getx()][next.gety()] = piece;
+        Pawn emptypawn;
+        m_board[current.getx()][current.gety()] = emptypawn;
    }
-}
+};
 
 void Board::printBoard()
 {
@@ -52,7 +51,7 @@ void Board::printBoard()
 	}
     std::cout << "\n" << std::endl;
 
-}
+};
 
 //rest and init board
 void Board::resetBoard()
@@ -78,7 +77,7 @@ void Board::resetBoard()
 
 		}
 	}
-}
+};
 
 Pawn Board::getPiece(int x, int y)
 {
@@ -89,4 +88,4 @@ Pawn Board::getPiece(int x, int y)
 Board::Board()
 {
 	resetBoard();
-}
+};
