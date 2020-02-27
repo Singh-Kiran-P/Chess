@@ -13,7 +13,7 @@ void Board::move(std::string currentpos, std::string moveTo) {
     Position next;
     current.setpos(currentpos);
     next.setpos(moveTo);
-    
+
     Pawn piece = getPiece(currentpos);
     if (piece.getName() != "." ) {
        m_board[moveTo.getx()][moveTo.gety()] = piece;
@@ -60,10 +60,11 @@ void Board::resetBoard()
 	{
 		for (int j = 0; j < 8; j++)
 		{
-			if (i == 1 || i == 6)
+			if (i == 1 )
 			{
 				Pawn p;
 				p.setName("P");
+
 
 				m_board[i][j] = p;
 
