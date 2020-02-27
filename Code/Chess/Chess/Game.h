@@ -1,8 +1,8 @@
 #ifndef GAME
 #define GAME
 #include <ctime>
-#include Player
-#include Board
+#include "player.h"
+#include "board.h"
 class Game
 {
 public:

@@ -2,7 +2,6 @@
 #define PLAYER
 #include <string>
 #include "color.h"
-
 using namespace std;
 
 class Player {
