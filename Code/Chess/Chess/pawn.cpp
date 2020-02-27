@@ -24,7 +24,7 @@ bool Pawn::firtsTurn()
 	return m_firstTurn;
 }
 
-void Pawn::setfirstTurn()
+void Pawn::setfirstTurnFalse()
 {
 	m_firstTurn = false;
 }
