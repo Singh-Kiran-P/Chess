@@ -14,8 +14,12 @@ bool Board::checkRestrictions(int curr_x, int curr_y,int next_x,int next_y)
 	Pawn p = m_board[curr_x][curr_y];
 	if (p.firtsTurn())
 	{
-		if (curr_y ==next_y && (next_x == curr_x+2) || (next_x == curr_x +1))
+		if (curr_y ==next_y && (next_x == curr_x+2) )
 		{
+			p.setfirstTurn();
+			return true;
+		}
+		else if ((next_x == curr_x + 1)) {
 			return true;
 		}
 	}
@@ -44,14 +48,8 @@ void Board::printBoard()
 {
 	for (int i = 0; i < 8; i++)
 	{
-		if (i == 0)std::cout << "A| ";
-		if (i == 1)std::cout << "B| ";
-		if (i == 2)std::cout << "C| ";
-		if (i == 3)std::cout << "D| ";
-		if (i == 4)std::cout << "E| ";
-		if (i == 5)std::cout << "F| ";
-		if (i == 6)std::cout << "G| ";
-		if (i == 7)std::cout << "H| ";
+	std::cout << i<<" |";
+	
 
 
 		for (int j = 0; j < 8; j++)
@@ -63,10 +61,9 @@ void Board::printBoard()
 	}
 	std::cout << "   ";
 
-	for (int i = 0; i < 8; i++)
-	{
-		std::cout << i << " ";
-	}
+
+		std::cout << "A B C D E F G H";
+	
     std::cout << "\n" << std::endl;
 
 };

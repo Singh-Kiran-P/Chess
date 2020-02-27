@@ -10,6 +10,7 @@ public:
 	void setName(std::string name);
 	void setColor(Color color);
 	bool firtsTurn();
+	void setfirstTurn();
 	//Color getColor();
 
 private:
