@@ -15,7 +15,7 @@ bool Board::checkRestrictions(int curr_x, int curr_y,int next_x,int next_y)
 	Pawn p = m_board[curr_x][curr_y];
 	if (p.firtsTurn())
 	{
-		if (curr_x ==next_x && (next_y == curr_y+2) || (next_y == curr_y +1))
+		if (curr_y ==next_y && (next_x == curr_x+2) || (next_x == curr_x +1))
 		{
 			return true;
 		}
