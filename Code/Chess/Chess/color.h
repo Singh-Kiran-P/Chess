@@ -3,4 +3,4 @@
 
 enum class Color { Black, White };
 
-#define COLOR
+#endif
