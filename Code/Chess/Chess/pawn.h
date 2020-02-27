@@ -16,9 +16,9 @@ private:
 	bool check_move(Position moveTo);
 
 	std::string m_name =".";
-	bool m_firstTurn;
+	bool m_firstTurn = true;
 	Color m_color;
-	bool m_killed;
+	bool m_killed = false;
 };
 
 
