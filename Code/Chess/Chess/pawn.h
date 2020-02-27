@@ -9,7 +9,7 @@ public:
 	std::string getName();
 	void setName(std::string name);
 	void setColor(Color color);
-
+	bool firtsTurn();
 	//Color getColor();
 
 private:

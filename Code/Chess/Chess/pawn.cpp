@@ -21,6 +21,11 @@ void Pawn::setColor(Color color) {
 	m_color = color;
 }
 
+bool Pawn::firtsTurn()
+{
+	return m_firstTurn;
+}
+
 // Color getColor() {
 // 	return m_color;
 // }
