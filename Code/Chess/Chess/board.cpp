@@ -51,6 +51,16 @@ void Board::resetBoard()
 	}
 }
 
+Pawn Board::getPiece(int x, int y)
+{
+	return m_board[x][y];
+}
+
+void Board::move(Position moveTo)
+{
+
+}
+
 Board::Board()
 {
 	resetBoard();

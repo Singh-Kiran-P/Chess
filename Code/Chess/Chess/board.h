@@ -6,6 +6,8 @@ class Board {
     public:
         void printBoard();
         void resetBoard();
+        Pawn getPiece(int x,int y);
+        void move(Position moveTo);
         Board();
     
     private:
