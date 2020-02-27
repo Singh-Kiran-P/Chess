@@ -1,10 +1,22 @@
 #ifndef PAWN
 #define PAWN
-#include "piece.h"
+#include "color.h"
 #include "position.h"
-class Pawn : public Piece {
+#include <string>
+
+class Pawn {
 public:
-	bool check_move(Position moveTo);	
+	std::string getName();
+	bool move(Position moveTo);
+
+private:
+	bool check_move(Position moveTo);
+
+	std::string m_name ="P";
+	bool m_firstTurn;
+	Position m_position;
+	Color m_color;
+	bool m_killed;
 };
 
 

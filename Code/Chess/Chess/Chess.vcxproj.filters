@@ -30,12 +30,18 @@
     <ClInclude Include="position.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="piece.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="testClass.cpp">
+    <ClCompile Include="pawn.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="board.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="pawn.cpp">

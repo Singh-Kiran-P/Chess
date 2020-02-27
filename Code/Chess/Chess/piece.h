@@ -5,7 +5,7 @@
 
 class Piece {
     public:
-        void move(Piece p, Position pos);
+        bool move(Piece p, Position pos);
     private:
         Position m_position;
         Color m_color;
