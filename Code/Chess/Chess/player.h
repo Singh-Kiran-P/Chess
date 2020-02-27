@@ -1,6 +1,6 @@
-IFNDEF PLAYER
-DEFINE PLAYER
-include <string>
+#ifndef PLAYER
+#define PLAYER
+#include <string>
 #include "color.h"
 
 using namespace std;
@@ -11,4 +11,4 @@ class Player {
         Color m_color;
 };
 
-ENDIF
+#endif
