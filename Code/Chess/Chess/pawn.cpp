@@ -21,6 +21,6 @@ void Pawn::setColor(Color color) {
 	m_color = color;
 }
 
-Color getColor() {
-	return m_color;
-}
+// Color getColor() {
+// 	return m_color;
+// }

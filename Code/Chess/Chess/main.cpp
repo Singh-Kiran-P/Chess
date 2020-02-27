@@ -8,7 +8,7 @@ int main() {
 	newBoard.move("A3", "B2");
 
 	newBoard.printBoard();
-	
+
 	return 1;
 
 }

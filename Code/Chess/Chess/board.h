@@ -5,7 +5,7 @@
 class Board {
     public:
         Pawn getPiece(Position position);
-        void move(Position currentpos, Position moveTo);
+        void move(std::string currentpos, std::string moveTo);
         void printBoard();
         void resetBoard();
         Pawn getPiece(int x,int y);

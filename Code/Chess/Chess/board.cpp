@@ -14,11 +14,11 @@ void Board::move(std::string currentpos, std::string moveTo) {
     current.setpos(currentpos);
     next.setpos(moveTo);
 
-    Pawn piece = getPiece(currentpos);
+    Pawn piece = getPiece(current.getx(), current.gety());
     if (piece.getName() != "." ) {
-       m_board[moveTo.getx()][moveTo.gety()] = piece;
+       m_board[next.getx()][next.gety()] = piece;
        Pawn emptypawn;
-       m_board[currentpos.getx()][currentpos.gety()] = emptypawn;
+       m_board[current.getx()][current.gety()] = emptypawn;
    }
 }
 

@@ -10,7 +10,7 @@ public:
 	void setName(std::string name);
 	void setColor(Color color);
 
-	Color getColor();
+	//Color getColor();
 
 private:
 	bool check_move(Position moveTo);
