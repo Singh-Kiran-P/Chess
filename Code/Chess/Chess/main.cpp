@@ -5,7 +5,7 @@ int main() {
 	Board newBoard;
 	newBoard.printBoard();
 
-	newBoard.move("A3", "B2");
+	newBoard.move("B0", "C0");
 
 	newBoard.printBoard();
 
