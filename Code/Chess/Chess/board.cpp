@@ -1,21 +1,21 @@
 #include "board.h"
 #include <iostream>
 
-//Pawn Board::getPiece(Position position) {
-//    int x = position.getx();
-//    int y = position.gety();
-//
-//    return m_board[x][y];
-//}
-//
-//void Board::move(Position currentpos, Position moveTo) {
-//    Pawn piece = getPiece(currentpos);
-//    if (piece.getName() != "." ) {
-//        m_board[moveTo.getx()][moveTo.gety()] = piece;
-//        Pawn emptypawn;
-//        m_board[currentpos.getx()][currentpos.gety()] = emptypawn;
-//    }
-//}
+Pawn Board::getPiece(Position position) {
+    int x = position.getx();
+    int y = position.gety();
+
+    return m_board[x][y];
+}
+
+void Board::move(Position currentpos, Position moveTo) {
+    Pawn piece = getPiece(currentpos);
+    if (piece.getName() != "." ) {
+        m_board[moveTo.getx()][moveTo.gety()] = piece;
+        Pawn emptypawn;
+        m_board[currentpos.getx()][currentpos.gety()] = emptypawn;
+    }
+}
 
 void Board::printBoard()
 {
@@ -54,10 +54,11 @@ void Board::resetBoard()
 	{
 		for (int j = 0; j < 8; j++)
 		{
-			if (i == 1 || i == 6)
+			if (i == 1 )
 			{
 				Pawn p;
 				p.setName("P");
+				
 
 				m_board[i][j] = p;
 

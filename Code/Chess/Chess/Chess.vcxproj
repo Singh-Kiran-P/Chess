@@ -31,6 +31,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="pawn.cpp" />
     <ClCompile Include="pawn.h" />
+    <ClCompile Include="position.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
