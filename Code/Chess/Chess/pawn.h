@@ -7,12 +7,13 @@
 class Pawn {
 public:
 	std::string getName();
+	void setName(std::string name);
 	bool move(Position moveTo);
 
 private:
 	bool check_move(Position moveTo);
 
-	std::string m_name ="P";
+	std::string m_name =".";
 	bool m_firstTurn;
 	Position m_position;
 	Color m_color;
