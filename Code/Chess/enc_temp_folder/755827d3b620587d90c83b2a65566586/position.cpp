@@ -14,7 +14,8 @@ void Position::setpos(int x, int y) {
 }
 void Position::setpos(std::string pos)
 {
-	
+	std::string  sm_ypos = pos.substr(0);
 
 
+	//int sm_ypos = stoi(pos.substr(1));
 };
