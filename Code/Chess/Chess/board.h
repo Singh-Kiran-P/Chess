@@ -4,10 +4,9 @@
 #include "pawn.h"
 class Board {
     public:
-        Pawn getPiece(Position position);
         void move(std::string currentpos, std::string moveTo);
         void printBoard();
-        void resetBoard();
+        Pawn getPiece(Position position);
         Pawn getPiece(int x,int y);
         void move(Position moveTo);
         Board();
@@ -16,6 +15,8 @@ class Board {
     private:
         Pawn m_board[BOARD_SIZE][BOARD_SIZE];
         bool checkRestrictions(int curr_x, int curr_y, int next_x, int next_y, Pawn& p);
+        void resetBoard();
+
 };
 
 #endif

@@ -14,8 +14,8 @@ public:
 	//Color getColor();
 
 private:
-	bool check_move(Position moveTo);
 
+	bool check_move(Position moveTo);
 	std::string m_name =".";
 	bool m_firstTurn = true;
 	Color m_color;

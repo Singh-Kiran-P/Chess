@@ -21,9 +21,6 @@
   <ItemGroup>
     <ClInclude Include="board.h" />
     <ClInclude Include="color.h" />
-    <ClInclude Include="game.h" />
-    <ClInclude Include="piece.h" />
-    <ClInclude Include="player.h" />
     <ClInclude Include="position.h" />
   </ItemGroup>
   <ItemGroup>
