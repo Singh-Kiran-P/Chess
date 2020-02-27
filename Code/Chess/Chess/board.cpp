@@ -1,5 +1,4 @@
 #include "board.h"
-#include "color.h"
 #include <iostream>
 
 Pawn Board::getPiece(Position position) {
@@ -19,7 +18,7 @@ bool Board::checkRestrictions(int curr_x, int curr_y,int next_x,int next_y)
 		{
 			return true;
 		}
-	} 
+	}
 	return res;
 }
 
@@ -38,7 +37,7 @@ void Board::move(std::string currentpos, std::string moveTo) {
 		}
 
 
-   
+
 }
 
 void Board::printBoard()
@@ -70,7 +69,7 @@ void Board::printBoard()
 	}
     std::cout << "\n" << std::endl;
 
-}
+};
 
 //rest and init board
 void Board::resetBoard()
@@ -96,7 +95,7 @@ void Board::resetBoard()
 
 		}
 	}
-}
+};
 
 Pawn Board::getPiece(int x, int y)
 {
@@ -106,5 +105,4 @@ Pawn Board::getPiece(int x, int y)
 Board::Board()
 {
 	resetBoard();
-}
-
+};

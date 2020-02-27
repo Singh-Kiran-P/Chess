@@ -17,7 +17,6 @@ private:
 
 	std::string m_name =".";
 	bool m_firstTurn;
-	Position m_position;
 	Color m_color;
 	bool m_killed;
 };
