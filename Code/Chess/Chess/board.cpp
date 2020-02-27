@@ -1,7 +1,6 @@
 #include "board.h"
 #include <iostream>
 
-<<<<<<< HEAD
 Position Board::getPiece(Position position) {
     int x = position.getx();
     int y = position.gety();
@@ -18,8 +17,6 @@ void Board::move(Position currentpos, Position moveTo) {
     }
 }
 
-=======
->>>>>>> e65d8478c8dfd27ce2b4f72a84dcf5fe1eaf09c3
 void Board::printBoard()
 {
 	for (int i = 0; i < 8; i++)
