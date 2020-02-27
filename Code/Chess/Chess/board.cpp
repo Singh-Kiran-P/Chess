@@ -16,7 +16,7 @@ bool Board::checkRestrictions(int curr_x, int curr_y,int next_x,int next_y)
 	{
 		if (curr_y ==next_y && (next_x == curr_x+2) )
 		{
-			p.setfirstTurn();
+			p.setfirstTurnFalse();
 			return true;
 		}
 		else if ((next_x == curr_x + 1)) {
