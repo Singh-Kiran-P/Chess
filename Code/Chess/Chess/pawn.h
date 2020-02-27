@@ -7,8 +7,6 @@
 class Pawn {
 public:
 	std::string getName();
-	void setName(std::string name);
-	bool move(Position moveTo);
 
 private:
 	bool check_move(Position moveTo);
