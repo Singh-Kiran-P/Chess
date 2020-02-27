@@ -16,3 +16,11 @@ void Pawn::setName(std::string name)
 {
 	m_name = name;
 }
+
+void Pawn::setColor(Color color) {
+	m_color = color;
+}
+
+Color getColor() {
+	return m_color;
+}

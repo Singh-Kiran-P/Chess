@@ -8,6 +8,9 @@ class Pawn {
 public:
 	std::string getName();
 	void setName(std::string name);
+	void setColor(Color color);
+
+	Color getColor();
 
 private:
 	bool check_move(Position moveTo);

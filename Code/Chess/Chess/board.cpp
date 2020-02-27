@@ -1,21 +1,26 @@
 #include "board.h"
 #include <iostream>
 
-//Pawn Board::getPiece(Position position) {
-//    int x = position.getx();
-//    int y = position.gety();
-//
-//    return m_board[x][y];
-//}
-//
-//void Board::move(Position currentpos, Position moveTo) {
-//    Pawn piece = getPiece(currentpos);
-//    if (piece.getName() != "." ) {
-//        m_board[moveTo.getx()][moveTo.gety()] = piece;
-//        Pawn emptypawn;
-//        m_board[currentpos.getx()][currentpos.gety()] = emptypawn;
-//    }
-//}
+Pawn Board::getPiece(Position position) {
+   int x = position.getx();
+   int y = position.gety();
+
+   return m_board[x][y];
+}
+
+void Board::move(std::string currentpos, std::string moveTo) {
+    Position current;
+    Position next;
+    current.setpos(currentpos);
+    next.setpos(moveTo);
+    
+    Pawn piece = getPiece(currentpos);
+    if (piece.getName() != "." ) {
+       m_board[moveTo.getx()][moveTo.gety()] = piece;
+       Pawn emptypawn;
+       m_board[currentpos.getx()][currentpos.gety()] = emptypawn;
+   }
+}
 
 void Board::printBoard()
 {
@@ -44,6 +49,7 @@ void Board::printBoard()
 	{
 		std::cout << i << " ";
 	}
+    std::cout << "\n" << std::endl;
 
 }
 

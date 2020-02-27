@@ -4,6 +4,11 @@
 int main() {
 	Board newBoard;
 	newBoard.printBoard();
-	return 1;
+
+	newBoard.move("A3", "B2");
+
+	newBoard.printBoard();
 	
+	return 1;
+
 }
