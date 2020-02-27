@@ -9,8 +9,8 @@ public:
 	std::string getName();
 	void setName(std::string name);
 	void setColor(Color color);
-
-	Color getColor();
+	bool firtsTurn();
+	//Color getColor();
 
 private:
 	bool check_move(Position moveTo);

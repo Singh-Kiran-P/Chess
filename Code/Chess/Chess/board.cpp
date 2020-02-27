@@ -8,19 +8,37 @@ Pawn Board::getPiece(Position position) {
    return m_board[x][y];
 }
 
+bool Board::checkRestrictions(int curr_x, int curr_y,int next_x,int next_y)
+{
+	bool res =false;
+	Pawn p = m_board[curr_x][curr_y];
+	if (p.firtsTurn())
+	{
+		if (curr_x ==next_x && (next_y == curr_y+2) || (next_y == curr_y +1))
+		{
+			return true;
+		}
+	}
+	return res;
+}
+
+
 void Board::move(std::string currentpos, std::string moveTo) {
     Position current;
     Position next;
     current.setpos(currentpos);
     next.setpos(moveTo);
 
-    if (getPiece(next).getColor() != getPiece(current).getColor() || getPiece(next).getName() == ".") {
-        Pawn piece = getPiece(current.getx(), current.gety());
-        m_board[next.getx()][next.gety()] = piece;
-        Pawn emptypawn;
-        m_board[current.getx()][current.gety()] = emptypawn;
-   }
-};
+    Pawn piece = getPiece(current.getx(), current.gety());
+		if (checkRestrictions(current.getx(), current.gety(), next.getx(), next.gety())) {
+			m_board[next.getx()][next.gety()] = piece;
+			Pawn emptypawn;
+			m_board[current.getx()][current.gety()] = emptypawn;
+		}
+
+
+
+}
 
 void Board::printBoard()
 {
@@ -83,7 +101,6 @@ Pawn Board::getPiece(int x, int y)
 {
 	return m_board[x][y];
 }
-
 
 Board::Board()
 {
