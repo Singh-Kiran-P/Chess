@@ -1,8 +1,9 @@
 #include "pawn.h"
 
+
 bool Pawn::check_move(Position moveTo)
 {
-	return false;
+	return true;
 }
 
 
