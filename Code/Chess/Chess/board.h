@@ -15,7 +15,7 @@ class Board {
 
     private:
         Pawn m_board[BOARD_SIZE][BOARD_SIZE];
-        bool checkRestrictions(int curr_x, int curr_y, int next_x, int next_y);
+        bool checkRestrictions(int curr_x, int curr_y, int next_x, int next_y, Pawn& p);
 };
 
 #endif
