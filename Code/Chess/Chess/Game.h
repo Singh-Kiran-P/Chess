@@ -1,12 +1,16 @@
 #ifndef GAME
 #define GAME
 #include <ctime>
+#include <random>
 #include "player.h"
 #include "board.h"
+
+
 class Game
 {
 public:
 	void initGame();
+	void nextturn();
 
 private:
 	time_t m_time;
