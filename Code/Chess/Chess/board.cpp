@@ -1,4 +1,5 @@
 #include "board.h"
+#include "color.h"
 #include <iostream>
 
 Pawn Board::getPiece(Position position) {
@@ -64,10 +65,15 @@ void Board::resetBoard()
 			{
 				Pawn p;
 				p.setName("P");
-
-
+				p.setColor(Color::Black);
 				m_board[i][j] = p;
 
+			}
+			else if(i == 6){
+				Pawn p;
+				p.setName("P");
+				p.setColor(Color::White);
+				m_board[i][j] = p;
 			}
 
 		}
