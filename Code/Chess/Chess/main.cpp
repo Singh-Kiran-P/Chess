@@ -4,7 +4,9 @@
 int main() {
 	Board newBoard;
 	newBoard.printBoard();
-	while (true) {
+
+	int count = 0;
+	while (count < 5) {
 		std::string curr;
 		std::string next;
 		std::cout << "Move which pawn? ";
@@ -12,6 +14,7 @@ int main() {
 		std::cout << "To where? ";
 		std::cin >> next;
 
+		count++;
 		newBoard.move(curr, next);
 		newBoard.printBoard();
 	}
