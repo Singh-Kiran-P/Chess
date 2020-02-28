@@ -66,14 +66,14 @@ bool Board::checkRestrictions(int curr_x, int curr_y, int next_x, int next_y, Pa
     return false;
 };
 
-void Board::move(std::string currentpos, std::string moveTo) {
+void Board::move(std::string currentpos, std::string moveTo,Color playerColor) {
 	Position current;
 	Position next;
 	current.setpos(currentpos);
 	next.setpos(moveTo);
 
     Pawn* movingpiece = getPiece(current.getx(), current.gety());
-    if (movingpiece == nullptr)
+    if (movingpiece == nullptr || movingpiece->getColor() != playerColor)
         return;
 
 	Pawn* nextpiece = getPiece(next.getx(), next.gety());
