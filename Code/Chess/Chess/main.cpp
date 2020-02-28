@@ -1,7 +1,9 @@
 ﻿#include <iostream>
-#include "board.h"
+#include "game.h"
 
 int main() {
+	Game game;
+	game.initGame();
 	Board newBoard;
 	newBoard.printBoard();
 

@@ -3,3 +3,11 @@
 void Player::setcolor(Color color) {
     m_color = color;
 };
+
+void Player::setName(std::string name) {
+    m_playername = name;
+};
+
+std::string Player::name() {
+    return m_playername;
+};
