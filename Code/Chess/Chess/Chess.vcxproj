@@ -21,14 +21,19 @@
   <ItemGroup>
     <ClInclude Include="board.h" />
     <ClInclude Include="color.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="piece.h" />
+    <ClInclude Include="player.h" />
     <ClInclude Include="position.h" />
     <ClInclude Include="TermColor.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="board.cpp" />
+    <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="pawn.cpp" />
     <ClCompile Include="pawn.h" />
+    <ClCompile Include="player.cpp" />
     <ClCompile Include="position.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

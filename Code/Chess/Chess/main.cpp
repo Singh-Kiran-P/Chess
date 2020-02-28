@@ -1,9 +1,12 @@
 ﻿#include <iostream>
-#include "board.h"
+#include "Game.h"
 #include "TermColor.hpp"
 bool checkInput(std::string inputStr);
 int main() {
-	Board newBoard;
+	Game newGame;
+	newGame.initGame();
+	
+	Board newBoard = newGame.getBoard();
 	newBoard.printBoard();
 
 	int count = 0;
@@ -24,7 +27,7 @@ int main() {
 			std::cin >> next;
 		} while (checkInput(next) == false);
 		count++;
-		newBoard.move(curr, next);
+		newBoard.move(curr, next,Color::Black);
 		newBoard.printBoard();
 	}
 	// freeboard();
@@ -46,6 +49,7 @@ bool checkInput(std::string  inputStr) {
 		std::cout <<termcolor::red<< "Invaild input" << termcolor::white<<std::endl;
 
 	}
+	return false;
 
 
 }

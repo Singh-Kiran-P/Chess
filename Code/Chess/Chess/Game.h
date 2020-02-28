@@ -13,6 +13,7 @@ class Game
 public:
 	void initGame();
 	void nextturn();
+	Board getBoard();
 
 private:
 	time_t m_time;
