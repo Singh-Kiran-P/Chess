@@ -11,6 +11,8 @@ int main() {
 	Board newBoard{};
 	newBoard.printBoard();
 
+	//newGame.getBoard().~Board();//for testing
+
 		int resultMove;
 		std::string curr = "";
 		std::string next = "";
@@ -20,7 +22,7 @@ int main() {
 
 			curr = "";
 			next = "";
-			
+
 			do {
 				std::cout << "Move which pawn? ";
 				std::cin >> curr;
