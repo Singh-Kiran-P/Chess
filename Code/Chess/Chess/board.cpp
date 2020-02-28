@@ -1,7 +1,7 @@
 #include "board.h"
 #include <iostream>
 #include "TermColor.hpp"
-#include <stdlib.h>
+
 Pawn* Board::getPiece(Position position) {
 	int x = position.getx();
 	int y = position.gety();
@@ -59,6 +59,7 @@ bool Board::checkRestrictions(int curr_x, int curr_y, int next_x, int next_y, Pa
     }
 	return false;
 };
+
 bool checkWin(int x,Color currentPiece) {
 	if (currentPiece == Color::Black && x ==7)
 	{
@@ -70,15 +71,16 @@ bool checkWin(int x,Color currentPiece) {
 		return true;
 	}
 	return false;
-}
-int Board::move(std::string currentpos, std::string moveTo, Color playerColor) {
+};
+
+int Board::move(std::string currentpos, std::string moveTo, Player* player) {
 	Position current;
 	Position next;
 	current.setpos(currentpos);
 	next.setpos(moveTo);
 
 	Pawn* movingpiece = getPiece(current.getx(), current.gety());
-	if (movingpiece == nullptr || movingpiece->getColor() != playerColor) {
+	if (movingpiece == nullptr || movingpiece->getColor() != player->color()) {
 		std::cout << termcolor::red << "Invalid move" << termcolor::white << std::endl;
 		return 0;
 	}
@@ -90,14 +92,13 @@ int Board::move(std::string currentpos, std::string moveTo, Color playerColor) {
 		m_board[next.getx()][next.gety()] = movingpiece;
 		m_board[current.getx()][current.gety()] = nullptr;
 
-		if (checkWin(next.getx(), movingpiece->getColor())) {//check if the pawn is the winner
-			std::cout << "\n####################################";
-			std::cout << movingpiece->getColorStr() << " won the game";
-			std::cout << "####################################";
+		if (checkWin(next.getx(), movingpiece->getColor())) { //check if the pawn is the winner
+			std::cout << "\n####################################  ";
+			std::cout << player->name() << " won the game";
+			std::cout << "  ####################################";
 
-			return -1;//return 2 if game ends
+			return -1; // Game ended
 		}
-		system("CLS");
 		return 1;
 	}
 	std::cout << termcolor::red << "Invalid move" << termcolor::white << std::endl;
@@ -105,7 +106,6 @@ int Board::move(std::string currentpos, std::string moveTo, Color playerColor) {
 };
 
 void Board::printBoard() {
-	std::cout << "   A B C D E F G H" << termcolor::white << std::endl;
 	std::cout << termcolor::green << "   _______________" << std::endl;
 	for (int i = 0; i < 8; i++) {
 		std::cout << termcolor::green << i + 1 << " |" << termcolor::white;
@@ -146,7 +146,8 @@ void Board::printBoard() {
 
 	}
 
-	std::cout << termcolor::green << "   _______________" << termcolor::white << std::endl;
+	std::cout << termcolor::green << "   _______________" << std::endl;
+	std::cout <<  "   A B C D E F G H" << termcolor::white << std::endl;
 
 
 };
@@ -176,9 +177,8 @@ Board::Board() {
 Board::~Board() {
 	for (int i = 0; i < 8; i++) {
 		for (int j = 0; j < 8; j++) {
-			if (m_board[i][j] != nullptr) {
+			if (m_board[i][j] != nullptr)
 				delete m_board[i][j]; // TODO: fix double denconstructor call
-			}
 		}
 	}
 };

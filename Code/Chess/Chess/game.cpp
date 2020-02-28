@@ -6,6 +6,7 @@ void Game::initGame() {
     cout << "Player 1's name:" << endl;
     cin >> name1;
     m_player1.setName(name1);
+
     cout << "Player 2's name:"<< endl;
     cin >> name2;
     m_player2.setName(name2);
@@ -32,10 +33,6 @@ void Game::nextturn() {
         m_turn = &m_player2;
     else
         m_turn = &m_player1;
-}
-Board Game::getBoard()
-{
-    return m_board;
 };
 
 Player* Game::currentPlayer() {

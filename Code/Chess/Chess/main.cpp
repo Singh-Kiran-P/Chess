@@ -8,17 +8,19 @@ int main() {
 	Game newGame;
 	newGame.initGame();
 
-	Board newBoard = newGame.getBoard();
-	system("CLS");//clear screen
+	Board newBoard{};
 	newBoard.printBoard();
 
-	while (true) {
 		int resultMove;
-		std::cout << "It's " << (newGame.currentPlayer())->name() << "'s turn" << std::endl;
-
 		std::string curr = "";
 		std::string next = "";
+
 		do {
+			std::cout << "It's " << (newGame.currentPlayer())->name() << "'s turn" << std::endl;
+
+			curr = "";
+			next = "";
+			
 			do {
 				std::cout << "Move which pawn? ";
 				std::cin >> curr;
@@ -30,15 +32,15 @@ int main() {
 				std::cin >> next;
 			} while (checkInput(next) == false);
 
-		} while (resultMove= newBoard.move(curr, next, (newGame.currentPlayer())->color()) <= 0);
+			resultMove = newBoard.move(curr, next, newGame.currentPlayer());
 
-		if (resultMove != -1)//move returns -1 if someone won the game
-		{
-			newBoard.printBoard();
-			newGame.nextturn();
-		}
+			if (resultMove != -1) { //move returns -1 if someone won the game
+				newBoard.printBoard();
+				newGame.nextturn();
+			}
 
-	}
+		} while (resultMove != -1);
+
 	return 1;
 };
 

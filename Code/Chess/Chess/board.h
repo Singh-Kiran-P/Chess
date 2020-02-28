@@ -2,12 +2,13 @@
 #define BOARD
 #include <string>
 #include "pawn.h"
+#include "player.h"
 
 class Board {
     public:
-        int move(std::string currentpos, std::string moveTo,Color playerColor);
+        int move(std::string currentpos, std::string moveTo, Player* player);
         void printBoard();
-  
+
         Pawn* getPiece(Position position);
         Pawn* getPiece(int x,int y);
 
