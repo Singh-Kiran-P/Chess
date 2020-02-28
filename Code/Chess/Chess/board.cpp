@@ -16,17 +16,21 @@ bool Board::checkRestrictions(int curr_x, int curr_y,int next_x,int next_y, Pawn
             max_delta_x--;
             movingpiece->setfirstTurnFalse();
         }
-        if (curr_y == next_y && (max_delta_x <= (next_x - curr_x) && (next_x - curr_x) < 0))
+        if (curr_y == next_y && (max_delta_x <= (next_x - curr_x) && (next_x - curr_x) < 0)) {
             if (nextpiece == nullptr)
                 return true;
-            else
+            else {
+            std::cout << "\nInvalid move" << std::endl;;
                 return false;
-
+            }
+        }
         else if (abs(curr_y - next_y) == 1 && (next_x - curr_x) == -1) {
             if (movingpiece->getColor() != nextpiece->getColor())
                 return true;
-            else
+            else {
+            std::cout << "\nInvalid move" << std::endl;;
                 return false;
+            }
         }
     }
 
@@ -36,19 +40,24 @@ bool Board::checkRestrictions(int curr_x, int curr_y,int next_x,int next_y, Pawn
             max_delta_x++;
             movingpiece->setfirstTurnFalse();
         }
-            if (curr_y == next_y && (0 < (next_x - curr_x) && (next_x - curr_x) <= max_delta_x))
+            if (curr_y == next_y && (0 < (next_x - curr_x) && (next_x - curr_x) <= max_delta_x)) {
                 if (nextpiece == nullptr)
                     return true;
-                    else
+                else {
+                std::cout << "\nInvalid move" << std::endl;
                     return false;
-
+                }
+            }
         else if (abs(curr_y - next_y) == 1 && (next_x - curr_x) == 1) {
             if (movingpiece->getColor() != nextpiece->getColor())
                 return true;
-            else
+            else {
+            std::cout << "\nInvalid move" << std::endl;
                 return false;
+            }
         }
     }
+    std::cout << "\nInvalid move" << std::endl;
     return false;
 };
 
@@ -59,8 +68,8 @@ void Board::move(std::string currentpos, std::string moveTo) {
     next.setpos(moveTo);
 
     Pawn* movingpiece = getPiece(current.getx(), current.gety());
-    //if (movingpiece = nullptr)
-        //return;
+    if (movingpiece == nullptr)
+        return;
 
     Pawn* nextpiece = getPiece(next.getx(), next.gety());
 		if (checkRestrictions(current.getx(), current.gety(), next.getx(), next.gety(), movingpiece, nextpiece)) {
