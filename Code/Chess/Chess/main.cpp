@@ -12,7 +12,7 @@ int main() {
 	system("CLS");//clear screen
 	newBoard.printBoard();
 	
-	newBoard.~Board();//for testing 
+	//newGame.getBoard().~Board();//for testing 
 
 	while (true) {
 		int resultMove;
@@ -40,7 +40,6 @@ int main() {
 			newGame.nextturn();
 		}
 		else {
-			newBoard.~Board();
 			return 1;
 		}
 
