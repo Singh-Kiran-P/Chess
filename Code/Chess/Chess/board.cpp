@@ -16,7 +16,7 @@ bool Board::checkRestrictions(int curr_x, int curr_y,int next_x,int next_y, Pawn
             max_delta_x--;
             movingpiece->setfirstTurnFalse();
         }
-        if (curr_y == next_y && (0< (next_x - curr_x) && (next_x - curr_x) <= max_delta_x))
+        if (curr_y == next_y && (max_delta_x <= (next_x - curr_x) && (next_x - curr_x) < 0))
             if (nextpiece == nullptr)
                 return true;
             else
