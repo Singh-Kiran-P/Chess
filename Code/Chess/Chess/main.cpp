@@ -11,8 +11,6 @@ int main() {
 	Board newBoard{};
 	newBoard.printBoard();
 
-	//newGame.getBoard().~Board();//for testing
-
 		int resultMove;
 		std::string curr = "";
 		std::string next = "";
@@ -57,4 +55,4 @@ bool checkInput(std::string  inputStr) {
 		std::cout << termcolor::red << "Invaild input" << termcolor::white<<std::endl;
 	}
 	return false;
-}
+};

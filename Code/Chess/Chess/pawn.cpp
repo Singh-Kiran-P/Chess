@@ -18,15 +18,15 @@ void Pawn::setColor(Color color) {
 
 bool Pawn::firstTurn() {
 	return m_firstTurn;
-}
+};
 
 void Pawn::setfirstTurnFalse() {
 	m_firstTurn = false;
-}
+};
 
 Color Pawn::getColor() {
 	return m_color;
-}
+};
 
 std::string Pawn::getColorStr()
 {
@@ -38,4 +38,4 @@ std::string Pawn::getColorStr()
 	{
 		return "White";
 	}
-}
+};

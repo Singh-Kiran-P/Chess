@@ -22,4 +22,4 @@ class Pawn {
 };
 
 
-#endif // !PAWN
+#endif

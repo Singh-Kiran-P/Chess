@@ -154,7 +154,7 @@ void Board::printBoard() {
 
 Pawn* Board::getPiece(int x, int y) {
 	return m_board[x][y];
-}
+};
 
 Board::Board() {
 	for (int i = 0; i < 8; i++) {
@@ -175,11 +175,10 @@ Board::Board() {
 };
 
 Board::~Board() {
-	std::cout<<"\ndestuctur\n";
 	for (int i = 0; i < 8; i++) {
 		for (int j = 0; j < 8; j++) {
 			if (m_board[i][j] != nullptr)
-				delete m_board[i][j]; // TODO: fix double denconstructor call
+				delete m_board[i][j];
 		}
 	}
 };
