@@ -9,6 +9,7 @@ int main() {
 	newGame.initGame();
 
 	Board newBoard = newGame.getBoard();
+	system("CLS");//clear screen
 	newBoard.printBoard();
 
 	while (true) {

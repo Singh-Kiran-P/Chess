@@ -1,7 +1,7 @@
 #include "board.h"
 #include <iostream>
 #include "TermColor.hpp"
-
+#include <stdlib.h>
 Pawn* Board::getPiece(Position position) {
 	int x = position.getx();
 	int y = position.gety();
@@ -78,6 +78,7 @@ bool Board::move(std::string currentpos, std::string moveTo,Color playerColor) {
             movingpiece->setfirstTurnFalse();
 		m_board[next.getx()][next.gety()] = movingpiece;
 		m_board[current.getx()][current.gety()] = nullptr;
+        system("CLS");
 		return true;
 	}
 	std::cout << termcolor::red << "Invalid move" << termcolor::white << std::endl;
@@ -85,27 +86,50 @@ bool Board::move(std::string currentpos, std::string moveTo,Color playerColor) {
 };
 
 void Board::printBoard() {
+    std::cout << "   A B C D E F G H" << termcolor::white << std::endl;
+    std::cout << termcolor::green << "   _______________" << std::endl;
 	for (int i = 0; i < 8; i++) {
 		std::cout << termcolor::green << i + 1 << " |" << termcolor::white;
 		for (int j = 0; j < 8; j++) {
 			if (m_board[i][j] != nullptr) {
 				Pawn* temp_pawn = m_board[i][j];
-
+                                      
 				if (temp_pawn->getColor() == Color::Black) {
 					std::cout << termcolor::blue;
 				}
 
-				std::cout << temp_pawn->getId() << ' ';
-				std::cout << termcolor::white;
+                if (j<7)
+                {
+                    std::cout << temp_pawn->getId() << ' ';
 
-			}
-			else
-				std::cout << ". ";
+                }
+                else {
+                    std::cout << temp_pawn->getId();
+
+                }
+				std::cout << termcolor::white;        
+            }
+            else if(j<7) {
+                std::cout << ". ";
+            }
+            else {
+                std::cout << ".";
+
+            }
+
 		}
+
+            std::cout << termcolor::green << '|';
+
+    
 		std::cout << '\n';
+   
+
 	}
-	std::cout << termcolor::green << "   _______________" << std::endl;
-	std::cout << "   A B C D E F G H" << termcolor::white << std::endl;
+
+    std::cout << termcolor::green << "   _______________" << termcolor::white<< std::endl;
+
+
 };
 
 Pawn* Board::getPiece(int x, int y) {
