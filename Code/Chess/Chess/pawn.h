@@ -11,6 +11,7 @@ class Pawn {
 		bool firstTurn();
 		void setfirstTurnFalse();
 		Color getColor();
+		std::string getColorStr();
 
 	private:
 		bool check_move(Position moveTo);
