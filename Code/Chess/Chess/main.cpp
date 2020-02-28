@@ -13,7 +13,7 @@ int main() {
 	newBoard.printBoard();
 
 	while (true) {
-
+		int resultMove;
 		std::cout << "It's " << (newGame.currentPlayer())->name() << "'s turn" << std::endl;
 
 		std::string curr = "";
@@ -30,10 +30,14 @@ int main() {
 				std::cin >> next;
 			} while (checkInput(next) == false);
 
-		} while (newBoard.move(curr, next, (newGame.currentPlayer())->color()) == false);
+		} while (resultMove= newBoard.move(curr, next, (newGame.currentPlayer())->color()) <= 0);
 
-		newBoard.printBoard();
-		newGame.nextturn();
+		if (resultMove != -1)//move returns -1 if someone won the game
+		{
+			newBoard.printBoard();
+			newGame.nextturn();
+		}
+
 	}
 	return 1;
 };

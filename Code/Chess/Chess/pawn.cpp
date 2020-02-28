@@ -27,3 +27,15 @@ void Pawn::setfirstTurnFalse() {
 Color Pawn::getColor() {
 	return m_color;
 }
+
+std::string Pawn::getColorStr()
+{
+	if (m_color ==Color::Black)
+	{
+		return "Black";
+	}
+	else
+	{
+		return "White";
+	}
+}
