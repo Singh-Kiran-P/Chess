@@ -1,92 +1,102 @@
 #include "board.h"
 #include <iostream>
+#include "TermColor.hpp"
 
 Pawn* Board::getPiece(Position position) {
-   int x = position.getx();
-   int y = position.gety();
+	int x = position.getx();
+	int y = position.gety();
 
-   return m_board[x][y];
+	return m_board[x][y];
 };
 
-bool Board::checkRestrictions(int curr_x, int curr_y,int next_x,int next_y, Pawn* movingpiece, Pawn* nextpiece)
+bool Board::checkRestrictions(int curr_x, int curr_y, int next_x, int next_y, Pawn* movingpiece, Pawn* nextpiece)
 {
 	if (movingpiece->getColor() == Color::White) {
-        int max_delta_x = -1;
-        if (movingpiece->firtsTurn()) {
-            max_delta_x--;
-            movingpiece->setfirstTurnFalse();
-        }
-        if (curr_y == next_y && (max_delta_x <= (next_x - curr_x) && (next_x - curr_x) < 0))
-            if (nextpiece == nullptr)
-                return true;
-            else
-                return false;
+		int max_delta_x = -1;
+		if (movingpiece->firtsTurn()) {
+			max_delta_x--;
+			movingpiece->setfirstTurnFalse();
+		}
+		if (curr_y == next_y && (max_delta_x <= (next_x - curr_x) && (next_x - curr_x) < 0))
+			if (nextpiece == nullptr)
+				return true;
+			else
+				return false;
 
-        else if (abs(curr_y - next_y) == 1 && (next_x - curr_x) == -1) {
-            if (movingpiece->getColor() != nextpiece->getColor())
-                return true;
-            else
-                return false;
-        }
-    }
+		else if (abs(curr_y - next_y) == 1 && (next_x - curr_x) == -1) {
+			if (movingpiece->getColor() != nextpiece->getColor())
+				return true;
+			else
+				return false;
+		}
+	}
 
-    else if (movingpiece->getColor() == Color::Black) {
-        int max_delta_x = 1;
-        if (movingpiece->firtsTurn()) {
-            max_delta_x++;
-            movingpiece->setfirstTurnFalse();
-        }
-            if (curr_y == next_y && (0 < (next_x - curr_x) && (next_x - curr_x) <= max_delta_x))
-                if (nextpiece == nullptr)
-                    return true;
-                    else
-                    return false;
+	else if (movingpiece->getColor() == Color::Black) {
+		int max_delta_x = 1;
+		if (movingpiece->firtsTurn()) {
+			max_delta_x++;
+			movingpiece->setfirstTurnFalse();
+		}
+		if (curr_y == next_y && (0 < (next_x - curr_x) && (next_x - curr_x) <= max_delta_x))
+			if (nextpiece == nullptr)
+				return true;
+			else
+				return false;
 
-        else if (abs(curr_y - next_y) == 1 && (next_x - curr_x) == 1) {
-            if (movingpiece->getColor() != nextpiece->getColor())
-                return true;
-            else
-                return false;
-        }
-    }
-    return false;
+		else if (abs(curr_y - next_y) == 1 && (next_x - curr_x) == 1) {
+			if (movingpiece->getColor() != nextpiece->getColor())
+				return true;
+			else
+				return false;
+		}
+	}
+	return false;
 };
 
 void Board::move(std::string currentpos, std::string moveTo) {
-    Position current;
-    Position next;
-    current.setpos(currentpos);
-    next.setpos(moveTo);
+	Position current;
+	Position next;
+	current.setpos(currentpos);
+	next.setpos(moveTo);
 
-    Pawn* movingpiece = getPiece(current.getx(), current.gety());
-    //if (movingpiece = nullptr)
-        //return;
+	Pawn* movingpiece = getPiece(current.getx(), current.gety());
+	//if (movingpiece = nullptr)
+		//return;
 
-    Pawn* nextpiece = getPiece(next.getx(), next.gety());
-		if (checkRestrictions(current.getx(), current.gety(), next.getx(), next.gety(), movingpiece, nextpiece)) {
-			m_board[next.getx()][next.gety()] = movingpiece;
-			m_board[current.getx()][current.gety()] = nullptr;
-		}
+	Pawn* nextpiece = getPiece(next.getx(), next.gety());
+	if (checkRestrictions(current.getx(), current.gety(), next.getx(), next.gety(), movingpiece, nextpiece)) {
+		m_board[next.getx()][next.gety()] = movingpiece;
+		m_board[current.getx()][current.gety()] = nullptr;
+	}
 };
 
 void Board::printBoard()
 {
 	for (int i = 0; i < 8; i++)
 	{
-	std::cout << i <<" |";
+		std::cout << termcolor::green << i << " |" << termcolor::white;
 		for (int j = 0; j < 8; j++)
 		{
 			if (m_board[i][j] != nullptr) {
 				Pawn* temp_pawn = m_board[i][j];
+
+				if (temp_pawn->getColor() == Color::Black)
+				{
+					std::cout << termcolor::blue;
+
+				}
 				std::cout << temp_pawn->getId() << ' ';
+				std::cout << termcolor::white;
+
+
 			}
-            else
-                std::cout << ". ";
+			else
+				std::cout << ". ";
 		}
 		std::cout << '\n';
 	}
-    std::cout << "   _______________" << std::endl;
-	std::cout << "   A B C D E F G H" << std::endl;
+	std::cout << termcolor::green << "   _______________" << std::endl;
+	std::cout << "   A B C D E F G H" << termcolor::white << std::endl;
 };
 
 //rest and init board
@@ -96,19 +106,18 @@ void Board::resetBoard()
 	{
 		for (int j = 0; j < 8; j++)
 		{
-            if (i == 1 || i == 6)
+			if (i == 1 || i == 6)
 			{
-
-				Pawn* p_ptr{new Pawn{}};
+				Pawn* p_ptr{ new Pawn{} };
 				m_board[i][j] = p_ptr;
 				p_ptr->setId('P');
-                if (i == 1)
-			    	p_ptr->setColor(Color::Black);
-                else
-                    p_ptr->setColor(Color::White);
-            }
-            else
-                m_board[i][j] = nullptr;
+				if (i == 1)
+					p_ptr->setColor(Color::Black);
+				else
+					p_ptr->setColor(Color::White);
+			}
+			else
+				m_board[i][j] = nullptr;
 		}
 	}
 };

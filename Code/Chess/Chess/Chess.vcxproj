@@ -22,6 +22,7 @@
     <ClInclude Include="board.h" />
     <ClInclude Include="color.h" />
     <ClInclude Include="position.h" />
+    <ClInclude Include="TermColor.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="board.cpp" />

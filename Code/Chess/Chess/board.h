@@ -12,6 +12,7 @@ class Board {
         Pawn* getPiece(int x,int y);
         void move(Position moveTo);
         Board();
+        
 
 
     private:
