@@ -86,7 +86,7 @@ bool Board::move(std::string currentpos, std::string moveTo,Color playerColor) {
 
 void Board::printBoard() {
 	for (int i = 0; i < 8; i++) {
-		std::cout << termcolor::green << i << " |" << termcolor::white;
+		std::cout << termcolor::green << i + 1 << " |" << termcolor::white;
 		for (int j = 0; j < 8; j++) {
 			if (m_board[i][j] != nullptr) {
 				Pawn* temp_pawn = m_board[i][j];

@@ -40,8 +40,9 @@ int main() {
 bool checkInput(std::string  inputStr) {
 	try {
 		char letter = inputStr[0];
-		int num = std::stoi(inputStr.substr(1));
-		return true;
+		int num = std::stoi(inputStr.substr(1)) - 1;
+		if (('A' <= letter <= 'G') && (1 <= num <= 8))
+			return true;
 	}
 	catch (const std::exception&) {
 		std::cout << termcolor::red << "Invaild input" << termcolor::white<<std::endl;
