@@ -16,7 +16,7 @@ void Game::initGame() {
     srand(time(nullptr)); // Use current time for random seed
     int coinflip = rand() % 2;
 
-    if (coinflip = 1) {
+    if (coinflip == 1) {
         m_player1.setcolor(Color::White);
         cout << m_player1.name() << " is white, " << m_player2.name() << " is black." << endl;
         m_player2.setcolor(Color::Black);
