@@ -11,8 +11,7 @@ int main() {
 	Board newBoard = newGame.getBoard();
 	system("CLS");//clear screen
 	newBoard.printBoard();
-	
-	newBoard.~Board();//for testing 
+	newBoard.~Board();
 
 	while (true) {
 		int resultMove;
