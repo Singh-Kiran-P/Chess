@@ -4,21 +4,20 @@
 #include "position.h"
 
 class Pawn {
-public:
-	char getId();
-	void setId(char id);
-	void setColor(Color color);
-	bool firtsTurn();
-	void setfirstTurnFalse();
-	Color getColor();
+	public:
+		char getId();
+		void setId(char id);
+		void setColor(Color color);
+		bool firstTurn();
+		void setfirstTurnFalse();
+		Color getColor();
 
-private:
-
-	bool check_move(Position moveTo);
-	char m_id;
-	bool m_firstTurn = true;
-	Color m_color;
-	bool m_killed = false;
+	private:
+		bool check_move(Position moveTo);
+		char m_id;
+		bool m_firstTurn = true;
+		Color m_color;
+		bool m_killed = false;
 };
 
 

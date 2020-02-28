@@ -2,18 +2,15 @@
 using namespace std;
 
 void Game::initGame() {
-    
     string name1, name2;
-    cout << "Player1 Name:" <<endl;
+    cout << "Player 1's name:" << endl;
     cin >> name1;
     m_player1.setName(name1);
-    cout << "Player2 Name:"<< endl;
+    cout << "Player 2's name:"<< endl;
     cin >> name2;
     m_player2.setName(name2);
 
-
-
-    srand(time(nullptr)); // Use current time for random seed
+    srand((unsigned int) time(nullptr)); // Use current time for random seed
     int coinflip = rand() % 2;
 
     if (coinflip == 1) {
@@ -28,17 +25,19 @@ void Game::initGame() {
         m_player2.setcolor(Color::White);
         m_turn = &m_player2;
     }
-
 };
 
 void Game::nextturn() {
     if (m_turn == &m_player1)
-        *m_turn = m_player2;
+        m_turn = &m_player2;
     else
-        *m_turn = m_player1;
+        m_turn = &m_player1;
 }
 Board Game::getBoard()
 {
     return m_board;
-}
-;
+};
+
+Player* Game::currentPlayer() {
+    return m_turn;
+};
