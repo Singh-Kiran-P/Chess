@@ -25,8 +25,10 @@ bool Board::checkRestrictions(int curr_x, int curr_y,int next_x,int next_y, Pawn
             }
         }
         else if (abs(curr_y - next_y) == 1 && (next_x - curr_x) == -1) {
-            if (movingpiece->getColor() != nextpiece->getColor())
+            if (movingpiece->getColor() != nextpiece->getColor()) {
+                delete nextpiece;
                 return true;
+            }
             else {
             std::cout << "\nInvalid move" << std::endl;;
                 return false;
@@ -49,8 +51,10 @@ bool Board::checkRestrictions(int curr_x, int curr_y,int next_x,int next_y, Pawn
                 }
             }
         else if (abs(curr_y - next_y) == 1 && (next_x - curr_x) == 1) {
-            if (movingpiece->getColor() != nextpiece->getColor())
+            if (movingpiece->getColor() != nextpiece->getColor()) {
+                delete nextpiece;
                 return true;
+            }
             else {
             std::cout << "\nInvalid move" << std::endl;
                 return false;
@@ -131,3 +135,12 @@ Board::Board()
 {
 	resetBoard();
 };
+
+Board::~Board() {
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            if (m_board[i][j] != nullptr)
+                delete m_board[i][j];
+        }
+    }
+}
