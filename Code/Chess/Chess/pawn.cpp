@@ -5,14 +5,14 @@ bool Pawn::check_move(Position moveTo)
 	return true;
 }
 
-std::string Pawn::getName()
+char Pawn::getId()
 {
-	return m_name;
+	return m_id;
 };
 
-void Pawn::setName(std::string name)
+void Pawn::setId(char id)
 {
-	m_name = name;
+	m_id = id;;
 };
 
 void Pawn::setColor(Color color) {

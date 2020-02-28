@@ -1,29 +1,28 @@
 #include "board.h"
 #include <iostream>
 
-Pawn Board::getPiece(Position position) {
+Pawn* Board::getPiece(Position position) {
    int x = position.getx();
    int y = position.gety();
 
    return m_board[x][y];
 }
 
-bool Board::checkRestrictions(int curr_x, int curr_y,int next_x,int next_y,Pawn &p)
+bool Board::checkRestrictions(int curr_x, int curr_y,int next_x,int next_y, Pawn* p)
 {
-	bool res =false;
 	//Pawn p = m_board[curr_x][curr_y];
-	if (p.firtsTurn())
+	if (p->firtsTurn())
 	{
 		if (curr_y ==next_y && (next_x == curr_x+2) || (next_x == curr_x + 1))
 		{
-			p.setfirstTurnFalse();
+			p->setfirstTurnFalse();
 			return true;
 		}
 	}
 	else if ((next_x == curr_x + 1)) {
 		return true;
 	}
-	return res;
+	return false;
 }
 
 
@@ -33,11 +32,10 @@ void Board::move(std::string currentpos, std::string moveTo) {
     current.setpos(currentpos);
     next.setpos(moveTo);
 
-    Pawn piece = getPiece(current.getx(), current.gety());
-		if (checkRestrictions(current.getx(), current.gety(), next.getx(), next.gety(),piece)) {
+    Pawn* piece = getPiece(current.getx(), current.gety());
+		if (checkRestrictions(current.getx(), current.gety(), next.getx(), next.gety(), piece)) {
 			m_board[next.getx()][next.gety()] = piece;
-			Pawn emptypawn;
-			m_board[current.getx()][current.gety()] = emptypawn;
+			m_board[current.getx()][current.gety()] = nullptr;
 		}
 
 
@@ -48,24 +46,20 @@ void Board::printBoard()
 {
 	for (int i = 0; i < 8; i++)
 	{
-	std::cout << i<<" |";
-	
-
-
+	std::cout << i <<" |";
 		for (int j = 0; j < 8; j++)
 		{
-
-			std::cout << m_board[i][j].getName() << " ";
+			if (m_board[i][j] != nullptr) {
+				Pawn* temp_pawn = m_board[i][j];
+				std::cout << temp_pawn->getId() << ' ';
+			}
+            else
+                std::cout << ". ";
 		}
-		std::cout << "\n";
+		std::cout << '\n';
 	}
-	std::cout << "   ";
-
-
-		std::cout << "A B C D E F G H";
-	
-    std::cout << "\n" << std::endl;
-
+    std::cout << "   _______________" << std::endl;
+	std::cout << "   A B C D E F G H" << std::endl;
 };
 
 //rest and init board
@@ -75,26 +69,21 @@ void Board::resetBoard()
 	{
 		for (int j = 0; j < 8; j++)
 		{
-			if (i == 1 )
+            if (i == 1 || i == 6)
 			{
-				Pawn p;
-				p.setName("P");
-				p.setColor(Color::Black);
-				m_board[i][j] = p;
 
-			}
-			else if(i == 6){
-				Pawn p;
-				p.setName("P");
-				p.setColor(Color::White);
-				m_board[i][j] = p;
-			}
-
+				Pawn* p_ptr{new Pawn{}};
+				m_board[i][j] = p_ptr;
+				p_ptr->setId('P');
+				p_ptr->setColor(Color::Black);
+            }
+            else
+                m_board[i][j] = nullptr;
 		}
 	}
 };
 
-Pawn Board::getPiece(int x, int y)
+Pawn* Board::getPiece(int x, int y)
 {
 	return m_board[x][y];
 }
