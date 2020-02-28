@@ -10,7 +10,7 @@ public:
 	void setColor(Color color);
 	bool firtsTurn();
 	void setfirstTurnFalse();
-	//Color getColor();
+	Color getColor();
 
 private:
 

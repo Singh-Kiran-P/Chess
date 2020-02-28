@@ -6,25 +6,51 @@ Pawn* Board::getPiece(Position position) {
    int y = position.gety();
 
    return m_board[x][y];
-}
+};
 
-bool Board::checkRestrictions(int curr_x, int curr_y,int next_x,int next_y, Pawn* p)
+bool Board::checkRestrictions(int curr_x, int curr_y,int next_x,int next_y, Pawn* movingpiece, Pawn* nextpiece)
 {
-	//Pawn p = m_board[curr_x][curr_y];
-	if (p->firtsTurn())
-	{
-		if (curr_y ==next_y && (next_x == curr_x+2) || (next_x == curr_x + 1))
-		{
-			p->setfirstTurnFalse();
-			return true;
-		}
-	}
-	else if ((next_x == curr_x + 1)) {
-		return true;
-	}
-	return false;
-}
+	if (movingpiece->getColor() == Color::White) {
+        int max_delta_x = -1;
+        if (movingpiece->firtsTurn()) {
+            max_delta_x--;
+            movingpiece->setfirstTurnFalse();
+        }
+        if (curr_y == next_y && (0< (next_x - curr_x) && (next_x - curr_x) <= max_delta_x))
+            if (nextpiece == nullptr)
+                return true;
+            else
+                return false;
 
+        else if (abs(curr_y - next_y) == 1 && (next_x - curr_x) == -1) {
+            if (movingpiece->getColor() != nextpiece->getColor())
+                return true;
+            else
+                return false;
+        }
+    }
+
+    else if (movingpiece->getColor() == Color::Black) {
+        int max_delta_x = 1;
+        if (movingpiece->firtsTurn()) {
+            max_delta_x++;
+            movingpiece->setfirstTurnFalse();
+        }
+            if (curr_y == next_y && (0 < (next_x - curr_x) && (next_x - curr_x) <= max_delta_x))
+                if (nextpiece == nullptr)
+                    return true;
+                    else
+                    return false;
+
+        else if (abs(curr_y - next_y) == 1 && (next_x - curr_x) == 1) {
+            if (movingpiece->getColor() != nextpiece->getColor())
+                return true;
+            else
+                return false;
+        }
+    }
+    return false;
+};
 
 void Board::move(std::string currentpos, std::string moveTo) {
     Position current;
@@ -32,15 +58,16 @@ void Board::move(std::string currentpos, std::string moveTo) {
     current.setpos(currentpos);
     next.setpos(moveTo);
 
-    Pawn* piece = getPiece(current.getx(), current.gety());
-		if (checkRestrictions(current.getx(), current.gety(), next.getx(), next.gety(), piece)) {
-			m_board[next.getx()][next.gety()] = piece;
+    Pawn* movingpiece = getPiece(current.getx(), current.gety());
+    //if (movingpiece = nullptr)
+        //return;
+
+    Pawn* nextpiece = getPiece(next.getx(), next.gety());
+		if (checkRestrictions(current.getx(), current.gety(), next.getx(), next.gety(), movingpiece, nextpiece)) {
+			m_board[next.getx()][next.gety()] = movingpiece;
 			m_board[current.getx()][current.gety()] = nullptr;
 		}
-
-
-
-}
+};
 
 void Board::printBoard()
 {
@@ -75,7 +102,10 @@ void Board::resetBoard()
 				Pawn* p_ptr{new Pawn{}};
 				m_board[i][j] = p_ptr;
 				p_ptr->setId('P');
-				p_ptr->setColor(Color::Black);
+                if (i == 1)
+			    	p_ptr->setColor(Color::Black);
+                else
+                    p_ptr->setColor(Color::White);
             }
             else
                 m_board[i][j] = nullptr;

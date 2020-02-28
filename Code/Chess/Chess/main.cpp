@@ -14,7 +14,8 @@ int main() {
 
 		newBoard.move(curr, next);
 		newBoard.printBoard();
-}
+	}
+	// freeboard();
 	return 1;
 
 };

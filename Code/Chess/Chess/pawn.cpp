@@ -29,6 +29,6 @@ void Pawn::setfirstTurnFalse()
 	m_firstTurn = false;
 }
 
-// Color getColor() {
-// 	return m_color;
-// }
+Color Pawn::getColor() {
+	return m_color;
+}
