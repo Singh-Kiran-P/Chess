@@ -7,19 +7,18 @@ class Pawn {
 	public:
 		char getId();
 		void setId(char id);
+
 		void setColor(Color color);
+		Color getColor();
+
 		bool firstTurn();
 		void setfirstTurnFalse();
-		Color getColor();
-		std::string getColorStr();
 
 	private:
-		bool check_move(Position moveTo);
 		char m_id;
 		bool m_firstTurn = true;
 		Color m_color;
 		bool m_killed = false;
 };
-
 
 #endif

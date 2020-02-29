@@ -10,7 +10,7 @@
 
 class Game {
 	public:
-		void initGame();
+		Game();
 		void nextturn();
 		Player* currentPlayer();
 
@@ -21,4 +21,5 @@ class Game {
 		Player* m_turn;
 
 };
+
 #endif

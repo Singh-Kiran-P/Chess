@@ -63,7 +63,7 @@ bool Board::checkRestrictions(int curr_x, int curr_y, int next_x, int next_y, Pa
 bool Board::checkWin() {
 	for (int i = 0; i < 8; ++i) {
 		if (m_board[0][i] != nullptr || m_board[7][i] != nullptr)
-			return true;
+			return true; // triggers when a pawn has reached the opposite side
 	}
 	return false;
 };
@@ -75,7 +75,7 @@ bool Board::move(std::string currentpos, std::string moveTo, Player* player) {
 	next.setpos(moveTo);
 
 	Pawn* movingpiece = getPiece(current.getx(), current.gety());
-	if (movingpiece == nullptr || movingpiece->getColor() != player->color()) {
+	if (movingpiece == nullptr || movingpiece->getColor() != player->color()) { //pawn can only move to empty spaces or enemy spaces
 		std::cout << termcolor::red << "Invalid move" << termcolor::white << std::endl;
 		return false;
 	}
@@ -97,7 +97,7 @@ bool Board::move(std::string currentpos, std::string moveTo, Player* player) {
 void Board::printBoard() {
 	std::cout << termcolor::green << "   _______________" << std::endl;
 	for (int i = 0; i < 8; i++) {
-		std::cout << termcolor::green << i + 1 << " |" << termcolor::white;
+		std::cout << termcolor::green << 8 - i << " |" << termcolor::white; //Board is zero-indexed, while the chess game is flipped and has 1 at the bottom
 		for (int j = 0; j < 8; j++) {
 			if (m_board[i][j] != nullptr) {
 				Pawn* temp_pawn = m_board[i][j];
@@ -106,14 +106,11 @@ void Board::printBoard() {
 					std::cout << termcolor::blue;
 				}
 
-				if (j < 7)
-				{
+				if (j < 7) {
 					std::cout << temp_pawn->getId() << ' ';
-
 				}
 				else {
 					std::cout << temp_pawn->getId();
-
 				}
 				std::cout << termcolor::white;
 			}
@@ -122,17 +119,11 @@ void Board::printBoard() {
 			}
 			else {
 				std::cout << ".";
-
 			}
-
 		}
-
+		
 		std::cout << termcolor::green << '|';
-
-
 		std::cout << '\n';
-
-
 	}
 
 	std::cout << termcolor::green << "   _______________" << std::endl;
@@ -153,9 +144,9 @@ Board::Board() {
 				m_board[i][j] = p_ptr;
 				p_ptr->setId('P');
 				if (i == 1)
-					p_ptr->setColor(Color::Black);
+					p_ptr->setColor(Color::Black); // top of board is black
 				else
-					p_ptr->setColor(Color::White);
+					p_ptr->setColor(Color::White); // bottom of board is white
 			}
 			else
 				m_board[i][j] = nullptr;

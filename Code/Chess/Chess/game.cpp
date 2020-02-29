@@ -1,7 +1,7 @@
 #include "game.h"
 using namespace std;
 
-void Game::initGame() {
+Game::Game() {
     string name1, name2;
     cout << "Player 1's name:" << endl;
     cin >> name1;

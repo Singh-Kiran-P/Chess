@@ -5,14 +5,15 @@
 bool checkInput(std::string inputStr);
 
 int main() {
-	Game newGame;
-	newGame.initGame();
 
-	Board newBoard{};
+	Game newGame{}; // Creates both player objects, randomly assigns them their color
+
+	Board newBoard{}; // Creates the board and places the pawns
 	newBoard.printBoard();
 
-	std::string curr = "";
-	std::string next = "";
+	std::string curr;
+	std::string next;
+
 	do {
 		do {
 			std::cout << "It's " << (newGame.currentPlayer())->name() << "'s turn" << std::endl;
@@ -28,12 +29,12 @@ int main() {
 				std::cin >> next;
 			} while (checkInput(next) == false);
 
-		} while (newBoard.move(curr, next, newGame.currentPlayer()) == false);
+		} while (newBoard.move(curr, next, newGame.currentPlayer()) == false); // If a move is invalid, a turn isn't skipped
 
 	newBoard.printBoard();
 	newGame.nextturn();
 
-	} while (newBoard.checkWin() == false);
+	} while (newBoard.checkWin() == false); //as long as no one has won, ask the next player for their move
 
 	std::cout << "\n##################################   ";
 	std::cout << (newGame.currentPlayer())->name() << " won the game!";
@@ -45,8 +46,8 @@ int main() {
 bool checkInput(std::string  inputStr) {
 	try {
 		char letter = inputStr[0];
-		int num = std::stoi(inputStr.substr(1)) - 1;
-		if (('A' <= letter <= 'H') && (1 <= num <= 8))
+		int num = std::stoi(inputStr.substr(1)) - 1; //input value must be of the form CHARINT
+		if (('A' <= letter <= 'H') && (1 <= num <= 8)) //input value must be between A1 and H8
 			return true;
 	}
 	catch (const std::exception&) {
