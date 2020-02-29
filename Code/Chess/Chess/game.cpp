@@ -4,13 +4,13 @@ using namespace std;
 Game::Game(bool vsAI) {
 
     string name1, name2;
-    cout << "Player 1's name:" << endl;
+    cout << "Player 1's name: "  ;
     cin >> name1;
     m_player1.setName(name1);
     m_player1.set_ai(false);
 
     if (!vsAI) {
-    cout << "Player 2's name:"<< endl;
+    cout << "Player 2's name: ";
     cin >> name2;
     m_player2.setName(name2);
     m_player2.set_ai(false);
@@ -26,7 +26,7 @@ Game::Game(bool vsAI) {
 
     if (coinflip == 1) {
         m_player1.setcolor(Color::White);
-        cout << m_player1.name() << " is white, " << m_player2.name() << " is black." << endl;
+        cout <<endl<< m_player1.name() << " is white, " << m_player2.name() << " is black." << endl;
         m_player2.setcolor(Color::Black);
         m_turn = &m_player1;
     }
