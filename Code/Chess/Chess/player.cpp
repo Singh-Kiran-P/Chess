@@ -15,3 +15,11 @@ void Player::setName(std::string name) {
 std::string Player::name() {
     return m_playername;
 };
+
+bool Player::is_ai() {
+    return m_is_ai;
+};
+
+void Player::set_ai(bool ai) {
+    m_is_ai = ai;
+};

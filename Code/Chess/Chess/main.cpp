@@ -1,12 +1,17 @@
 ﻿#include <iostream>
 #include "Game.h"
+// #include "player.h"
 #include "TermColor.hpp"
 
 bool checkInput(std::string inputStr);
+bool checkChoice();
 
 int main() {
 
-	Game newGame{checkChoice()}; // Creates both player objects, randomly assigns them their color
+	bool gametype = checkChoice();
+	bool checkwin;
+
+	Game newGame{gametype}; // Creates both player objects, randomly assigns them their color
 
 	Board newBoard{}; // Creates the board and places the pawns
 	newBoard.printBoard();
@@ -32,14 +37,15 @@ int main() {
 					std::cin >> next;
 				} while (checkInput(next) == false);
 
-			} while (newBoard.move(curr, next, newGame.currentPlayer()) == false); // If a move is invalid, a turn isn't skipped
+		} while (newBoard.moveStr(curr, next, newGame.currentPlayer()) == false); // If a move is invalid, a turn isn't skipped
 
 		}
 
 		newBoard.printBoard();
+		if ((checkwin = newBoard.checkWin()) == false)
 		newGame.nextturn();
 
-	} while (newBoard.checkWin() == false); //as long as no one has won, ask the next player for their move
+	} while (checkwin == false); //as long as no one has won, ask the next player for their move
 
 	std::cout << "\n##################################   ";
 	std::cout << (newGame.currentPlayer())->name() << " won the game!";
@@ -64,14 +70,20 @@ bool checkInput(std::string  inputStr) {
 bool checkChoice() {
 	std::string choice;
 
+	std::cout << "Choose you gametype" << std::endl;
+	std::cout << "1) Player VS Player" << std::endl;
+	std::cout << "2) Player VS AI" << std::endl;
+
 	do {
 		std::cin >> choice;
 
 		if (choice == "1")
-			return true;
+			return false;
 		else if (choice == "2")
 			return true;
 		else
 			std::cout << termcolor::red << "Invaild input" << termcolor::white<<std::endl;
 	} while (choice != "1" && choice != "2");
+
+	return false;
 };

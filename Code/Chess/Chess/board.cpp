@@ -24,7 +24,7 @@ bool Board::checkRestrictions(int curr_x, int curr_y, int next_x, int next_y, Pa
                 return false;
             }
         }
-        else if (abs(curr_y - next_y) == 1 && (next_x - curr_x) == -1) {
+        else if (abs(curr_y - next_y) == 1 && (next_x - curr_x) == -1 && nextpiece != nullptr) {
             if (movingpiece->getColor() != nextpiece->getColor()) {
                 m_board[next_x][next_y] = nullptr;
                 delete nextpiece;
@@ -48,7 +48,7 @@ bool Board::checkRestrictions(int curr_x, int curr_y, int next_x, int next_y, Pa
                     return false;
                 }
             }
-        else if (abs(curr_y - next_y) == 1 && (next_x - curr_x) == 1) {
+        else if (abs(curr_y - next_y) == 1 && (next_x - curr_x) == 1 && nextpiece != nullptr) {
             if (movingpiece->getColor() != nextpiece->getColor()) {
                 m_board[next_x][next_y] = nullptr;
                 delete nextpiece;
@@ -70,15 +70,11 @@ bool Board::checkWin() {
 	return false;
 };
 
-bool Board::move(std::string currentpos, std::string moveTo, Player* player) {
-	Position current;
-	Position next;
-	current.setpos(currentpos);
-	next.setpos(moveTo);
-
+bool Board::move(Position current, Position next, Player* player) {
 	Pawn* movingpiece = getPiece(current.getx(), current.gety());
 	if (movingpiece == nullptr || movingpiece->getColor() != player->color()) { //pawn can only move to empty spaces or enemy spaces
-		std::cout << termcolor::red << "Invalid move" << termcolor::white << std::endl;
+		if (!(player->is_ai()))
+			std::cout << termcolor::red << "Invalid move" << termcolor::white << std::endl;
 		return false;
 	}
 
@@ -92,30 +88,48 @@ bool Board::move(std::string currentpos, std::string moveTo, Player* player) {
 		return true;
 	}
 
-	std::cout << termcolor::red << "Invalid move" << termcolor::white << std::endl;
+	if (!(player->is_ai()))
+		std::cout << termcolor::red << "Invalid move" << termcolor::white << std::endl;
 	return false;
+};
+
+bool Board::moveStr(std::string currentpos, std::string moveTo, Player* player)
+{
+	Position current;
+	Position next;
+	current.setpos(currentpos);
+	next.setpos(moveTo);
+	return Board::move(current, next,player);
 };
 
 void Board::AiMove(Player* player) {
 	int curr_x;
 	int curr_y;
-	std::string currpos;
+	Position currpos;
 	int next_x;
 	int next_y;
-	std::string nextpos;
+	Position nextpos;
 
 	do {
-		curr_x = (rand() % 8) + 1;
-		curr_y = (rand() % 8) + 1;
-	} while (m_board[curr_x][curr_y] == nullptr && (m_board[curr_x][curr_y])->getColor() != player->color());
+		curr_x = (rand() % 8);
+		curr_y = (rand() % 8);
+	} while (m_board[curr_x][curr_y] == nullptr || (m_board[curr_x][curr_y])->getColor() != player->color());
+	currpos.setpos(8 - curr_x, curr_y);
 
 	do {
 		do {
-			next_x = (rand() % 8) + 1;
-			next_y = (rand() % 8) + 1;
-		} while (m_board[next_x][next_y] == nullptr);
+			if (player->color() == Color::Black)
+				next_x = curr_x + ((rand() % 2)  + 1);
 
-	} while(move(curr_x, curr_y, next_x, next_y, player) == false);
+			else
+				next_x = curr_x - ((rand() % 2) + 1);
+
+			next_y = curr_y + (rand() % 3) - 1;
+
+		} while (m_board[next_x][next_y] != nullptr);
+		nextpos.setpos(8 - next_x, next_y);
+
+	} while(move(currpos, nextpos, player) == false);
 
 };
 
