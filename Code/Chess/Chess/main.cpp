@@ -20,11 +20,11 @@ int main() {
 	std::string next;
 
 	do {
+		std::cout << "It's " << (newGame.currentPlayer())->name() << "'s turn" << std::endl;
 		if ((newGame.currentPlayer())->is_ai())
 			newBoard.AiMove(newGame.currentPlayer());
 		else {
 			do {
-				std::cout << "It's " << (newGame.currentPlayer())->name() << "'s turn" << std::endl;
 				curr = "";
 				next = "";
 				do {
@@ -90,7 +90,7 @@ bool checkChoice() {
 }
 void printLogo()
 {
-	
+
 		cout <<termcolor::green<< "    ======================================\n"<<termcolor::white;
 		cout << termcolor::blue << "       _____ _    _ ______  _____ _____\n" << termcolor::white;
 		cout << termcolor::blue << "      / ____| |  | |  ____|/ ____/ ____|\n" << termcolor::white;
@@ -99,6 +99,5 @@ void printLogo()
 		cout << termcolor::red << "     | |____| |  | | |____ ____) |___) |\n" << termcolor::white;
 		cout << termcolor::blue << "      \\_____|_|  |_|______|_____/_____/\n\n" << termcolor::white;
 		cout << termcolor::green << "    ======================================\n\n"<<termcolor::white;
-	
-}
-;
+
+};
