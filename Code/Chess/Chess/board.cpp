@@ -111,22 +111,24 @@ bool Board::validChoice(int xpos, int ypos, Color playercolor) {
 
 	if (playercolor == Color::Black) {
 		if (m_board[xpos + 1][ypos] != nullptr) {
-			if (m_board[xpos + 1][ypos - 1] != nullptr && 0 <= ypos -1 <= 8)
+			if (m_board[xpos + 1][ypos - 1] != nullptr && 0 <= (ypos - 1) <= 8)
 				return ((m_board[xpos][ypos])->getColor() != (m_board[xpos + 1][ypos - 1])->getColor());
 			else if (m_board[xpos + 1][ypos + 1] != nullptr && 0 <= ypos + 1 <= 8)
 				return ((m_board[xpos][ypos])->getColor() != (m_board[xpos + 1][ypos + 1])->getColor());
-			return true;
 		}
+		return true;
 	}
-	if (playercolor == Color::White) {
+
+	else if (playercolor == Color::White) {
 		if (m_board[xpos - 1][ypos] != nullptr) {
-			if (m_board[xpos - 1][ypos - 1] != nullptr && 0 <= ypos - 1 <= 8)
+			if (m_board[xpos - 1][ypos - 1] != nullptr && 0 <= (ypos - 1) <= 8)
 				return ((m_board[xpos][ypos])->getColor() != (m_board[xpos - 1][ypos - 1])->getColor());
 			else if (m_board[xpos - 1][ypos + 1] != nullptr && 0 <= ypos + 1 <= 8)
 				return ((m_board[xpos][ypos])->getColor() != (m_board[xpos - 1][ypos + 1])->getColor());
 		}
 		return true;
 	}
+	return false;
 };
 
 void Board::AiMove(Player* player) {
