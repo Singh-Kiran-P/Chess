@@ -63,7 +63,7 @@ bool Board::checkRestrictions(int curr_x, int curr_y, int next_x, int next_y, Pa
 };
 
 bool Board::checkWin() {
-	for (int i = 0; i < 8; ++i) {
+	for (int i = 0; i < SIZE_BOARD; ++i) {
 		if (m_board[0][i] != nullptr || m_board[7][i] != nullptr)
 			return true; // triggers when a pawn has reached the opposite side
 	}
@@ -111,10 +111,10 @@ void Board::AiMove(Player* player) {
 	Position nextpos;
 
 	do {
-		curr_x = (rand() % 8);
-		curr_y = (rand() % 8);
+		curr_x = (rand() % SIZE_BOARD);
+		curr_y = (rand() % SIZE_BOARD);
 	} while (m_board[curr_x][curr_y] == nullptr || (m_board[curr_x][curr_y])->getColor() != player->color());
-	currpos.setpos(8 - curr_x, curr_y);
+	currpos.setpos(SIZE_BOARD - curr_x, curr_y);
 
 	do {
 		do {
@@ -127,7 +127,7 @@ void Board::AiMove(Player* player) {
 			next_y = curr_y + (rand() % 3) - 1;
 
 		} while (m_board[next_x][next_y] != nullptr);
-		nextpos.setpos(8 - next_x, next_y);
+		nextpos.setpos(SIZE_BOARD - next_x, next_y);
 
 	} while(move(currpos, nextpos, player) == false);
 
@@ -135,9 +135,9 @@ void Board::AiMove(Player* player) {
 
 void Board::printBoard() {
 	std::cout << termcolor::green << "   _______________" << std::endl;
-	for (int i = 0; i < 8; i++) {
-		std::cout << termcolor::green << 8 - i << " |" << termcolor::white; //Board is zero-indexed, while the chess game is flipped and has 1 at the bottom
-		for (int j = 0; j < 8; j++) {
+	for (int i = 0; i < SIZE_BOARD; i++) {
+		std::cout << termcolor::green << SIZE_BOARD - i << " |" << termcolor::white; //Board is zero-indexed, while the chess game is flipped and has 1 at the bottom
+		for (int j = 0; j < SIZE_BOARD; j++) {
 			if (m_board[i][j] != nullptr) {
 				Pawn* temp_pawn = m_board[i][j];
 
@@ -145,7 +145,7 @@ void Board::printBoard() {
 					std::cout << termcolor::blue;
 				}
 
-				if (j < 7) {
+				if (j < SIZE_BOARD-1) {
 					std::cout << temp_pawn->getId() << ' ';
 				}
 				else {
@@ -153,7 +153,7 @@ void Board::printBoard() {
 				}
 				std::cout << termcolor::white;
 			}
-			else if (j < 7) {
+			else if (j < SIZE_BOARD-1) {
 				std::cout << ". ";
 			}
 			else {
@@ -176,8 +176,8 @@ Pawn* Board::getPiece(int x, int y) {
 };
 
 Board::Board() {
-	for (int i = 0; i < 8; i++) {
-		for (int j = 0; j < 8; j++) {
+	for (int i = 0; i < SIZE_BOARD; i++) {
+		for (int j = 0; j < SIZE_BOARD; j++) {
 			if (i == 1 || i == 6) {
 				Pawn* p_ptr{ new Pawn{} };
 				m_board[i][j] = p_ptr;
@@ -194,8 +194,8 @@ Board::Board() {
 };
 
 Board::~Board() {
-	for (int i = 0; i < 8; i++) {
-		for (int j = 0; j < 8; j++) {
+	for (int i = 0; i < SIZE_BOARD; i++) {
+		for (int j = 0; j < SIZE_BOARD; j++) {
 			if (m_board[i][j] != nullptr)
 				delete m_board[i][j];
 		}

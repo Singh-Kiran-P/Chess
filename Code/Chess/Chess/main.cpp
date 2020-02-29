@@ -62,7 +62,7 @@ bool checkInput(std::string  inputStr) {
 	try {		
 		char letter = inputStr[0];
 		int num = std::stoi(inputStr.substr(1)) - 1; //input value must be of the form CHARINT
-		if (('A' <=  letter <= 'H') && (1 <= num <= 8)) //input value must be between A1 and H8
+		if (('A' <=  letter <= 'H') && (1 <= num <= SIZE_BOARD)) //input value must be between A1 and H8
 			return true;
 	}
 	catch (const std::exception&) {
