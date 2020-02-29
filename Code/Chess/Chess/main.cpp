@@ -2,7 +2,8 @@
 #include "Game.h"
 // #include "player.h"
 #include "TermColor.hpp"
-
+#include <stdio.h>
+#include <ctype.h>
 bool checkInput(std::string inputStr);
 bool checkChoice();
 void printLogo();
@@ -30,14 +31,16 @@ int main() {
 				do {
 					std::cout << "Move which pawn? ";
 					std::cin >> curr;
+					curr[0] = toupper(curr[0]);
 				} while (checkInput(curr) == false);
 
 				do {
 					std::cout << "To where? ";
 					std::cin >> next;
+					next[0] = toupper(next[0]);
 				} while (checkInput(next) == false);
 
-		} while (newBoard.moveStr(curr, next, newGame.currentPlayer()) == false); // If a move is invalid, a turn isn't skipped
+			} while (newBoard.moveStr( curr , next, newGame.currentPlayer()) == false); // If a move is invalid, a turn isn't skipped
 
 		}
 
@@ -56,10 +59,10 @@ int main() {
 };
 
 bool checkInput(std::string  inputStr) {
-	try {
+	try {		
 		char letter = inputStr[0];
 		int num = std::stoi(inputStr.substr(1)) - 1; //input value must be of the form CHARINT
-		if (('A' <= letter <= 'H') && (1 <= num <= 8)) //input value must be between A1 and H8
+		if (('A' <=  letter <= 'H') && (1 <= num <= 8)) //input value must be between A1 and H8
 			return true;
 	}
 	catch (const std::exception&) {
