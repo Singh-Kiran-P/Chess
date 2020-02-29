@@ -50,6 +50,7 @@ int main() {
 	std::cout << "\n##################################   ";
 	std::cout << (newGame.currentPlayer())->name() << " won the game!";
 	std::cout << "   ##################################\n" << std::endl;
+	std::cin;
 
 	return 1;
 };
