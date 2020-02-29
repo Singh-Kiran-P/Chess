@@ -68,12 +68,7 @@ bool Board::checkWin() {
 	return false;
 };
 
-bool Board::move(std::string currentpos, std::string moveTo, Player* player) {
-	Position current;
-	Position next;
-	current.setpos(currentpos);
-	next.setpos(moveTo);
-
+bool Board::move(Position current, Position next, Player* player) {
 	Pawn* movingpiece = getPiece(current.getx(), current.gety());
 	if (movingpiece == nullptr || movingpiece->getColor() != player->color()) { //pawn can only move to empty spaces or enemy spaces
 		std::cout << termcolor::red << "Invalid move" << termcolor::white << std::endl;
@@ -93,6 +88,15 @@ bool Board::move(std::string currentpos, std::string moveTo, Player* player) {
 	std::cout << termcolor::red << "Invalid move" << termcolor::white << std::endl;
 	return false;
 };
+
+bool Board::moveStr(std::string currentpos, std::string moveTo, Player* player)
+{
+	Position current;
+	Position next;
+	current.setpos(currentpos);
+	next.setpos(moveTo);
+	return Board::move(current, next,player);
+}
 
 void Board::printBoard() {
 	std::cout << termcolor::green << "   _______________" << std::endl;
