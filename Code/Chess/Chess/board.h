@@ -6,7 +6,9 @@
 
 class Board {
     public:
-        bool move(std::string currentpos, std::string moveTo, Player* player);
+        bool moveStr(std::string currentpos, std::string moveTo, Player* player);
+
+        bool move(Position current, Position next, Player* player);
         void printBoard();
         bool checkWin();
 
