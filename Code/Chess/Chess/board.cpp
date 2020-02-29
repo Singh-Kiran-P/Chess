@@ -102,6 +102,33 @@ bool Board::moveStr(std::string currentpos, std::string moveTo, Player* player)
 	return Board::move(current, next,player);
 };
 
+bool Board::validChoice(int xpos, int ypos, Color playercolor) {
+	if (m_board[xpos][ypos] == nullptr)
+		return false;
+
+	else if ((m_board[xpos][ypos])->getColor() != playercolor)
+		return false;
+
+	if (playercolor == Color::Black) {
+		if (m_board[xpos + 1][ypos] != nullptr) {
+			if (m_board[xpos + 1][ypos - 1] != nullptr && 0 <= ypos -1 <= 8)
+				return ((m_board[xpos][ypos])->getColor() != (m_board[xpos + 1][ypos - 1])->getColor());
+			else if (m_board[xpos + 1][ypos + 1] != nullptr && 0 <= ypos + 1 <= 8)
+				return ((m_board[xpos][ypos])->getColor() != (m_board[xpos + 1][ypos + 1])->getColor());
+			return true;
+		}
+	}
+	if (playercolor == Color::White) {
+		if (m_board[xpos - 1][ypos] != nullptr) {
+			if (m_board[xpos - 1][ypos - 1] != nullptr && 0 <= ypos - 1 <= 8)
+				return ((m_board[xpos][ypos])->getColor() != (m_board[xpos - 1][ypos - 1])->getColor());
+			else if (m_board[xpos - 1][ypos + 1] != nullptr && 0 <= ypos + 1 <= 8)
+				return ((m_board[xpos][ypos])->getColor() != (m_board[xpos - 1][ypos + 1])->getColor());
+		}
+		return true;
+	}
+};
+
 void Board::AiMove(Player* player) {
 	int curr_x;
 	int curr_y;
@@ -109,24 +136,40 @@ void Board::AiMove(Player* player) {
 	int next_x;
 	int next_y;
 	Position nextpos;
+	bool valid_next_spot = false;
 
 	do {
 		curr_x = (rand() % 8);
 		curr_y = (rand() % 8);
-	} while (m_board[curr_x][curr_y] == nullptr || (m_board[curr_x][curr_y])->getColor() != player->color());
+
+	} while (!validChoice(curr_x, curr_y, player->color()));
 	currpos.setpos(8 - curr_x, curr_y);
 
 	do {
 		do {
-			if (player->color() == Color::Black)
-				next_x = curr_x + ((rand() % 2)  + 1);
-
-			else
-				next_x = curr_x - ((rand() % 2) + 1);
+			if (player->color() == Color::Black) {
+				if ((m_board[curr_x][curr_y])->firstTurn())
+					next_x = curr_x + ((rand() % 2) + 1);
+				else
+					next_x = curr_x + ((rand() % 1) + 1);
+			}
+			else {
+				if ((m_board[curr_x][curr_y])->firstTurn())
+					next_x = curr_x - ((rand() % 2) + 1);
+				else
+					next_x = curr_x - ((rand() % 1) + 1);
+			}
 
 			next_y = curr_y + (rand() % 3) - 1;
 
-		} while (m_board[next_x][next_y] != nullptr);
+			if (m_board[next_x][next_y] == nullptr)
+				valid_next_spot = true;
+			else {
+				if ((m_board[next_x][next_y])->getColor() != player->color())
+					valid_next_spot = true;
+			}
+
+		} while (!valid_next_spot);
 		nextpos.setpos(8 - next_x, next_y);
 
 	} while(move(currpos, nextpos, player) == false);

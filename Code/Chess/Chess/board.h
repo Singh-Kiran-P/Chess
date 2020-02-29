@@ -22,6 +22,7 @@ class Board {
     private:
         Pawn* m_board[8][8];
         bool checkRestrictions(int curr_x, int curr_y,int next_x,int next_y, Pawn* movingpiece, Pawn* nextpiece);
+        bool validChoice(int xpos, int ypos, Color playercolor);
         void resetBoard();
 
 };
