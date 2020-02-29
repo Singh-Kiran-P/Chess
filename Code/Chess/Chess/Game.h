@@ -2,15 +2,13 @@
 #define GAME
 #include <ctime>
 #include <iostream>
-#include <stdlib.h>
-#include <stdio.h>
 #include "player.h"
 #include "board.h"
 
 
 class Game {
 	public:
-		Game();
+		Game(bool vsAI);
 		void nextturn();
 		Player* currentPlayer();
 

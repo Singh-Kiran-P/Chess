@@ -7,6 +7,7 @@
 class Board {
     public:
         bool move(std::string currentpos, std::string moveTo, Player* player);
+        void AiMove(Player* player);
         void printBoard();
         bool checkWin();
 

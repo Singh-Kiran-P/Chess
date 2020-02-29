@@ -1,15 +1,23 @@
 #include "game.h"
 using namespace std;
 
-Game::Game() {
+Game::Game(bool vsAI) {
+
     string name1, name2;
     cout << "Player 1's name:" << endl;
     cin >> name1;
     m_player1.setName(name1);
+    m_player1.set_ai(false);
 
+    if (!vsAI) {
     cout << "Player 2's name:"<< endl;
     cin >> name2;
     m_player2.setName(name2);
+    }
+
+    else
+        m_player2.setName("AI");
+        m_player2.set_ai(true);
 
     srand((unsigned int) time(nullptr)); // Use current time for random seed
     int coinflip = rand() % 2;

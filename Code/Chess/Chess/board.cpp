@@ -1,5 +1,7 @@
 #include "board.h"
 #include <iostream>
+#include <stdlib.h>
+#include <stdio.h>
 #include "TermColor.hpp"
 
 Pawn* Board::getPiece(Position position) {
@@ -94,6 +96,29 @@ bool Board::move(std::string currentpos, std::string moveTo, Player* player) {
 	return false;
 };
 
+void Board::AiMove(Player* player) {
+	int curr_x;
+	int curr_y;
+	std::string currpos;
+	int next_x;
+	int next_y;
+	std::string nextpos;
+
+	do {
+		curr_x = (rand() % 8) + 1;
+		curr_y = (rand() % 8) + 1;
+	} while (m_board[curr_x][curr_y] == nullptr && (m_board[curr_x][curr_y])->getColor() != player->color());
+
+	do {
+		do {
+			next_x = (rand() % 8) + 1;
+			next_y = (rand() % 8) + 1;
+		} while (m_board[next_x][next_y] == nullptr);
+
+	} while(move(curr_x, curr_y, next_x, next_y, player) == false);
+
+};
+
 void Board::printBoard() {
 	std::cout << termcolor::green << "   _______________" << std::endl;
 	for (int i = 0; i < 8; i++) {
@@ -121,7 +146,7 @@ void Board::printBoard() {
 				std::cout << ".";
 			}
 		}
-		
+
 		std::cout << termcolor::green << '|';
 		std::cout << '\n';
 	}
