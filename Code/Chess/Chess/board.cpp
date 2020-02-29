@@ -18,8 +18,9 @@ bool Board::checkRestrictions(int curr_x, int curr_y, int next_x, int next_y, Pa
             max_delta_x--;
 
         if (curr_y == next_y && (max_delta_x <= (next_x - curr_x) && (next_x - curr_x) < 0)) {
-            if (nextpiece == nullptr)
-                return true;
+            if (nextpiece == nullptr) {
+                return (m_board[curr_x - 1][curr_y] == nullptr);
+			}
             else {
                 return false;
             }
@@ -43,7 +44,7 @@ bool Board::checkRestrictions(int curr_x, int curr_y, int next_x, int next_y, Pa
 
             if (curr_y == next_y && (0 < (next_x - curr_x) && (next_x - curr_x) <= max_delta_x)) {
                 if (nextpiece == nullptr)
-                    return true;
+                    return (m_board[curr_x + 1][curr_y] == nullptr);
                 else {
                     return false;
                 }
@@ -113,7 +114,7 @@ bool Board::validChoice(int xpos, int ypos, Color playercolor) {
 		if (m_board[xpos + 1][ypos] != nullptr) {
 			if (m_board[xpos + 1][ypos - 1] != nullptr && 0 <= (ypos - 1) <= 8)
 				return ((m_board[xpos][ypos])->getColor() != (m_board[xpos + 1][ypos - 1])->getColor());
-			else if (m_board[xpos + 1][ypos + 1] != nullptr && 0 <= ypos + 1 <= 8)
+			else if (m_board[xpos + 1][ypos + 1] != nullptr && 0 <= (ypos + 1) <= 8)
 				return ((m_board[xpos][ypos])->getColor() != (m_board[xpos + 1][ypos + 1])->getColor());
 		}
 		return true;
@@ -123,7 +124,7 @@ bool Board::validChoice(int xpos, int ypos, Color playercolor) {
 		if (m_board[xpos - 1][ypos] != nullptr) {
 			if (m_board[xpos - 1][ypos - 1] != nullptr && 0 <= (ypos - 1) <= 8)
 				return ((m_board[xpos][ypos])->getColor() != (m_board[xpos - 1][ypos - 1])->getColor());
-			else if (m_board[xpos - 1][ypos + 1] != nullptr && 0 <= ypos + 1 <= 8)
+			else if (m_board[xpos - 1][ypos + 1] != nullptr && 0 <= (ypos + 1) <= 8)
 				return ((m_board[xpos][ypos])->getColor() != (m_board[xpos - 1][ypos + 1])->getColor());
 		}
 		return true;
