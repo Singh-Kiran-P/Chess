@@ -5,9 +5,9 @@
 
 bool checkInput(std::string inputStr);
 bool checkChoice();
-
+void printLogo();
 int main() {
-
+	printLogo();
 	bool gametype = checkChoice();
 	bool checkwin;
 
@@ -75,6 +75,7 @@ bool checkChoice() {
 	std::cout << "2) Player VS AI" << std::endl;
 
 	do {
+		std::cout << "\nChoice: ";
 		std::cin >> choice;
 
 		if (choice == "1")
@@ -86,4 +87,18 @@ bool checkChoice() {
 	} while (choice != "1" && choice != "2");
 
 	return false;
-};
+}
+void printLogo()
+{
+	
+		cout <<termcolor::green<< "    ======================================\n"<<termcolor::white;
+		cout << termcolor::blue << "       _____ _    _ ______  _____ _____\n" << termcolor::white;
+		cout << termcolor::blue << "      / ____| |  | |  ____|/ ____/ ____|\n" << termcolor::white;
+		cout << termcolor::red << "     | |    | |__| | |__  | (___| (___ \n" << termcolor::white;
+		cout << termcolor::red << "     | |    |  __  |  __|  \\___ \\\\___ \\ \n" << termcolor::white;
+		cout << termcolor::red << "     | |____| |  | | |____ ____) |___) |\n" << termcolor::white;
+		cout << termcolor::blue << "      \\_____|_|  |_|______|_____/_____/\n\n" << termcolor::white;
+		cout << termcolor::green << "    ======================================\n\n"<<termcolor::white;
+	
+}
+;
