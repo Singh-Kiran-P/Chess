@@ -29,7 +29,7 @@ int main() {
 				std::cin >> next;
 			} while (checkInput(next) == false);
 
-		} while (newBoard.move(curr, next, newGame.currentPlayer()) == false); // If a move is invalid, a turn isn't skipped
+		} while (newBoard.moveStr(curr, next, newGame.currentPlayer()) == false); // If a move is invalid, a turn isn't skipped
 
 	newBoard.printBoard();
 	newGame.nextturn();
