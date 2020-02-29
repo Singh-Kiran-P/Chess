@@ -6,8 +6,9 @@
 
 class Board {
     public:
-        int move(std::string currentpos, std::string moveTo, Player* player);
+        bool move(std::string currentpos, std::string moveTo, Player* player);
         void printBoard();
+        bool checkWin();
 
         Pawn* getPiece(Position position);
         Pawn* getPiece(int x,int y);

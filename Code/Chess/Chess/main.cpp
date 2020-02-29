@@ -11,20 +11,16 @@ int main() {
 	Board newBoard{};
 	newBoard.printBoard();
 
-		int resultMove;
-		std::string curr = "";
-		std::string next = "";
-
+	std::string curr = "";
+	std::string next = "";
+	do {
 		do {
 			std::cout << "It's " << (newGame.currentPlayer())->name() << "'s turn" << std::endl;
-
 			curr = "";
 			next = "";
-
 			do {
 				std::cout << "Move which pawn? ";
 				std::cin >> curr;
-
 			} while (checkInput(curr) == false);
 
 			do {
@@ -32,14 +28,16 @@ int main() {
 				std::cin >> next;
 			} while (checkInput(next) == false);
 
-			resultMove = newBoard.move(curr, next, newGame.currentPlayer());
+		} while (newBoard.move(curr, next, newGame.currentPlayer()) == false);
 
-			if (resultMove != -1) { //move returns -1 if someone won the game
-				newBoard.printBoard();
-				newGame.nextturn();
-			}
+	newBoard.printBoard();
+	newGame.nextturn();
 
-		} while (resultMove != -1);
+	} while (newBoard.checkWin() == false);
+
+	std::cout << "\n##################################   ";
+	std::cout << (newGame.currentPlayer())->name() << " won the game!";
+	std::cout << "   ##################################\n" << std::endl;
 
 	return 1;
 };

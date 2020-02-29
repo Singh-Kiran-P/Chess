@@ -60,20 +60,15 @@ bool Board::checkRestrictions(int curr_x, int curr_y, int next_x, int next_y, Pa
 	return false;
 };
 
-bool checkWin(int x,Color currentPiece) {
-	if (currentPiece == Color::Black && x ==7)
-	{
-		return true;
-	}
-
-	if (currentPiece == Color::White && x == 0)
-	{
-		return true;
+bool Board::checkWin() {
+	for (int i = 0; i < 8; ++i) {
+		if (m_board[0][i] != nullptr || m_board[7][i] != nullptr)
+			return true;
 	}
 	return false;
 };
 
-int Board::move(std::string currentpos, std::string moveTo, Player* player) {
+bool Board::move(std::string currentpos, std::string moveTo, Player* player) {
 	Position current;
 	Position next;
 	current.setpos(currentpos);
@@ -82,7 +77,7 @@ int Board::move(std::string currentpos, std::string moveTo, Player* player) {
 	Pawn* movingpiece = getPiece(current.getx(), current.gety());
 	if (movingpiece == nullptr || movingpiece->getColor() != player->color()) {
 		std::cout << termcolor::red << "Invalid move" << termcolor::white << std::endl;
-		return 0;
+		return false;
 	}
 
 	Pawn* nextpiece = getPiece(next.getx(), next.gety());
@@ -92,17 +87,11 @@ int Board::move(std::string currentpos, std::string moveTo, Player* player) {
 		m_board[next.getx()][next.gety()] = movingpiece;
 		m_board[current.getx()][current.gety()] = nullptr;
 
-		if (checkWin(next.getx(), movingpiece->getColor())) { //check if the pawn is the winner
-			std::cout << "\n####################################  ";
-			std::cout << player->name() << " won the game";
-			std::cout << "  ####################################";
-
-			return -1; // Game ended
-		}
-		return 1;
+		return true;
 	}
+
 	std::cout << termcolor::red << "Invalid move" << termcolor::white << std::endl;
-	return 0;
+	return false;
 };
 
 void Board::printBoard() {
