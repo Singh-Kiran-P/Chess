@@ -80,7 +80,7 @@ void Board::AiMove(Player* player) {
 	int next_y;
 	Position nextpos;
 	bool valid_next_spot = false;
-
+	
 	do {
 		curr_x = (rand() % SIZE_BOARD);
 		curr_y = (rand() % SIZE_BOARD);
@@ -103,8 +103,15 @@ void Board::AiMove(Player* player) {
 			}
 
 			next_y = curr_y + (rand() % 3) - 1;
+			if (m_board[next_x][next_y] != nullptr) {
+				if (m_board[next_x][next_y]->getColor() != player->color())
+					valid_next_spot = true;
+			}
+			else {
+				valid_next_spot = true;
+			}
 
-		} while (m_board[next_x][next_y] != nullptr);
+		} while (!valid_next_spot);
 		nextpos.setpos(SIZE_BOARD - next_x, next_y);
 
 	} while(move(currpos, nextpos, player) == false);
