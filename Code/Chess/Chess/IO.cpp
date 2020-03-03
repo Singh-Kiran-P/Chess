@@ -58,7 +58,7 @@ void printWinner(string name) {
 };
 
 void clearScreen() {
-#ifdef WINDOWS
+#ifdef _WIN32
     std::system("cls");
 #else
     std::system ("clear");
