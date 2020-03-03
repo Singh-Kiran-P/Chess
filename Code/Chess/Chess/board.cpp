@@ -13,6 +13,7 @@ bool Board::checkWin() const {
 };
 
 bool Board::move(Position current, Position next, Player* player) {
+	std::cout << current.getx() << ", " << current.gety() << "; " << next.getx() << ", " << next.gety() << "\n";
 	Pawn* movingpiece = m_board[current.getx()][current.gety()];
 	if (movingpiece == nullptr || movingpiece->getColor() != player->color()) { //pawn can only move to empty spaces or enemy spaces
 		if (!(player->get_is_ai()))
@@ -52,22 +53,28 @@ bool Board::validChoice(int xpos, int ypos, Color playercolor)  {
 
 	if (playercolor == Color::Black) {
 		if (m_board[xpos + 1][ypos] != nullptr) {
-			if (m_board[xpos + 1][ypos - 1] != nullptr && 0 <= (ypos - 1) <= 8)
+			if (m_board[xpos + 1][ypos - 1] != nullptr && 0 <= (ypos - 1) < 8)
 				return ((m_board[xpos][ypos])->getColor() != (m_board[xpos + 1][ypos - 1])->getColor());
-			else if (m_board[xpos + 1][ypos + 1] != nullptr && 0 <= (ypos + 1) <= 8)
+			else if (m_board[xpos + 1][ypos + 1] != nullptr && 0 <= (ypos + 1) < 8)
 				return ((m_board[xpos][ypos])->getColor() != (m_board[xpos + 1][ypos + 1])->getColor());
+			else
+				return false;
 		}
-		return true;
+		else
+			return true;
 	}
 
 	else if (playercolor == Color::White) {
 		if (m_board[xpos - 1][ypos] != nullptr) {
-			if (m_board[xpos - 1][ypos - 1] != nullptr && 0 <= (ypos - 1) <= 8)
+			if (m_board[xpos - 1][ypos - 1] != nullptr && 0 <= (ypos - 1) < 8)
 				return ((m_board[xpos][ypos])->getColor() != (m_board[xpos - 1][ypos - 1])->getColor());
-			else if (m_board[xpos - 1][ypos + 1] != nullptr && 0 <= (ypos + 1) <= 8)
+			else if (m_board[xpos - 1][ypos + 1] != nullptr && 0 <= (ypos + 1) < 8)
 				return ((m_board[xpos][ypos])->getColor() != (m_board[xpos - 1][ypos + 1])->getColor());
+			else
+				return false;
 		}
-		return true;
+		else
+			return true;
 	}
 	return false;
 };
@@ -80,7 +87,7 @@ void Board::AiMove(Player* player) {
 	int next_y;
 	Position nextpos;
 	bool valid_next_spot = false;
-	
+
 	do {
 		curr_x = (rand() % SIZE_BOARD);
 		curr_y = (rand() % SIZE_BOARD);
