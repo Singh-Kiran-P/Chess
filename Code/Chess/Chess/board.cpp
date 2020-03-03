@@ -84,7 +84,7 @@ void Board::AiMove(Player* player) {
 	do {
 		curr_x = (rand() % SIZE_BOARD);
 		curr_y = (rand() % SIZE_BOARD);
-	} while (m_board[curr_x][curr_y] == nullptr || (m_board[curr_x][curr_y])->getColor() != player->color());
+	} while (!validChoice(curr_x, curr_y, player->color()));
 	currpos.setpos(SIZE_BOARD - curr_x, curr_y);
 
 	do {
