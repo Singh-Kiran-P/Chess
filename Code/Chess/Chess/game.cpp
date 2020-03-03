@@ -53,6 +53,7 @@ Player* Game::currentPlayer() {
 }
 void Game::run(Game& newGame)
 {
+    clearScreen();
 	bool checkwin;
 
 	Board newBoard{}; // Creates the board and places the pawns
@@ -66,7 +67,8 @@ void Game::run(Game& newGame)
 		if ((newGame.currentPlayer())->get_is_ai()) {
 			newBoard.AiMove(newGame.currentPlayer());
 
-		}else {
+		}
+        else {
 		do {
 			curr = "";
 			next = "";
@@ -81,9 +83,10 @@ void Game::run(Game& newGame)
 				std::cin >> next;
 				next[0] = toupper(next[0]);
 			} while (checkInput(next) == false);
-			clearScreen();
 
 		} while (newBoard.move(curr, next, newGame.currentPlayer()) == false); // If a move is invalid, a turn isn't skipped
+
+        clearScreen();
 
 		}
 

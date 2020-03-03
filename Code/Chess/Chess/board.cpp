@@ -52,9 +52,9 @@ bool Board::validChoice(int xpos, int ypos, Color playercolor)  {
 
 	if (playercolor == Color::Black) {
 		if (m_board[xpos + 1][ypos] != nullptr) {
-			if (m_board[xpos + 1][ypos - 1] != nullptr && 0 <= (ypos - 1) < 8)
+			if (m_board[xpos + 1][ypos - 1] != nullptr && (ypos - 1) >= 0 && (ypos - 1) < 8)
 				return ((m_board[xpos][ypos])->getColor() != (m_board[xpos + 1][ypos - 1])->getColor());
-			else if (m_board[xpos + 1][ypos + 1] != nullptr && 0 <= (ypos + 1) < 8)
+			else if (m_board[xpos + 1][ypos + 1] != nullptr && (ypos + 1) >= 0 && (ypos + 1) < 8)
 				return ((m_board[xpos][ypos])->getColor() != (m_board[xpos + 1][ypos + 1])->getColor());
 			else
 				return false;
@@ -65,9 +65,9 @@ bool Board::validChoice(int xpos, int ypos, Color playercolor)  {
 
 	else if (playercolor == Color::White) {
 		if (m_board[xpos - 1][ypos] != nullptr) {
-			if (m_board[xpos - 1][ypos - 1] != nullptr && 0 <= (ypos - 1) < 8)
+			if (m_board[xpos - 1][ypos - 1] != nullptr && (ypos - 1) >= 0 && (ypos - 1) < 8)
 				return ((m_board[xpos][ypos])->getColor() != (m_board[xpos - 1][ypos - 1])->getColor());
-			else if (m_board[xpos - 1][ypos + 1] != nullptr && 0 <= (ypos + 1) < 8)
+			else if (m_board[xpos - 1][ypos + 1] != nullptr && (ypos + 1) >= 0 && (ypos + 1) < 8)
 				return ((m_board[xpos][ypos])->getColor() != (m_board[xpos - 1][ypos + 1])->getColor());
 			else
 				return false;
@@ -117,7 +117,7 @@ void Board::AiMove(Player* player) {
 				valid_next_spot = true;
 			}
 
-		} while (!valid_next_spot);
+		} while (!valid_next_spot || next_x < 0 || next_x >= 8 || next_y < 0 || next_y >= 8);
 		nextpos.setpos(SIZE_BOARD - next_x, next_y);
 
 	} while(move(currpos, nextpos, player) == false);
