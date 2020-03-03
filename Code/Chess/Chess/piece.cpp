@@ -1,9 +1,9 @@
 #include "piece.h"
 
-void Pawn::setColor(Color color) {
+void Piece::setColor(Color color) {
 	m_color = color;
 };
 
-Color Pawn::getColor() const {
+Color Piece::getColor() const {
 	return m_color;
 };

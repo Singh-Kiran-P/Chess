@@ -21,7 +21,7 @@ bool Board::move(Position current, Position next, Player* player) {
 	}
 
 	Pawn* nextpiece = m_board[next.getx()][next.gety()];
-	if (movingpiece->moveRestrictions(current.getx(), current.gety(), next.getx(), next.gety(), movingpiece, nextpiece)) {
+	if (movingpiece->moveRestrictions(current.getx(), current.gety(), next.getx(), next.gety(), movingpiece, nextpiece) && noBlockers(current, next)) {
 		movingpiece->increaseTurnCount();
 		m_board[next.getx()][next.gety()] = movingpiece;
 		m_board[current.getx()][current.gety()] = nullptr;
@@ -111,18 +111,29 @@ void Board::AiMove(Player* player) {
 
 };
 
-bool Piece::noBlockers(Piece* movingpiece, Position current, Position next) {
+bool Board::noBlockers(Position current, Position next) const {
     int curr_x = current.getx();
     int curr_y = current.gety();
     int next_x = next.getx();
     int next_y = next.gety();
 
-    if (movingpiece->getColor()) == Color::White) {
-		if (curr_x >= next_x) {
-        	while (curr_x > next_x)
+	while (curr_x != next_x || curr_y != next_y) {
+		if (next_x < curr_x)
+			next_x++;
+		else if (next_x > curr_x)
+			next_x--;
+		if (next_y < curr_y)
+			next_y++;
+		else if (next_y > curr_y)
+			next_y--;
+		if (next_x != curr_x || next_y != curr_y) {
+			if (m_board[next_x][next_y] != nullptr)
+				return false;
 		}
-    }
-}
+	}
+	return true;
+
+};
 
 void Board::printBoard() const {
 	std::cout << termcolor::green << "   _______________" << std::endl;
