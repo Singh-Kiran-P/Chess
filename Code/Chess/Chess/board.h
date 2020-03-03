@@ -13,9 +13,6 @@ class Board {
         void printBoard();
         bool checkWin();
 
-        Pawn* getPiece(Position position);
-        Pawn* getPiece(int x,int y);
-
         Board();
         ~Board();
 

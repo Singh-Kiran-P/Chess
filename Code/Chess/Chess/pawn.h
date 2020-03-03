@@ -11,12 +11,14 @@ class Pawn {
 		void setColor(Color color);
 		Color getColor();
 
-		bool firstTurn();
-		void setfirstTurnFalse();
+		int turnCount();
+		void increaseTurnCount();
+
+		bool moveRestrictions();
 
 	private:
 		char m_id;
-		bool m_firstTurn = true;
+		int m_turnCount = 0;
 		Color m_color;
 		bool m_killed = false;
 };

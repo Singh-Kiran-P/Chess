@@ -12,14 +12,66 @@ void Pawn::setColor(Color color) {
 	m_color = color;
 };
 
-bool Pawn::firstTurn() {
-	return m_firstTurn;
+int Pawn::turnCount() {
+	return m_turnCount;
 };
 
-void Pawn::setfirstTurnFalse() {
-	m_firstTurn = false;
-};
+void Pawn::increaseTurnCount() {
+	m_turnCount++;
+}
 
 Color Pawn::getColor() {
 	return m_color;
+};
+
+bool Pawn::moveRestrictions(int curr_x, int curr_y, int next_x, int next_y, Pawn* movingpiece, Pawn* nextpiece) {
+	if (movingpiece->getColor() == Color::White) {
+        int max_delta_x = -1;
+        if (movingpiece->turnCount() == 0)
+            max_delta_x--;
+
+        if (curr_y == next_y && (max_delta_x <= (next_x - curr_x) && (next_x - curr_x) < 0)) {
+            if (nextpiece == nullptr) {
+                return true;
+			}
+            else {
+                return false;
+            }
+        }
+        else if (abs(curr_y - next_y) == 1 && (next_x - curr_x) == -1 && nextpiece != nullptr) {
+            if (movingpiece->getColor() != nextpiece->getColor()) {
+                m_board[next_x][next_y] = nullptr;
+                delete nextpiece;
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    }
+
+    else if (movingpiece->getColor() == Color::Black) {
+        int max_delta_x = 1;
+        if (movingpiece->turnCount() == 0)
+            max_delta_x++;
+
+            if (curr_y == next_y && (0 < (next_x - curr_x) && (next_x - curr_x) <= max_delta_x)) {
+                if (nextpiece == nullptr)
+                    return true;
+                else {
+                    return false;
+                }
+            }
+        else if (abs(curr_y - next_y) == 1 && (next_x - curr_x) == 1 && nextpiece != nullptr) {
+            if (movingpiece->getColor() != nextpiece->getColor()) {
+                m_board[next_x][next_y] = nullptr;
+                delete nextpiece;
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    }
+	return false;
 };
