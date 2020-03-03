@@ -4,6 +4,7 @@
 #include "TermColor.hpp"
 #include <stdio.h>
 #include <ctype.h>
+#include <cstdlib>
 #include <string>
 #include <iostream>
 using namespace std;
@@ -12,5 +13,6 @@ bool checkInput(std::string inputStr);
 bool checkChoice();
 void printLogo();
 void printWinner(std::string name);
+void clearScreen();
 
 #endif

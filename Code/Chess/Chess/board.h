@@ -4,6 +4,7 @@
 #include "pawn.h"
 #include "player.h"
 const int SIZE_BOARD = 8;
+
 class Board {
     public:
         bool move(Position current, Position next, Player* player);

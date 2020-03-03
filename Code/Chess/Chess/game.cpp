@@ -1,4 +1,5 @@
 #include "game.h"
+#include "io.h"
 using namespace std;
 
 Game::Game(bool vsAI) {
@@ -21,12 +22,14 @@ Game::Game(bool vsAI) {
         m_player2.set_ai(true);
     }
 
+    clearScreen();
+
     srand((unsigned int) time(nullptr)); // Use current time for random seed
     int coinflip = rand() % 2;
 
     if (coinflip == 1) {
         m_player1.setcolor(Color::White);
-        cout <<endl<< m_player1.name() << " is white, " << m_player2.name() << " is black." << endl;
+        cout << m_player1.name() << " is white, " << m_player2.name() << " is black." << endl;
         m_player2.setcolor(Color::Black);
         m_turn = &m_player1;
     }
