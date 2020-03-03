@@ -9,6 +9,7 @@ class Board {
         bool move(Position current, Position next, Player* player);
         bool move(std::string currentpos, std::string moveTo, Player* player);
         void AiMove(Player* player);
+        bool noBlockers(Position current, Position next) const;
 
         void printBoard() const;
         bool checkWin() const;

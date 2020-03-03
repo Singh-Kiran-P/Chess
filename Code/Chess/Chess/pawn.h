@@ -3,13 +3,11 @@
 #include "color.h"
 #include "position.h"
 #include "piece.h"
+
 class Pawn : public Piece {
 	public:
 		char getId() const;
 		void setId(char id);
-
-		void setColor(Color color) ;
-		Color getColor() const;
 
 		int turnCount() const;
 		void increaseTurnCount();
@@ -19,8 +17,6 @@ class Pawn : public Piece {
 	private:
 		char m_id;
 		int m_turnCount = 0;
-		Color m_color;
-		bool m_killed = false;
 };
 
 #endif

@@ -111,6 +111,19 @@ void Board::AiMove(Player* player) {
 
 };
 
+bool Piece::noBlockers(Piece* movingpiece, Position current, Position next) {
+    int curr_x = current.getx();
+    int curr_y = current.gety();
+    int next_x = next.getx();
+    int next_y = next.gety();
+
+    if (movingpiece->getColor()) == Color::White) {
+		if (curr_x >= next_x) {
+        	while (curr_x > next_x)
+		}
+    }
+}
+
 void Board::printBoard() const {
 	std::cout << termcolor::green << "   _______________" << std::endl;
 	for (int i = 0; i < SIZE_BOARD; i++) {

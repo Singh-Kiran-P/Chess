@@ -8,20 +8,12 @@ void Pawn::setId(char id) {
 	m_id = id;;
 };
 
-void Pawn::setColor(Color color) {
-	m_color = color;
-};
-
 int Pawn::turnCount() const {
 	return m_turnCount;
 };
 
 void Pawn::increaseTurnCount() {
 	m_turnCount++;
-}
-
-Color Pawn::getColor() const {
-	return m_color;
 };
 
 bool Pawn::moveRestrictions(int curr_x, int curr_y, int next_x, int next_y, Pawn* movingpiece, Pawn* nextpiece) {
@@ -31,20 +23,16 @@ bool Pawn::moveRestrictions(int curr_x, int curr_y, int next_x, int next_y, Pawn
             max_delta_x--;
 
         if (curr_y == next_y && (max_delta_x <= (next_x - curr_x) && (next_x - curr_x) < 0)) {
-            if (nextpiece == nullptr) {
+            if (nextpiece == nullptr)
                 return true;
-			}
-            else {
+            else
                 return false;
-            }
         }
-        else if (abs(curr_y - next_y) == 1 && (next_x - curr_x) == -1 && nextpiece == nullptr) {
-            if (nextpiece != nullptr) {
+        else if (abs(curr_y - next_y) == 1 && (next_x - curr_x) == -1 && nextpiece != nullptr) {
                 if (movingpiece->getColor() != nextpiece->getColor())
                     return true;
                 else
                     return false;
-            }
         }
     }
 
@@ -56,17 +44,14 @@ bool Pawn::moveRestrictions(int curr_x, int curr_y, int next_x, int next_y, Pawn
             if (curr_y == next_y && (0 < (next_x - curr_x) && (next_x - curr_x) <= max_delta_x)) {
                 if (nextpiece == nullptr)
                     return true;
-                else {
+                else
                     return false;
-                }
             }
-        else if (abs(curr_y - next_y) == 1 && (next_x - curr_x) == 1  && nextpiece == nullptr) {
-			if (nextpiece != nullptr) {
+        else if (abs(curr_y - next_y) == 1 && (next_x - curr_x) == 1  && nextpiece != nullptr) {
                 if (movingpiece->getColor() != nextpiece->getColor())
                     return true;
                 else
                     return false;
-            }
         }
     }
 	return false;

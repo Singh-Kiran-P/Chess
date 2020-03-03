@@ -5,11 +5,13 @@
 
 class Piece {
     public:
-        bool move(Piece p, Position pos) const;
+		void setColor(Color color) ;
+		Color getColor() const;
+        
     private:
         Position m_position;
         Color m_color;
-        bool m_killed;
+        bool m_killed = false;
 };
 
 #endif
