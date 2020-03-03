@@ -14,7 +14,7 @@ class Pawn : public Piece {
 		int turnCount() const;
 		void increaseTurnCount();
 
-		bool moveRestrictions(int curr_x, int curr_y, int next_x, int next_y, Pawn* movingpiece, Pawn* nextpiece) ;
+		bool moveRestrictions(int curr_x, int curr_y, int next_x, int next_y, Pawn* movingpiece, Pawn* nextpiece);
 
 	private:
 		char m_id;

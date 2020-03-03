@@ -21,11 +21,12 @@ bool Board::move(Position current, Position next, Player* player) {
 	}
 
 	Pawn* nextpiece = m_board[next.getx()][next.gety()];
-	if (checkRestrictions(current.getx(), current.gety(), next.getx(), next.gety(), movingpiece, nextpiece)) {
+	if (movingpiece->moveRestrictions(current.getx(), current.gety(), next.getx(), next.gety(), movingpiece, nextpiece)) {
 		movingpiece->increaseTurnCount();
 		m_board[next.getx()][next.gety()] = movingpiece;
 		m_board[current.getx()][current.gety()] = nullptr;
-
+		if (nextpiece != nullptr)
+			delete nextpiece;
 		return true;
 	}
 	if (!(player->get_is_ai()))

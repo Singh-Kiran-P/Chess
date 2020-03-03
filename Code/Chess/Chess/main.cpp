@@ -4,7 +4,7 @@
 
 int main() {
 	printLogo();
-	bool gametype = checkChoice();
+	bool gametype = checkChoice(); //VS AI || VS Player
 	bool checkwin;
 
 	Game newGame{gametype}; // Creates both player objects, randomly assigns them their color
