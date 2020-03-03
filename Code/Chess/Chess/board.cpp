@@ -21,19 +21,21 @@ bool Board::move(Position current, Position next, Player* player) {
 	}
 
 	Pawn* nextpiece = m_board[next.getx()][next.gety()];
-	if (checkRestrictions(current.getx(), current.gety(), next.getx(), next.gety(), movingpiece, nextpiece)) {
+	if (movingpiece->moveRestrictions(current.getx(), current.gety(), next.getx(), next.gety(), movingpiece, nextpiece)) {
 		movingpiece->increaseTurnCount();
 		m_board[next.getx()][next.gety()] = movingpiece;
 		m_board[current.getx()][current.gety()] = nullptr;
-
+		if (nextpiece != nullptr)
+			delete nextpiece;
 		return true;
 	}
+
 	if (!(player->is_ai()))
 		std::cout << termcolor::red << "Invalid move" << termcolor::white << std::endl;
 	return false;
 };
 
-bool Board::moveStr(std::string currentpos, std::string moveTo, Player* player)
+bool Board::move(std::string currentpos, std::string moveTo, Player* player)
 {
 	Position current;
 	Position next;

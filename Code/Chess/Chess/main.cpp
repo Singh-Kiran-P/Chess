@@ -4,7 +4,7 @@
 
 int main() {
 	printLogo();
-	bool gametype = checkChoice();
+	bool gametype = checkChoice(); //VS AI || VS Player
 	bool checkwin;
 
 	Game newGame{gametype}; // Creates both player objects, randomly assigns them their color
@@ -35,7 +35,7 @@ int main() {
 					next[0] = toupper(next[0]);
 				} while (checkInput(next) == false);
 
-			} while (newBoard.moveStr( curr , next, newGame.currentPlayer()) == false); // If a move is invalid, a turn isn't skipped
+			} while (newBoard.move( curr , next, newGame.currentPlayer()) == false); // If a move is invalid, a turn isn't skipped
 
 		}
 

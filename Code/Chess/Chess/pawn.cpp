@@ -38,15 +38,11 @@ bool Pawn::moveRestrictions(int curr_x, int curr_y, int next_x, int next_y, Pawn
                 return false;
             }
         }
-        else if (abs(curr_y - next_y) == 1 && (next_x - curr_x) == -1 && nextpiece != nullptr) {
-            if (movingpiece->getColor() != nextpiece->getColor()) {
-                m_board[next_x][next_y] = nullptr;
-                delete nextpiece;
+        else if (abs(curr_y - next_y) == 1 && (next_x - curr_x) == -1) {
+            if (movingpiece->getColor() != nextpiece->getColor())
                 return true;
-            }
-            else {
+            else
                 return false;
-            }
         }
     }
 
@@ -62,12 +58,10 @@ bool Pawn::moveRestrictions(int curr_x, int curr_y, int next_x, int next_y, Pawn
                     return false;
                 }
             }
-        else if (abs(curr_y - next_y) == 1 && (next_x - curr_x) == 1 && nextpiece != nullptr) {
-            if (movingpiece->getColor() != nextpiece->getColor()) {
-                m_board[next_x][next_y] = nullptr;
-                delete nextpiece;
+        else if (abs(curr_y - next_y) == 1 && (next_x - curr_x) == 1) {
+			if (nextpiece == nullptr) {
                 return true;
-            }
+			}
             else {
                 return false;
             }
