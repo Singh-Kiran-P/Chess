@@ -12,7 +12,7 @@ class Game {
 		Game(bool vsAI);
 		void nextturn() ;
 		Player* currentPlayer();
-		void run(Game newGame);
+		void run(Game & newGame);
 
 	private:
 		time_t m_time;
