@@ -17,7 +17,7 @@ int main() {
 
 	do {
 		std::cout << "It's " << (newGame.currentPlayer())->name() << "'s turn" << std::endl;
-		if ((newGame.currentPlayer())->is_ai())
+		if ((newGame.currentPlayer())->get_is_ai())
 			newBoard.AiMove(newGame.currentPlayer());
 		else {
 			do {
@@ -35,7 +35,7 @@ int main() {
 					next[0] = toupper(next[0]);
 				} while (checkInput(next) == false);
 
-			} while (newBoard.moveStr( curr , next, newGame.currentPlayer()) == false); // If a move is invalid, a turn isn't skipped
+			} while (newBoard.move( curr , next, newGame.currentPlayer()) == false); // If a move is invalid, a turn isn't skipped
 
 		}
 

@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include "TermColor.hpp"
 
-bool Board::checkWin() {
+bool Board::checkWin() const {
 	for (int i = 0; i < SIZE_BOARD; ++i) {
 		if (m_board[0][i] != nullptr || m_board[7][i] != nullptr)
 			return true; // triggers when a pawn has reached the opposite side
@@ -15,7 +15,7 @@ bool Board::checkWin() {
 bool Board::move(Position current, Position next, Player* player) {
 	Pawn* movingpiece = m_board[current.getx()][current.gety()];
 	if (movingpiece == nullptr || movingpiece->getColor() != player->color()) { //pawn can only move to empty spaces or enemy spaces
-		if (!(player->is_ai()))
+		if (!(player->get_is_ai()))
 			std::cout << termcolor::red << "Invalid move" << termcolor::white << std::endl;
 		return false;
 	}
@@ -28,12 +28,12 @@ bool Board::move(Position current, Position next, Player* player) {
 
 		return true;
 	}
-	if (!(player->is_ai()))
+	if (!(player->get_is_ai()))
 		std::cout << termcolor::red << "Invalid move" << termcolor::white << std::endl;
 	return false;
 };
 
-bool Board::moveStr(std::string currentpos, std::string moveTo, Player* player)
+bool Board::move(std::string currentpos, std::string moveTo, Player* player)
 {
 	Position current;
 	Position next;
@@ -42,7 +42,7 @@ bool Board::moveStr(std::string currentpos, std::string moveTo, Player* player)
 	return Board::move(current, next,player);
 };
 
-bool Board::validChoice(int xpos, int ypos, Color playercolor) {
+bool Board::validChoice(int xpos, int ypos, Color playercolor)  {
 	if (m_board[xpos][ypos] == nullptr)
 		return false;
 
@@ -110,7 +110,7 @@ void Board::AiMove(Player* player) {
 
 };
 
-void Board::printBoard() {
+void Board::printBoard() const {
 	std::cout << termcolor::green << "   _______________" << std::endl;
 	for (int i = 0; i < SIZE_BOARD; i++) {
 		std::cout << termcolor::green << SIZE_BOARD - i << " |" << termcolor::white; //Board is zero-indexed, while the chess game is flipped and has 1 at the bottom

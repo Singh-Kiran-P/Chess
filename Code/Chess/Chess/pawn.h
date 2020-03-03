@@ -2,19 +2,19 @@
 #define PAWN
 #include "color.h"
 #include "position.h"
-
-class Pawn {
+#include "piece.h"
+class Pawn : public Piece {
 	public:
-		char getId();
+		char getId() const;
 		void setId(char id);
 
-		void setColor(Color color);
-		Color getColor();
+		void setColor(Color color) ;
+		Color getColor() const;
 
-		int turnCount();
+		int turnCount() const;
 		void increaseTurnCount();
 
-		bool moveRestrictions();
+		bool moveRestrictions(int curr_x, int curr_y, int next_x, int next_y, Pawn* movingpiece, Pawn* nextpiece) ;
 
 	private:
 		char m_id;

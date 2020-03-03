@@ -1,6 +1,6 @@
 #include "pawn.h"
 
-char Pawn::getId() {
+char Pawn::getId() const {
 	return m_id;
 };
 
@@ -12,7 +12,7 @@ void Pawn::setColor(Color color) {
 	m_color = color;
 };
 
-int Pawn::turnCount() {
+int Pawn::turnCount() const {
 	return m_turnCount;
 };
 
@@ -20,7 +20,7 @@ void Pawn::increaseTurnCount() {
 	m_turnCount++;
 }
 
-Color Pawn::getColor() {
+Color Pawn::getColor() const {
 	return m_color;
 };
 
@@ -40,7 +40,7 @@ bool Pawn::moveRestrictions(int curr_x, int curr_y, int next_x, int next_y, Pawn
         }
         else if (abs(curr_y - next_y) == 1 && (next_x - curr_x) == -1 && nextpiece != nullptr) {
             if (movingpiece->getColor() != nextpiece->getColor()) {
-                m_board[next_x][next_y] = nullptr;
+                //m_board[next_x][next_y] = nullptr;
                 delete nextpiece;
                 return true;
             }
@@ -64,7 +64,7 @@ bool Pawn::moveRestrictions(int curr_x, int curr_y, int next_x, int next_y, Pawn
             }
         else if (abs(curr_y - next_y) == 1 && (next_x - curr_x) == 1 && nextpiece != nullptr) {
             if (movingpiece->getColor() != nextpiece->getColor()) {
-                m_board[next_x][next_y] = nullptr;
+                //m_board[next_x][next_y] = nullptr;
                 delete nextpiece;
                 return true;
             }

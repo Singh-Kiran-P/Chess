@@ -5,7 +5,7 @@
 
 class Piece {
     public:
-        bool move(Piece p, Position pos);
+        bool move(Piece p, Position pos) const;
     private:
         Position m_position;
         Color m_color;

@@ -2,11 +2,11 @@
 #include <string>
 const int SIZE_BOARD = 8;
 
-int Position::getx() {
+int Position::getx() const {
 	return m_xpos;
 };
 
-int Position::gety() {
+int Position::gety() const {
 	return m_ypos;
 };
 

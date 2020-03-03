@@ -9,7 +9,7 @@
 class Game {
 	public:
 		Game(bool vsAI);
-		void nextturn();
+		void nextturn() ;
 		Player* currentPlayer();
 
 	private:
