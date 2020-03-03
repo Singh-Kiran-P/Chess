@@ -6,10 +6,12 @@ int main() {
 	printLogo();
 	bool gametype = checkChoice(); //VS AI || VS Player
 	bool checkwin;
+	clearScreen();
 
 	Game newGame{gametype}; // Creates both player objects, randomly assigns them their color
 
 	Board newBoard{}; // Creates the board and places the pawns
+	clearScreen();
 	newBoard.printBoard();
 
 	std::string curr;
@@ -39,12 +41,14 @@ int main() {
 
 		}
 
+		clearScreen();
 		newBoard.printBoard();
 		if ((checkwin = newBoard.checkWin()) == false)
 		newGame.nextturn();
 
 	} while (checkwin == false); //as long as no one has won, ask the next player for their move
 
+	clearScreen();
 	printWinner((newGame.currentPlayer())->name());
 	return 1;
 };

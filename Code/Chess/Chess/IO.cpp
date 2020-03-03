@@ -55,4 +55,12 @@ void printWinner(string name) {
     cout << "   ##################################\n" << endl;
     cin;
 
-}
+};
+
+void clearScreen() {
+#ifdef WINDOWS
+    std::system("cls");
+#else
+    std::system ("clear");
+#endif
+};
