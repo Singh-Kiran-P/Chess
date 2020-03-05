@@ -50,7 +50,8 @@ void Game::nextturn() {
 
 Player* Game::currentPlayer() {
 	return m_turn;
-}
+};
+
 void Game::run(Game& newGame)
 {
 	bool checkwin;
