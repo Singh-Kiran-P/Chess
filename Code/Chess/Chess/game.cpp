@@ -64,11 +64,10 @@ void Game::run(Game& newGame)
 
 	do {
 		std::cout << "It's " << (newGame.currentPlayer())->name() << "'s turn" << std::endl;
-		if ((newGame.currentPlayer())->get_is_ai()) {
-			newBoard.AiMove(newGame.currentPlayer());
-
-		}
-        else {
+		//if ((newGame.currentPlayer())->get_is_ai()) {
+			// newBoard.AiMove(newGame.currentPlayer());
+		//}
+        //else {
 		do {
 			curr = "";
 			next = "";
@@ -88,7 +87,7 @@ void Game::run(Game& newGame)
 
         clearScreen();
 
-		}
+		//}
 
 		newBoard.printBoard();
 		if ((checkwin = newBoard.checkWin()) == false)
