@@ -1,5 +1,4 @@
-#ifndef PLAYER
-#define PLAYER
+#pragma once
 #include <string>
 #include "color.h"
 using namespace std;
@@ -13,11 +12,10 @@ class Player {
         std::string name() const;
 
         bool get_is_ai() const;
-        void set_ai(bool ai) ;
+        void set_ai(bool ai);
     private:
         string m_playername;
         Color m_color;
         bool m_is_ai;
 };
 
-#endif

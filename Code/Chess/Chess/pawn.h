@@ -1,7 +1,4 @@
-#ifndef PAWN
-#define PAWN
-#include "color.h"
-#include "position.h"
+#pragma once
 #include "piece.h"
 
 class Pawn : public Piece {
@@ -10,10 +7,8 @@ class Pawn : public Piece {
 		int turnCount() const;
 		void increaseTurnCount();
 
-		bool moveRestrictions(int curr_x, int curr_y, int next_x, int next_y, Piece* movingpiece, Piece* nextpiece);
+		bool moveRestrictions(Piece* movingpiece, Piece* nextpiece, int next_x, int next_y);
 
 	private:
 		int m_turnCount = 0;
 };
-
-#endif

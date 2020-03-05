@@ -1,6 +1,3 @@
-#ifndef COLOR
-#define COLOR
+#pragma once
 
 enum class Color { Black, White };
-
-#endif

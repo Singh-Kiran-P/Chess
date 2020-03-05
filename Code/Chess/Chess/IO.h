@@ -1,5 +1,4 @@
-#ifndef IO
-#define IO
+#pragma once
 #define MAX_SIZE 8
 #include "TermColor.hpp"
 #include <stdio.h>
@@ -15,4 +14,3 @@ void printLogo();
 void printWinner(std::string name);
 void clearScreen();
 
-#endif

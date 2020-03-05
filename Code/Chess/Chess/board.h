@@ -1,8 +1,8 @@
-#ifndef BOARD
-#define BOARD
+#pragma once
 #include <string>
 #include "pawn.h"
 #include "player.h"
+
 const int SIZE_BOARD = 8;
 
 class Board {
@@ -24,4 +24,3 @@ class Board {
 
 };
 
-#endif

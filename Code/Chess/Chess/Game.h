@@ -1,5 +1,4 @@
-#ifndef GAME
-#define GAME
+#pragma once
 #include <ctime>
 #include <iostream>
 #include "player.h"
@@ -21,5 +20,3 @@ class Game {
 		Player* m_turn;
 
 };
-
-#endif

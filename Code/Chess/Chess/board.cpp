@@ -1,8 +1,8 @@
 #include "board.h"
-#include <iostream>
+#include "TermColor.hpp"
 #include <stdlib.h>
 #include <stdio.h>
-#include "TermColor.hpp"
+#include <iostream>
 
 bool Board::checkWin() const {
 	for (int i = 0; i < SIZE_BOARD; ++i) {
@@ -21,10 +21,11 @@ bool Board::move(Position current, Position next, Player* player) {
 	}
 
 	Piece* nextpiece = m_board[next.getx()][next.gety()];
-	if (movingpiece->moveRestrictions(current.getx(), current.gety(), next.getx(), next.gety(), movingpiece, nextpiece) && noBlockers(current, next)) {
+	if (movingpiece->moveRestrictions(movingpiece, nextpiece, next.getx(), next.gety()) && noBlockers(current, next)) {
 		if (auto *i = dynamic_cast<Pawn*>(movingpiece))
 			i->increaseTurnCount();
 		m_board[next.getx()][next.gety()] = movingpiece;
+		movingpiece->setPos(next);
 		m_board[current.getx()][current.gety()] = nullptr;
 		if (nextpiece != nullptr)
 			delete nextpiece;
@@ -37,10 +38,8 @@ bool Board::move(Position current, Position next, Player* player) {
 
 bool Board::move(std::string currentpos, std::string moveTo, Player* player)
 {
-	Position current;
-	Position next;
-	current.setpos(currentpos);
-	next.setpos(moveTo);
+	Position current{currentpos};
+	Position next{moveTo};
 	return Board::move(current, next,player);
 };
 
@@ -80,19 +79,18 @@ bool Board::validChoice(int xpos, int ypos, Color playercolor)  {
 };
 
 void Board::AiMove(Player* player) {
-	int curr_x;
-	int curr_y;
-	Position currpos;
-	int next_x;
-	int next_y;
-	Position nextpos;
-	bool valid_next_spot = false;
+	int curr_x{};
+	int curr_y{};
+	int next_x{};
+	int next_y{};
+	bool valid_next_spot{ false };
+	Position nextpos{};
 
 	do {
 		curr_x = (rand() % SIZE_BOARD);
 		curr_y = (rand() % SIZE_BOARD);
 	} while (!validChoice(curr_x, curr_y, player->color()));
-	currpos.setpos(SIZE_BOARD - curr_x, curr_y);
+	Position currpos{curr_x, curr_y};
 
 	do {
 		do {
@@ -123,7 +121,7 @@ void Board::AiMove(Player* player) {
 			}
 
 		} while (!valid_next_spot);
-		nextpos.setpos(SIZE_BOARD - next_x, next_y);
+		nextpos.setpos((SIZE_BOARD - next_x), next_y);
 
 	} while(move(currpos, nextpos, player) == false);
 
@@ -194,9 +192,11 @@ Board::Board() {
 	for (int i = 0; i < SIZE_BOARD; i++) {
 		for (int j = 0; j < SIZE_BOARD; j++) {
 			if (i == 1 || i == 6) {
-				Pawn* p_ptr{ new Pawn{} };
+				Pawn* p_ptr{ new Pawn };
 				m_board[i][j] = p_ptr;
 				p_ptr->setId('P');
+				Position tempPos{i, j};
+				p_ptr->setPos(tempPos);
 				if (i == 1)
 					p_ptr->setColor(Color::Black); // top of board is black
 				else

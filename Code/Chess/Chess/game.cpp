@@ -96,5 +96,4 @@ void Game::run(Game& newGame)
 } while (checkwin == false); //as long as no one has won, ask the next player for their move
 
 printWinner((newGame.currentPlayer())->name());
-}
-;
+};

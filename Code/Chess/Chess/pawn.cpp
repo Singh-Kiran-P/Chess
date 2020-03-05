@@ -8,7 +8,14 @@ void Pawn::increaseTurnCount() {
 	m_turnCount++;
 };
 
-bool Pawn::moveRestrictions(int curr_x, int curr_y, int next_x, int next_y, Piece* movingpiece, Piece* nextpiece) {
+bool Pawn::moveRestrictions(Piece* movingpiece, Piece* nextpiece, int x, int y) {
+	Position currPos = movingpiece->getPos();
+	int curr_x = currPos.getx();
+	int curr_y = currPos.gety();
+
+	int next_x = x;
+	int next_y = y;
+
 	int max_delta_x = 1;
 	if (movingpiece->getColor() == Color::White) {
 		if (next_x >= curr_x)
@@ -37,3 +44,4 @@ bool Pawn::moveRestrictions(int curr_x, int curr_y, int next_x, int next_y, Piec
     }
 	return false;
 };
+

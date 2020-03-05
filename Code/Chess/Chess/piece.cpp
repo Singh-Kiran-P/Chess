@@ -15,3 +15,11 @@ void Piece::setColor(Color color) {
 Color Piece::getColor() const {
 	return m_color;
 };
+
+Position Piece::getPos() {
+	return m_position;
+};
+
+void Piece::setPos(Position p) {
+	m_position = p;
+};
