@@ -1,5 +1,5 @@
 #pragma once
-#define MAX_SIZE 8
+const int MAX_SIZE = 8;
 #include "TermColor.hpp"
 #include <stdio.h>
 #include <ctype.h>

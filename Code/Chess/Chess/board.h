@@ -3,10 +3,11 @@
 #include "pawn.h"
 #include "player.h"
 
-const int SIZE_BOARD = 8;
 
 class Board {
     public:
+        static const int SIZE_BOARD = 8;
+
         bool move(Position current, Position next, Player* player);
         bool move(std::string currentpos, std::string moveTo, Player* player);
         void AiMove(Player* player);
