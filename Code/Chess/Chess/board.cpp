@@ -158,17 +158,14 @@ void Board::printBoard() const {
 		for (int j = 0; j < SIZE_BOARD; j++) {
 			if (m_board[i][j] != nullptr) {
 
-				if (m_board[i][j]->getColor() == Color::Black) {
-					std::cout << termcolor::blue;
-				}
-
 				if (j < SIZE_BOARD-1) {
-					std::cout << m_board[i][j]->getId() << ' ';
+					m_board[i][j]->printId(m_board[i][j]);
+					cout << " ";
 				}
 				else {
-					std::cout << m_board[i][j]->getId();
+					m_board[i][j]->printId(m_board[i][j]);
 				}
-				std::cout << termcolor::white;
+
 			}
 			else if (j < SIZE_BOARD-1) {
 				std::cout << ". ";
@@ -194,7 +191,6 @@ Board::Board() {
 			if (i == 1 || i == 6) {
 				Pawn* p_ptr{ new Pawn };
 				m_board[i][j] = p_ptr;
-				p_ptr->setId('P');
 				Position tempPos{i, j};
 				p_ptr->setPos(tempPos);
 				if (i == 1)
