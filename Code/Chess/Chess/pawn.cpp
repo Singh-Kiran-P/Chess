@@ -1,13 +1,5 @@
 #include "pawn.h"
 
-char Pawn::getId() const {
-	return m_id;
-};
-
-void Pawn::setId(char id) {
-	m_id = id;;
-};
-
 int Pawn::turnCount() const {
 	return m_turnCount;
 };
@@ -16,10 +8,12 @@ void Pawn::increaseTurnCount() {
 	m_turnCount++;
 };
 
-bool Pawn::moveRestrictions(int curr_x, int curr_y, int next_x, int next_y, Pawn* movingpiece, Pawn* nextpiece) {
+bool Pawn::moveRestrictions(int curr_x, int curr_y, int next_x, int next_y, Piece* movingpiece, Piece* nextpiece) {
+
+
 	if (movingpiece->getColor() == Color::White) {
         int max_delta_x = -1;
-        if (movingpiece->turnCount() == 0)
+        if (((Pawn*)movingpiece)->turnCount() == 0)
             max_delta_x--;
 
         if (curr_y == next_y && (max_delta_x <= (next_x - curr_x) && (next_x - curr_x) < 0)) {
@@ -38,7 +32,7 @@ bool Pawn::moveRestrictions(int curr_x, int curr_y, int next_x, int next_y, Pawn
 
     else if (movingpiece->getColor() == Color::Black) {
         int max_delta_x = 1;
-        if (movingpiece->turnCount() == 0)
+        if (((Pawn*)movingpiece)->turnCount() == 0)
             max_delta_x++;
 
             if (curr_y == next_y && (0 < (next_x - curr_x) && (next_x - curr_x) <= max_delta_x)) {

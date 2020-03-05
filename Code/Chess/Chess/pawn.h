@@ -6,16 +6,13 @@
 
 class Pawn : public Piece {
 	public:
-		char getId() const;
-		void setId(char id);
 
 		int turnCount() const;
 		void increaseTurnCount();
 
-		bool moveRestrictions(int curr_x, int curr_y, int next_x, int next_y, Pawn* movingpiece, Pawn* nextpiece);
+		bool moveRestrictions(int curr_x, int curr_y, int next_x, int next_y, Piece* movingpiece, Piece* nextpiece);
 
 	private:
-		char m_id;
 		int m_turnCount = 0;
 };
 
