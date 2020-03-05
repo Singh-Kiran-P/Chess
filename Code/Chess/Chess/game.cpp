@@ -4,7 +4,7 @@ using namespace std;
 
 Game::Game(bool vsAI) {
 
-	string name1, name2;
+	string name1{}, name2{};
 	cout << "Player 1's name: ";
 	cin >> name1;
 	m_player1.setName(name1);
@@ -25,7 +25,7 @@ Game::Game(bool vsAI) {
 	clearScreen();
 
 	srand((unsigned int)time(nullptr)); // Use current time for random seed
-	int coinflip = rand() % 2;
+	int coinflip{rand() % 2};
 
 	if (coinflip == 1) {
 		m_player1.setcolor(Color::White);
@@ -59,8 +59,8 @@ void Game::run(Game& newGame)
 	Board newBoard{}; // Creates the board and places the pawns
 	newBoard.printBoard();
 
-	std::string curr;
-	std::string next;
+	std::string curr{};
+	std::string next{};
 
 	do {
 		std::cout << "It's " << (newGame.currentPlayer())->name() << "'s turn" << std::endl;

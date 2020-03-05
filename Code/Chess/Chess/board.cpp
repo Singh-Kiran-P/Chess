@@ -128,10 +128,10 @@ void Board::AiMove(Player* player) {
 };
 
 bool Board::noBlockers(Position current, Position next) const {
-    int curr_x = current.getx();
-    int curr_y = current.gety();
-    int next_x = next.getx();
-    int next_y = next.gety();
+    int curr_x{current.getx()};
+    int curr_y{current.gety()};
+    int next_x{next.getx()};
+    int next_y{next.gety()};
 
 	while (curr_x != next_x || curr_y != next_y) {
 		if (next_x < curr_x)
@@ -189,8 +189,8 @@ void Board::printBoard() const {
 };
 
 Board::Board() {
-	for (int i = 0; i < SIZE_BOARD; i++) {
-		for (int j = 0; j < SIZE_BOARD; j++) {
+	for (int i{0}; i < SIZE_BOARD; i++) {
+		for (int j{0}; j < SIZE_BOARD; j++) {
 			if (i == 1 || i == 6) {
 				Pawn* p_ptr{ new Pawn };
 				m_board[i][j] = p_ptr;

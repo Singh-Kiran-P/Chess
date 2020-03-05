@@ -1,7 +1,7 @@
 #include "io.h"
 
 bool checkChoice() {
-	string choice;
+	string choice{};
 
 	cout << "Choose you gametype" << endl;
 	cout << "1) Player VS Player" << endl;
