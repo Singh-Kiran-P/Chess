@@ -53,7 +53,6 @@ Player* Game::currentPlayer() {
 }
 void Game::run(Game& newGame)
 {
-    clearScreen();
 	bool checkwin;
 
 	Board newBoard{}; // Creates the board and places the pawns
