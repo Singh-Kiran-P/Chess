@@ -1,12 +1,12 @@
 #include "piece.h"
 
-char Piece::getId() const {
-	return m_id;
-};
-
-void Piece::setId(char id) {
-	m_id = id;
-};
+//char Piece::getId() const {
+//	return m_id;
+//};
+//
+//void Piece::setId(char id) {
+//	m_id = id;
+//};
 
 void Piece::setColor(Color color) {
 	m_color = color;
