@@ -9,21 +9,21 @@ void Pawn::increaseTurnCount() {
 };
 
 bool Pawn::moveRestrictions(int curr_x, int curr_y, int next_x, int next_y, Piece* movingpiece, Piece* nextpiece) {
-	int max_delta_x;
+	int max_delta_x = 1;
 	if (movingpiece->getColor() == Color::White) {
 		if (next_x >= curr_x)
 			return false;
-		max_delta_x = -1;
 	}
+
 	else if (movingpiece->getColor() == Color::Black) {
 		if (next_x <= curr_x)
 			return false;
-		max_delta_x = 1;
 	}
-	if (((Pawn*)movingpiece)->turnCount() == 0)
-	max_delta_x = 2 * max_delta_x;
 
-    if (curr_y == next_y && (next_x - curr_x)  <= max_delta_x) {
+	if (((Pawn*)movingpiece)->turnCount() == 0)
+	max_delta_x = 2;
+
+    if (curr_y == next_y && abs(next_x - curr_x) <= max_delta_x) {
         if (nextpiece == nullptr)
             return true;
         else
