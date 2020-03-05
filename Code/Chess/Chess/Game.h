@@ -4,6 +4,7 @@
 #include <iostream>
 #include "player.h"
 #include "board.h"
+#include "IO.h"
 
 
 class Game {
@@ -11,6 +12,7 @@ class Game {
 		Game(bool vsAI);
 		void nextturn() ;
 		Player* currentPlayer();
+		void run(Game & newGame);
 
 	private:
 		time_t m_time;

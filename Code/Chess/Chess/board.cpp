@@ -13,7 +13,6 @@ bool Board::checkWin() const {
 };
 
 bool Board::move(Position current, Position next, Player* player) {
-	std::cout << current.getx() << ", " << current.gety() << "; " << next.getx() << ", " << next.gety() << "\n";
 	Piece* movingpiece = m_board[current.getx()][current.gety()];
 	if (movingpiece == nullptr || movingpiece->getColor() != player->color()) { //Piece can only move to empty spaces or enemy spaces
 		if (!(player->get_is_ai()))
