@@ -8,7 +8,6 @@
 
 class Board {
     public:
-        static const int SIZE_BOARD = 8;
 
         bool move(Position current, Position next, Color playerColor);
 
@@ -21,6 +20,8 @@ class Board {
         ~Board();
 
     private:
+        static const int SIZE_BOARD = 8;
+
         Piece* m_board[SIZE_BOARD][SIZE_BOARD];
         bool noBlockers(Position current, Position next) const;
 
