@@ -1,5 +1,5 @@
 #include "pawn.h"
-#include "TermColor.hpp"
+
 int Pawn::turnCount() const {
 	return m_turnCount;
 };
@@ -8,26 +8,29 @@ void Pawn::increaseTurnCount() {
 	m_turnCount++;
 };
 
-bool Pawn::moveRestrictions(Piece* movingpiece, Piece* nextpiece, int x, int y) {
-	Position currPos = movingpiece->getPos();
+bool Pawn::moveRestrictions(Piece* nextpiece, Position nextPos, Color &playerColor) {
+	if (this->getColor() != playerColor)
+		return false;
+
+	Position currPos = this->getPos();
 	int curr_x{ currPos.getx() };
 	int curr_y{ currPos.gety() };
 
-	int next_x{ x };
-	int next_y{ y };
+	int next_x{ nextPos.getx() };
+	int next_y{ nextPos.gety() };
 
 	int max_delta_x{ 1 };
-	if (movingpiece->getColor() == Color::White) {
+	if (this->getColor() == Color::White) {
 		if (next_x >= curr_x)
 			return false;
 	}
 
-	else if (movingpiece->getColor() == Color::Black) {
+	else if (this->getColor() == Color::Black) {
 		if (next_x <= curr_x)
 			return false;
 	}
 
-	if (((Pawn*)movingpiece)->turnCount() == 0)
+	if (((Pawn*)this)->turnCount() == 0)
 		max_delta_x = 2;
 
 	if (curr_y == next_y && abs(next_x - curr_x) <= max_delta_x) {
@@ -37,26 +40,12 @@ bool Pawn::moveRestrictions(Piece* movingpiece, Piece* nextpiece, int x, int y) 
 			return false;
 	}
 	else if (abs(curr_y - next_y) == 1 && abs(next_x - curr_x) == 1 && nextpiece != nullptr) {
-		if (movingpiece->getColor() != nextpiece->getColor())
+		if (this->getColor() != nextpiece->getColor())
 			return true;
 		else
 			return false;
 	}
 	return false;
-}
-void Pawn::printId(Piece* p)
-{
-	if (p->getColor() == Color::Black)
-	{
-		std::cout << termcolor::blue;
-		std::cout << "P";
-		std::cout << termcolor::white;
+};
 
-	}
-	else
-	{
-		std::cout << "p";
-
-	}
-}
-
+Pawn::Pawn(char id, Color color, Position Pos) : Piece(id, color, Pos) {};

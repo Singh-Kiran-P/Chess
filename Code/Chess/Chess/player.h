@@ -1,21 +1,23 @@
 #pragma once
 #include <string>
+#include "board.h"
+#include "position.h"
 #include "color.h"
+#include "TermColor.hpp"
 using namespace std;
 
 class Player {
     public:
-        void setcolor(Color color);
         Color color() const;
 
-        void setName(std::string name);
         std::string name() const;
 
-        bool get_is_ai() const;
-        void set_ai(bool ai);
+        virtual Position moveFrom(Board& board, Color playerColor) = 0;
+        virtual Position moveTo(Position currPos, Board &board, Color playerColor) = 0;
+
+        Player(string nameStr, Color color);
+
     private:
         string m_playername;
         Color m_color;
-        bool m_is_ai;
 };
-

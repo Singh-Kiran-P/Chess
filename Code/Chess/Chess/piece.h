@@ -1,24 +1,25 @@
 #pragma once
 #include "position.h"
 #include "color.h"
+#include "TermColor.hpp"
+#include <iostream>
 
 class Piece {
 public:
-	//char getId() const;
-	//void setId(char id);
 
 	void setColor(Color color);
 	Color getColor() const;
 
 	Position getPos();
 	void setPos(Position p);
-	virtual void printId(Piece* p) = 0;
-	virtual bool moveRestrictions(Piece* movingpiece, Piece* nextpiece, int next_x, int next_y) = 0;
 
-	Piece() {};
+	void printId();
+	virtual bool moveRestrictions(Piece* nextpiece, Position nextPos, Color &playerColor) = 0;
+
+	Piece(char id, Color color, Position Pos);
 private:
+    char m_id;
 	Position m_position;
 	Color m_color;
 	bool m_killed = false;
 };
-

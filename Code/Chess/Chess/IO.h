@@ -8,9 +8,7 @@ const int MAX_SIZE = 8;
 #include <iostream>
 using namespace std;
 
-bool checkInput(std::string inputStr);
 bool checkChoice();
 void printLogo();
 void printWinner(std::string name);
 void clearScreen();
-

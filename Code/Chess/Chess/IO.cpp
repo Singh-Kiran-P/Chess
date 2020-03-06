@@ -22,19 +22,6 @@ bool checkChoice() {
 	return false;
 };
 
-bool checkInput(string  inputStr) {
-	try {
-		char letter = inputStr[0];
-		int num = stoi(inputStr.substr(1)) - 1; //input value must be of the form CHARINT
-		if (('A' <=  letter <= 'H') && (1 <= num <= MAX_SIZE)) //input value must be between A1 and H8
-			return true;
-	}
-	catch (const exception&) {
-		cout << termcolor::red << "Invaild input" << termcolor::white<<endl;
-	}
-	return false;
-};
-
 void printLogo()
 {
 

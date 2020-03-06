@@ -19,22 +19,26 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AIplayer.h" />
     <ClInclude Include="board.h" />
     <ClInclude Include="color.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="humanplayer.h" />
     <ClInclude Include="IO.h" />
+    <ClInclude Include="pawn.h" />
     <ClInclude Include="piece.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="position.h" />
     <ClInclude Include="TermColor.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AIPlayer.cpp" />
     <ClCompile Include="board.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="humanplayer.cpp" />
     <ClCompile Include="IO.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="pawn.cpp" />
-    <ClCompile Include="pawn.h" />
     <ClCompile Include="piece.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="position.cpp" />

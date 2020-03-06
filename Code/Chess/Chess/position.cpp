@@ -11,7 +11,7 @@ int Position::gety() const {
 };
 
 void Position::setpos(int x, int y) {
-	m_xpos = SIZE_BOARD - x;
+	m_xpos = x;
 	m_ypos = y;
 };
 

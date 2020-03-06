@@ -1,13 +1,5 @@
 #include "piece.h"
 
-//char Piece::getId() const {
-//	return m_id;
-//};
-//
-//void Piece::setId(char id) {
-//	m_id = id;
-//};
-
 void Piece::setColor(Color color) {
 	m_color = color;
 };
@@ -23,3 +15,17 @@ Position Piece::getPos() {
 void Piece::setPos(Position p) {
 	m_position = p;
 };
+
+void Piece::printId()
+{
+	if (this->getColor() == Color::Black) {
+		std::cout << termcolor::blue;
+		std::cout << m_id;
+		std::cout << termcolor::white;
+	}
+	else {
+		std::cout << m_id;
+	}
+};
+
+Piece::Piece(char id, Color color, Position Pos) : m_id{ id }, m_color{ color }, m_position{ Pos } {};

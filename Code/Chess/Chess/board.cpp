@@ -1,8 +1,6 @@
 #include "board.h"
-#include "TermColor.hpp"
-#include <stdlib.h>
-#include <stdio.h>
-#include <iostream>
+#include "player.h"
+
 
 bool Board::checkWin() const {
 	for (int i = 0; i < SIZE_BOARD; ++i) {
@@ -12,16 +10,15 @@ bool Board::checkWin() const {
 	return false;
 };
 
-bool Board::move(Position current, Position next, Player* player) {
+bool Board::move(Position current, Position next, Color playerColor) {
 	Piece* movingpiece = m_board[current.getx()][current.gety()];
-	if (movingpiece == nullptr || movingpiece->getColor() != player->color()) { //Piece can only move to empty spaces or enemy spaces
-		if (!(player->get_is_ai()))
-			std::cout << termcolor::red << "Invalid move" << termcolor::white << std::endl;
+	if (movingpiece == nullptr) { // A piece must be selected to move it
+		// std::cout << termcolor::red << "Invalid move" << termcolor::white << std::endl;
 		return false;
 	}
 
 	Piece* nextpiece = m_board[next.getx()][next.gety()];
-	if (movingpiece->moveRestrictions(movingpiece, nextpiece, next.getx(), next.gety()) && noBlockers(current, next)) {
+	if (movingpiece->moveRestrictions(nextpiece, next, playerColor) && noBlockers(current, next)) {
 		if (auto *i = dynamic_cast<Pawn*>(movingpiece))
 			i->increaseTurnCount();
 		m_board[next.getx()][next.gety()] = movingpiece;
@@ -31,100 +28,8 @@ bool Board::move(Position current, Position next, Player* player) {
 			delete nextpiece;
 		return true;
 	}
-	if (!(player->get_is_ai()))
-		std::cout << termcolor::red << "Invalid move" << termcolor::white << std::endl;
+	// std::cout << termcolor::red << "Invalid move" << termcolor::white << std::endl;
 	return false;
-};
-
-bool Board::move(std::string currentpos, std::string moveTo, Player* player)
-{
-	Position current{currentpos};
-	Position next{moveTo};
-	return Board::move(current, next,player);
-};
-
-bool Board::validChoice(int xpos, int ypos, Color playercolor)  {
-	if (m_board[xpos][ypos] == nullptr)
-		return false;
-
-	else if ((m_board[xpos][ypos])->getColor() != playercolor)
-		return false;
-
-	if (playercolor == Color::Black) {
-		if (m_board[xpos + 1][ypos] != nullptr) {
-			if (m_board[xpos + 1][ypos - 1] != nullptr && 0 <= (ypos - 1) < 8)
-				return ((m_board[xpos][ypos])->getColor() != (m_board[xpos + 1][ypos - 1])->getColor());
-			else if (m_board[xpos + 1][ypos + 1] != nullptr && 0 <= (ypos + 1) < 8)
-				return ((m_board[xpos][ypos])->getColor() != (m_board[xpos + 1][ypos + 1])->getColor());
-			else
-				return false;
-		}
-		else
-			return true;
-	}
-
-	else if (playercolor == Color::White) {
-		if (m_board[xpos - 1][ypos] != nullptr) {
-			if (m_board[xpos - 1][ypos - 1] != nullptr && 0 <= (ypos - 1) < 8)
-				return ((m_board[xpos][ypos])->getColor() != (m_board[xpos - 1][ypos - 1])->getColor());
-			else if (m_board[xpos - 1][ypos + 1] != nullptr && 0 <= (ypos + 1) < 8)
-				return ((m_board[xpos][ypos])->getColor() != (m_board[xpos - 1][ypos + 1])->getColor());
-			else
-				return false;
-		}
-		else
-			return true;
-	}
-	return false;
-};
-
-void Board::AiMove(Player* player) {
-	int curr_x{};
-	int curr_y{};
-	int next_x{};
-	int next_y{};
-	bool valid_next_spot{ false };
-	Position nextpos{};
-
-	do {
-		curr_x = (rand() % SIZE_BOARD);
-		curr_y = (rand() % SIZE_BOARD);
-	} while (!validChoice(curr_x, curr_y, player->color()));
-	Position currpos{curr_x, curr_y};
-
-	do {
-		do {
-			if (player->color() == Color::Black) {
-				if (auto *i = dynamic_cast<Pawn*> (m_board[curr_x][curr_y])) {
-					if (i->turnCount() == 0)
-						next_x = curr_x + ((rand() % 2) + 1);
-					else
-						next_x = curr_x + ((rand() % 1) + 1);
-				}
-			}
-			else {
-				if (auto *i = dynamic_cast<Pawn*> (m_board[curr_x][curr_y])) {
-					if (i->turnCount() == 0)
-						next_x = curr_x - ((rand() % 2) + 1);
-					else
-						next_x = curr_x - ((rand() % 1) + 1);
-			}
-		}
-
-			next_y = curr_y + (rand() % 3) - 1;
-			if (m_board[next_x][next_y] != nullptr) {
-				if (m_board[next_x][next_y]->getColor() != player->color())
-					valid_next_spot = true;
-			}
-			else {
-				valid_next_spot = true;
-			}
-
-		} while (!valid_next_spot);
-		nextpos.setpos((SIZE_BOARD - next_x), next_y);
-
-	} while(move(currpos, nextpos, player) == false);
-
 };
 
 bool Board::noBlockers(Position current, Position next) const {
@@ -159,11 +64,11 @@ void Board::printBoard() const {
 			if (m_board[i][j] != nullptr) {
 
 				if (j < SIZE_BOARD-1) {
-					m_board[i][j]->printId(m_board[i][j]);
-					cout << " ";
+					m_board[i][j]->printId();
+					std::cout << " ";
 				}
 				else {
-					m_board[i][j]->printId(m_board[i][j]);
+					m_board[i][j]->printId();
 				}
 
 			}
@@ -185,18 +90,23 @@ void Board::printBoard() const {
 
 };
 
+Piece* Board::getPiece(Position p) {
+	return m_board[p.getx()][p.gety()];
+};
+
 Board::Board() {
 	for (int i{0}; i < SIZE_BOARD; i++) {
 		for (int j{0}; j < SIZE_BOARD; j++) {
 			if (i == 1 || i == 6) {
-				Pawn* p_ptr{ new Pawn };
-				m_board[i][j] = p_ptr;
-				Position tempPos{i, j};
-				p_ptr->setPos(tempPos);
+				Color PieceColor{};
+				Position tempPos{ i, j };
 				if (i == 1)
-					p_ptr->setColor(Color::Black); // top of board is black
+					PieceColor = Color::Black; // top of board is black
 				else
-					p_ptr->setColor(Color::White); // bottom of board is white
+					PieceColor = Color::White; // bottom of board is white
+
+				Pawn* p_ptr{ new Pawn{'P', PieceColor, tempPos} };
+				m_board[i][j] = p_ptr;
 			}
 			else
 				m_board[i][j] = nullptr;
