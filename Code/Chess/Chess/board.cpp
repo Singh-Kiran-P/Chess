@@ -1,24 +1,24 @@
 #include "board.h"
 
 bool Board::checkWin() const {
-	for (int i = 0; i < SIZE_BOARD; ++i) {
-		if (m_board[0][i] != nullptr || m_board[7][i] != nullptr)
-			return true; // triggers when a pawn has reached the opposite side
-	}
+	//for (int i = 0; i < SIZE_BOARD; ++i) {
+	//	if (m_board[0][i] != nullptr || m_board[7][i] != nullptr)
+	//		return true; // triggers when a pawn has reached the opposite side
+	//}
 	return false;
 };
 
 bool Board::move(Position current, Position next, Player* player) {
 	Piece* movingpiece = m_board[current.getx()][current.gety()];
 	if (movingpiece == nullptr) { // A piece must be selected to move it
-		if (auto *playertype = dynamic_cast<HumanPlayer*>(player)) // Only print this error message when a player causes it
+		if (auto* playertype = dynamic_cast<HumanPlayer*>(player)) // Only print this error message when a player causes it
 			std::cout << termcolor::red << "Invalid move" << termcolor::white << std::endl;
 		return false;
 	}
 
 	Piece* nextpiece = m_board[next.getx()][next.gety()];
 	if (movingpiece->moveRestrictions(nextpiece, next, player->color()) && noBlockers(current, next)) {
-		if (auto *i = dynamic_cast<Pawn*>(movingpiece))
+		if (auto* i = dynamic_cast<Pawn*>(movingpiece))
 			i->increaseTurnCount();
 		m_board[next.getx()][next.gety()] = movingpiece;
 		movingpiece->setPos(next);
@@ -27,16 +27,16 @@ bool Board::move(Position current, Position next, Player* player) {
 			delete nextpiece;
 		return true;
 	}
-	if (auto *playertype = dynamic_cast<HumanPlayer*>(player))
+	if (auto* playertype = dynamic_cast<HumanPlayer*>(player))
 		std::cout << termcolor::red << "Invalid move" << termcolor::white << std::endl;
 	return false;
 };
 
 bool Board::noBlockers(Position current, Position next) const {
-    int curr_x{current.getx()};
-    int curr_y{current.gety()};
-    int next_x{next.getx()};
-    int next_y{next.gety()};
+	int curr_x{ current.getx() };
+	int curr_y{ current.gety() };
+	int next_x{ next.getx() };
+	int next_y{ next.gety() };
 
 	while (curr_x != next_x || curr_y != next_y) {
 		if (next_x < curr_x)
@@ -63,7 +63,7 @@ void Board::printBoard() const {
 		for (int j = 0; j < SIZE_BOARD; j++) {
 			if (m_board[i][j] != nullptr) {
 
-				if (j < SIZE_BOARD-1) {
+				if (j < SIZE_BOARD - 1) {
 					m_board[i][j]->printId();
 					std::cout << " ";
 				}
@@ -72,7 +72,7 @@ void Board::printBoard() const {
 				}
 
 			}
-			else if (j < SIZE_BOARD-1) {
+			else if (j < SIZE_BOARD - 1) {
 				std::cout << ". ";
 			}
 			else {
@@ -85,7 +85,7 @@ void Board::printBoard() const {
 	}
 
 	std::cout << termcolor::green << "   _______________" << std::endl;
-	std::cout <<  "   A B C D E F G H" << termcolor::white << std::endl;
+	std::cout << "   A B C D E F G H" << termcolor::white << std::endl;
 
 
 };
@@ -95,8 +95,8 @@ Piece* Board::getPiece(Position p) {
 };
 
 Board::Board() {
-	for (int i{0}; i < SIZE_BOARD; i++) {
-		for (int j{0}; j < SIZE_BOARD; j++) {
+	for (int i = 0; i < SIZE_BOARD; i++) {
+		for (int j = 0; j < SIZE_BOARD; j++) {
 			if (i == 1 || i == 6) {
 				Color PieceColor{};
 				Position tempPos{ i, j };
@@ -107,6 +107,38 @@ Board::Board() {
 
 				Pawn* p_ptr{ new Pawn{'P', PieceColor, tempPos} };
 				m_board[i][j] = p_ptr;
+			}
+			else if (i == 0 || i == 7) {
+
+				Color PieceColor{};
+				Position tempPos{ i, j };
+				if (i == 0)
+					PieceColor = Color::Black; // top of board is black
+				else
+					PieceColor = Color::White; // bottom of board is white
+				if (j == 0 || j == 7) {// Rooks
+					Rook* p_ptr{ new Rook{'R', PieceColor, tempPos} };
+					m_board[i][j] = p_ptr;
+				}
+				if (j == 1 || j == 6) {//Knight
+					Knight* p_ptr{ new Knight{'N', PieceColor, tempPos} };
+					m_board[i][j] = p_ptr;
+
+				}
+				if (j == 2 || j == 5) {//Bishop
+					Bishop* p_ptr{ new Bishop{'B', PieceColor, tempPos} };
+					m_board[i][j] = p_ptr;
+
+				}
+				if (j == 3) {//King
+					King* p_ptr{ new King{'K', PieceColor, tempPos} };
+					m_board[i][j] = p_ptr;
+
+				}
+				if (j == 4) {//Queen
+					Queen* p_ptr{ new Queen{'Q', PieceColor, tempPos} };
+					m_board[i][j] = p_ptr;
+				}
 			}
 			else
 				m_board[i][j] = nullptr;

@@ -4,9 +4,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "humanplayer.h"
-#include "pawn.h"
 #include "TermColor.hpp"
-
+#include "pawn.h"
+#include "rook.h"
+#include "king.h"
+#include "queen.h"
+#include "knight.h"
+#include "bishop.h"
 class Board {
     public:
 
