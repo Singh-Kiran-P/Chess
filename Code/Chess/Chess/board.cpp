@@ -95,27 +95,27 @@ Piece* Board::getPiece(Position p) {
 };
 
 Board::Board() {
+	Color PieceColor{};
+	Position tempPos{};
+
 	for (int i = 0; i < SIZE_BOARD; i++) {
 		for (int j = 0; j < SIZE_BOARD; j++) {
-			if (i == 1 || i == 6) {
-				Color PieceColor{};
-				Position tempPos{ i, j };
-				if (i == 1)
-					PieceColor = Color::Black; // top of board is black
-				else
-					PieceColor = Color::White; // bottom of board is white
 
+			if (i <= 1) {
+				tempPos.setpos(i, j);
+				PieceColor = Color::Black; // top of board is black
+			}
+			else if (i >= 6) {
+				tempPos.setpos(i, j);
+				PieceColor = Color::White; // bottom of board is white
+			}
+
+			if ( i == 1 || i == 6) {
 				Pawn* p_ptr{ new Pawn{'P', PieceColor, tempPos} };
 				m_board[i][j] = p_ptr;
 			}
 			else if (i == 0 || i == 7) {
 
-				Color PieceColor{};
-				Position tempPos{ i, j };
-				if (i == 0)
-					PieceColor = Color::Black; // top of board is black
-				else
-					PieceColor = Color::White; // bottom of board is white
 				if (j == 0 || j == 7) {// Rooks
 					Rook* p_ptr{ new Rook{'R', PieceColor, tempPos} };
 					m_board[i][j] = p_ptr;
@@ -123,20 +123,17 @@ Board::Board() {
 				if (j == 1 || j == 6) {//Knight
 					Knight* p_ptr{ new Knight{'N', PieceColor, tempPos} };
 					m_board[i][j] = p_ptr;
-
 				}
 				if (j == 2 || j == 5) {//Bishop
 					Bishop* p_ptr{ new Bishop{'B', PieceColor, tempPos} };
 					m_board[i][j] = p_ptr;
-
 				}
-				if (j == 3) {//King
-					King* p_ptr{ new King{'K', PieceColor, tempPos} };
-					m_board[i][j] = p_ptr;
-
-				}
-				if (j == 4) {//Queen
+				if (j == 3) {//Queen
 					Queen* p_ptr{ new Queen{'Q', PieceColor, tempPos} };
+					m_board[i][j] = p_ptr;
+				}
+				if (j == 4) {//King
+					King* p_ptr{ new King{'K', PieceColor, tempPos} };
 					m_board[i][j] = p_ptr;
 				}
 			}
