@@ -1,6 +1,6 @@
 #include "AIPlayer.h"
 
-Position AIPlayer::moveFrom(Board &board, Color playerColor) {
+Position AIPlayer::moveFrom(Color playerColor) {
     int curr_x{};
     int curr_y{};
     Position currPos{};
@@ -11,8 +11,8 @@ Position AIPlayer::moveFrom(Board &board, Color playerColor) {
         curr_y = rand() % 8;
         currPos.setpos(curr_x, curr_y);
 
-        if (board.getPiece(currPos) != nullptr) {
-            if (board.getPiece(currPos)->getColor() == playerColor)
+        if (m_board->getPiece(currPos) != nullptr) {
+            if (m_board->getPiece(currPos)->getColor() == playerColor)
                 invalid_piece = false;
         }
 
@@ -21,7 +21,7 @@ Position AIPlayer::moveFrom(Board &board, Color playerColor) {
     return currPos;
 };
 
-Position AIPlayer::moveTo(Position currPos, Board &board, Color playerColor) {
+Position AIPlayer::moveTo(Position currPos, Color playerColor) {
     int next_x{};
 	int next_y{};
 	Position nextPos{};
@@ -33,8 +33,8 @@ Position AIPlayer::moveTo(Position currPos, Board &board, Color playerColor) {
 		next_y = rand() % 8;
 		nextPos.setpos(next_x, next_y);
 
-	} while (!(board.getPiece(currPos))->moveRestrictions((board.getPiece(nextPos)), nextPos, playerColor) && attemps < m_attemptCount);
+	} while (!(m_board->getPiece(currPos))->moveRestrictions((m_board->getPiece(nextPos)), nextPos, playerColor) && attemps < m_attemptCount);
     return nextPos;
 };
 
-AIPlayer::AIPlayer(string nameStr, Color color) : Player(nameStr, color) {};
+AIPlayer::AIPlayer(string nameStr, Color color, Board& board) : Player(nameStr, color), m_board{&board} {};

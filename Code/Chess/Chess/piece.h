@@ -1,5 +1,6 @@
 #pragma once
 #include "position.h"
+#include "player.h"
 #include "color.h"
 #include "TermColor.hpp"
 #include <iostream>
@@ -14,7 +15,7 @@ public:
 	void setPos(Position p);
 
 	void printId();
-	virtual bool moveRestrictions(Piece* nextpiece, Position nextPos, Color &playerColor) = 0;
+	virtual bool moveRestrictions(Piece* nextpiece, Position nextPos, const Color &playerColor) = 0;
 
 	Piece(char id, Color color, Position Pos);
 private:

@@ -1,6 +1,4 @@
 #include "board.h"
-#include "player.h"
-
 
 bool Board::checkWin() const {
 	for (int i = 0; i < SIZE_BOARD; ++i) {
@@ -10,15 +8,16 @@ bool Board::checkWin() const {
 	return false;
 };
 
-bool Board::move(Position current, Position next, Color playerColor) {
+bool Board::move(Position current, Position next, Player* player) {
 	Piece* movingpiece = m_board[current.getx()][current.gety()];
 	if (movingpiece == nullptr) { // A piece must be selected to move it
-		// std::cout << termcolor::red << "Invalid move" << termcolor::white << std::endl;
+		if (auto *playertype = dynamic_cast<HumanPlayer*>(player)) // Only print this error message when a player causes it
+			std::cout << termcolor::red << "Invalid move" << termcolor::white << std::endl;
 		return false;
 	}
 
 	Piece* nextpiece = m_board[next.getx()][next.gety()];
-	if (movingpiece->moveRestrictions(nextpiece, next, playerColor) && noBlockers(current, next)) {
+	if (movingpiece->moveRestrictions(nextpiece, next, player->color()) && noBlockers(current, next)) {
 		if (auto *i = dynamic_cast<Pawn*>(movingpiece))
 			i->increaseTurnCount();
 		m_board[next.getx()][next.gety()] = movingpiece;
@@ -28,7 +27,8 @@ bool Board::move(Position current, Position next, Color playerColor) {
 			delete nextpiece;
 		return true;
 	}
-	// std::cout << termcolor::red << "Invalid move" << termcolor::white << std::endl;
+	if (auto *playertype = dynamic_cast<HumanPlayer*>(player))
+		std::cout << termcolor::red << "Invalid move" << termcolor::white << std::endl;
 	return false;
 };
 

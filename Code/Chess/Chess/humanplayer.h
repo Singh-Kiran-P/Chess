@@ -3,8 +3,8 @@
 
 class HumanPlayer : public Player {
     public:
-        Position moveFrom(Board& board, Color playerColor);
-        Position moveTo(Position currPos, Board &board, Color playerColor);
+        Position moveFrom(Color playerColor);
+        Position moveTo(Position currPos, Color playerColor);
         HumanPlayer(string nameStr, Color color);
 
     private:

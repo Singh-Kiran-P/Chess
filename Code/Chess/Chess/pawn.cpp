@@ -8,7 +8,7 @@ void Pawn::increaseTurnCount() {
 	m_turnCount++;
 };
 
-bool Pawn::moveRestrictions(Piece* nextpiece, Position nextPos, Color &playerColor) {
+bool Pawn::moveRestrictions(Piece* nextpiece, Position nextPos, const Color &playerColor) {
 	if (this->getColor() != playerColor)
 		return false;
 

@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include "board.h"
 #include "position.h"
 #include "color.h"
 #include "TermColor.hpp"
@@ -12,8 +11,8 @@ class Player {
 
         std::string name() const;
 
-        virtual Position moveFrom(Board& board, Color playerColor) = 0;
-        virtual Position moveTo(Position currPos, Board &board, Color playerColor) = 0;
+        virtual Position moveFrom(Color playerColor) = 0;
+        virtual Position moveTo(Position currPos, Color playerColor) = 0;
 
         Player(string nameStr, Color color);
 

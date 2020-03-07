@@ -38,7 +38,7 @@ Game::Game(bool vsAI) {
 		m_player2 = new HumanPlayer{ name2, color2 };
 	}
 	else {
-		m_player2 = new AIPlayer{ name2, color2 };
+		m_player2 = new AIPlayer{ name2, color2, m_board };
 	}
 
 
@@ -73,8 +73,8 @@ Player* Game::currentPlayer() {
 void Game::run() {
 	bool checkwin;
 
-	Board newBoard{}; // Creates the board and places the pawns
-	newBoard.printBoard();
+	// Creates the board and places the pawns
+	m_board.printBoard();
 
 	Position curr{};
 	Position next{};
@@ -83,15 +83,15 @@ void Game::run() {
 		std::cout << "It's " << (this->currentPlayer())->name() << "'s turn" << std::endl;
 		do {
 
-			curr = currentPlayer()->moveFrom(newBoard, currentPlayer()->color());
-			next = currentPlayer()->moveTo(curr, newBoard, currentPlayer()->color());
+			curr = currentPlayer()->moveFrom(currentPlayer()->color());
+			next = currentPlayer()->moveTo(curr, currentPlayer()->color());
 
-			} while (!newBoard.move(curr, next, (this->currentPlayer())->color())); // If a move is invalid, a turn isn't skipped
+			} while (!m_board.move(curr, next, (this->currentPlayer()))); // If a move is invalid, a turn isn't skipped
 
 	        clearScreen();
 
-			newBoard.printBoard();
-			if ((checkwin = newBoard.checkWin()) == false)
+			m_board.printBoard();
+			if ((checkwin = m_board.checkWin()) == false)
 				this->nextturn();
 
 		} while (checkwin == false); //as long as no one has won, ask the next player for their move

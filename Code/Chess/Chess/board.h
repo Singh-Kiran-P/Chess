@@ -3,13 +3,14 @@
 #include <string>
 #include <stdlib.h>
 #include <stdio.h>
+#include "humanplayer.h"
 #include "pawn.h"
 #include "TermColor.hpp"
 
 class Board {
     public:
 
-        bool move(Position current, Position next, Color playerColor);
+        bool move(Position current, Position next, Player* player);
 
         void printBoard() const;
         bool checkWin() const;

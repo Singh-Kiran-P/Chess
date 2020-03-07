@@ -1,6 +1,6 @@
 #include "humanplayer.h"
 
-Position HumanPlayer::moveFrom(Board& board, Color playerColor) {
+Position HumanPlayer::moveFrom(Color playerColor) {
         std::string curr{};
 
         do {
@@ -14,7 +14,7 @@ Position HumanPlayer::moveFrom(Board& board, Color playerColor) {
         return currPos;
 };
 
-Position HumanPlayer::moveTo(Position currPos, Board &board, Color playerColor) {
+Position HumanPlayer::moveTo(Position currPos, Color playerColor) {
     std::string next{};
 
     do {
