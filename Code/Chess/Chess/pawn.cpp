@@ -44,7 +44,7 @@ bool Pawn::moveRestrictions(Piece* nextpiece, Position nextPos, const Color &pla
 			return true;
 		else
 			return false;
-	}
+	}	
 	return false;
 };
 

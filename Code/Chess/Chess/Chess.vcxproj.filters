@@ -37,6 +37,9 @@
     <Filter Include="Source Files\Pieces">
       <UniqueIdentifier>{a3f04348-1cd6-4a1b-b9a8-4602b218f995}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Resouce">
+      <UniqueIdentifier>{38ebf4cb-cdc8-4a4b-a5bb-66ba7d2b4aa2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="piece.h">
@@ -88,7 +91,7 @@
       <Filter>Header Files\IO</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Resouce</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
