@@ -11,6 +11,7 @@
 #include "queen.h"
 #include "knight.h"
 #include "bishop.h"
+
 class Board {
     public:
 
