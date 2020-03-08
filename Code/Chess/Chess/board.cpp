@@ -16,8 +16,12 @@ bool Board::move(Position current, Position next, Player* player) {
 		return false;
 	}
 
+	bool PossibleWalk{ true };
+	if (movingpiece->Id() != 'N')
+		PossibleWalk = noBlockers(current, next);
+
 	Piece* nextpiece = m_board[next.getx()][next.gety()];
-	if (movingpiece->moveRestrictions(nextpiece, next, player->color()) && noBlockers(current, next)) {
+	if (movingpiece->moveRestrictions(nextpiece, next, player->color()) && PossibleWalk) {
 		if (auto* i = dynamic_cast<Pawn*>(movingpiece))
 			i->increaseTurnCount();
 		m_board[next.getx()][next.gety()] = movingpiece;
@@ -63,7 +67,11 @@ void Board::printBoard() const {
 		for (int j = 0; j < SIZE_BOARD; j++) {
 			if (m_board[i][j] != nullptr) {
 
-				m_board[i][j]->printId();
+				if (m_board[i][j]->getColor() == Color::Black)
+					std::cout << termcolor::blue;
+				std::cout << m_board[i][j]->Id();
+				std::cout << termcolor::white;
+
 				if (j < SIZE_BOARD - 1)
 					std::cout << " ";
 			}

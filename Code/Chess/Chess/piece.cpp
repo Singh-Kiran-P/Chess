@@ -16,16 +16,8 @@ void Piece::setPos(Position p) {
 	m_position = p;
 };
 
-void Piece::printId()
-{
-	if (this->getColor() == Color::Black) {
-		std::cout << termcolor::blue;
-		std::cout << m_id;
-		std::cout << termcolor::white;
-	}
-	else {
-		std::cout << m_id;
-	}
+char Piece::Id() {
+	return m_id;
 };
 
 Piece::Piece(char id, Color color, Position Pos) : m_id{ id }, m_color{ color }, m_position{ Pos } {};

@@ -14,7 +14,7 @@ public:
 	Position getPos();
 	void setPos(Position p);
 
-	void printId();
+	char Id();
 	virtual bool moveRestrictions(Piece* nextpiece, Position nextPos, const Color &playerColor) = 0;
 
 	Piece(char id, Color color, Position Pos);
