@@ -1,6 +1,6 @@
 #include "knight.h"
 
-bool Knight::moveRestrictions(Piece* nextpiece, Position nextPos, const Color& playerColor)
+bool Knight::moveRestrictions(Piece* nextpiece, Position nextPos)
 {
 	return true;
 }

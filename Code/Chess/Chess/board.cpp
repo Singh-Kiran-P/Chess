@@ -21,7 +21,7 @@ bool Board::move(Position current, Position next, Player* player) {
 		PossibleWalk = noBlockers(current, next);
 
 	Piece* nextpiece = m_board[next.getx()][next.gety()];
-	if (movingpiece->moveRestrictions(nextpiece, next, player->color()) && PossibleWalk) {
+	if (movingpiece->moveRestrictions(nextpiece, next) && PossibleWalk) {
 		if (auto* i = dynamic_cast<Pawn*>(movingpiece))
 			i->increaseTurnCount();
 		m_board[next.getx()][next.gety()] = movingpiece;

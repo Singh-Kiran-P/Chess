@@ -1,6 +1,6 @@
 #include "king.h"
 
-bool King::moveRestrictions(Piece* nextpiece, Position nextPos, const Color& playerColor)
+bool King::moveRestrictions(Piece* nextpiece, Position nextPos)
 {
 	return true;
 }

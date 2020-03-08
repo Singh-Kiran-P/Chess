@@ -1,6 +1,6 @@
 #include "rook.h"
 
-bool Rook::moveRestrictions(Piece* nextpiece, Position nextPos, const Color& playerColor)
+bool Rook::moveRestrictions(Piece* nextpiece, Position nextPos)
 {
 	return true;
 }

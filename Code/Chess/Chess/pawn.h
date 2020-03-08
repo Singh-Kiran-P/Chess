@@ -7,7 +7,7 @@ class Pawn : public Piece {
 		int turnCount() const;
 		void increaseTurnCount();
 
-		bool moveRestrictions(Piece* nextpiece, Position nextPos, const Color &playerColor);
+		bool moveRestrictions(Piece* nextpiece, Position nextPos);
 
 		Pawn(char id, Color color, Position Pos);
 	private:

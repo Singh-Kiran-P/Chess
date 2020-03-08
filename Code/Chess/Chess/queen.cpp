@@ -1,6 +1,6 @@
 #include "queen.h"
 
-bool Queen::moveRestrictions(Piece* nextpiece, Position nextPos, const Color& playerColor)
+bool Queen::moveRestrictions(Piece* nextpiece, Position nextPos)
 {
 	return true;
 }

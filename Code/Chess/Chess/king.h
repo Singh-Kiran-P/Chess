@@ -2,7 +2,7 @@
 #include "piece.h"
 class King : public Piece {
 public:
-	bool moveRestrictions(Piece* nextpiece, Position nextPos, const Color& playerColor);
+	bool moveRestrictions(Piece* nextpiece, Position nextPos);
 	King(char id, Color color, Position Pos);
 
 private:

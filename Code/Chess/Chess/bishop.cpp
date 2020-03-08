@@ -1,6 +1,6 @@
 #include "bishop.h"
 
-bool Bishop::moveRestrictions(Piece* nextpiece, Position nextPos, const Color& playerColor)
+bool Bishop::moveRestrictions(Piece* nextpiece, Position nextPos)
 {
 	return true;
 }

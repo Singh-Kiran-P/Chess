@@ -33,7 +33,7 @@ Position AIPlayer::moveTo(Position currPos, Color playerColor) {
 		next_y = rand() % 8;
 		nextPos.setpos(next_x, next_y);
 
-	} while (!(m_board->getPiece(currPos))->moveRestrictions((m_board->getPiece(nextPos)), nextPos, playerColor) && attemps < m_attemptCount);
+	} while (!(m_board->getPiece(currPos))->moveRestrictions((m_board->getPiece(nextPos)), nextPos) && attemps < m_attemptCount);
     return nextPos;
 };
 
