@@ -33,6 +33,7 @@
     <ClInclude Include="player.h" />
     <ClInclude Include="position.h" />
     <ClInclude Include="queen.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="rook.h" />
     <ClInclude Include="TermColor.hpp" />
   </ItemGroup>
@@ -52,6 +53,12 @@
     <ClCompile Include="position.cpp" />
     <ClCompile Include="queen.cpp" />
     <ClCompile Include="rook.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Chess.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="app.ico" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
