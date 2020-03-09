@@ -8,7 +8,6 @@
 class Piece {
 public:
 
-	void setColor(Color color);
 	Color getColor() const;
 
 	Position getPos();

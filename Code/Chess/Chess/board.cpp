@@ -10,7 +10,7 @@ bool Board::checkWin() const {
 
 bool Board::move(Position current, Position next, Player* player) {
 	Piece* movingpiece = m_board[current.getx()][current.gety()];
-	if (movingpiece == nullptr) { // A piece must be selected to move it
+	if (movingpiece == nullptr || movingpiece->getColor() != player->color()) { // A piece must be selected to move it
 		if (auto* playertype = dynamic_cast<HumanPlayer*>(player)) // Only print this error message when a player causes it
 			std::cout << termcolor::red << "Invalid move" << termcolor::white << std::endl;
 		return false;
