@@ -14,11 +14,11 @@ bool Queen::moveRestrictions(Piece* nextpiece, Position nextPos)
 	}
 
 
-	if (abs(next_x - curr_x)<8 && abs(next_y - curr_y)<8 )
+	if (abs(next_x - curr_x) == abs(next_y - curr_y) || (curr_y == next_y) || (curr_x == next_x))
 		return true;
 	else
 		return false;
 
-	
+
 }
 Queen::Queen(char id, Color color, Position Pos) :Piece(id, color, Pos) {};
