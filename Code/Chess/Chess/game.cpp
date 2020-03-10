@@ -91,7 +91,7 @@ void Game::run() {
 	        clearScreen();
 
 			m_board.printBoard();
-			if ((checkwin = m_board.checkWin()) == false)
+			if ((checkwin = m_board.getWin()) == false)
 				this->nextturn();
 
 		} while (checkwin == false); //as long as no one has won, ask the next player for their move

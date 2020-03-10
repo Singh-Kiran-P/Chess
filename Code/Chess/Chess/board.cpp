@@ -1,12 +1,31 @@
 #include "board.h"
 
-bool Board::checkWin() const {
-	//for (int i = 0; i < SIZE_BOARD; ++i) {
-	//	if (m_board[0][i] != nullptr || m_board[7][i] != nullptr)
-	//		return true; // triggers when a pawn has reached the opposite side
-	//}
-	return false;
+void Board::checkWin(Color currColor) {
+
+	for (int i = 0; i < SIZE_BOARD; ++i) {
+		for (int j = 0; j < SIZE_BOARD; j++)
+		{
+			if (m_board[i][j] != nullptr) {
+				if (auto* playertype = dynamic_cast<King*>(m_board[i][j])) {
+					if (playertype->getColor() != currColor) {
+
+						winEndGame = false;
+						return;
+					}
+
+				}
+			}
+		}
+
+	}
+	winEndGame = true;
 };
+
+bool Board::getWin()
+{
+	return winEndGame;
+}
+
 
 bool Board::move(Position current, Position next, Player* player) {
 	Piece* movingpiece = m_board[current.getx()][current.gety()];
@@ -17,7 +36,7 @@ bool Board::move(Position current, Position next, Player* player) {
 	}
 
 	bool PossibleWalk{ true };
-	if (movingpiece->Id() != 'N')
+	if (movingpiece->getId() != 'N')
 		PossibleWalk = noBlockers(current, next);
 
 	Piece* nextpiece = m_board[next.getx()][next.gety()];
@@ -29,6 +48,7 @@ bool Board::move(Position current, Position next, Player* player) {
 		m_board[current.getx()][current.gety()] = nullptr;
 		if (nextpiece != nullptr)
 			delete nextpiece;
+		checkWin(player->color());
 		return true;
 	}
 
@@ -69,7 +89,7 @@ void Board::printBoard() const {
 
 				if (m_board[i][j]->getColor() == Color::Black)
 					std::cout << termcolor::blue;
-				std::cout << m_board[i][j]->Id();
+				std::cout << m_board[i][j]->getId();
 				std::cout << termcolor::white;
 
 				if (j < SIZE_BOARD - 1)
@@ -87,7 +107,8 @@ void Board::printBoard() const {
 	std::cout << termcolor::green << "   _______________" << std::endl;
 	std::cout << "   A B C D E F G H" << termcolor::white << std::endl;
 
-};
+}
+
 
 Piece* Board::getPiece(Position p) {
 	return m_board[p.getx()][p.gety()];
@@ -110,22 +131,22 @@ Board::Board() {
 				PieceColor = Color::White; // bottom of board is white
 			}
 
-			if ( i == 1 || i == 6) {
-				p_ptr = new Pawn{'P', PieceColor, tempPos};
+			if (i == 1 || i == 6) {
+				p_ptr = new Pawn{ 'P', PieceColor, tempPos };
 				m_board[i][j] = p_ptr;
 			}
 			else if (i == 0 || i == 7) {
 
 				if (j == 0 || j == 7) // Rooks
-					p_ptr = new Rook{'R', PieceColor, tempPos};
+					p_ptr = new Rook{ 'R', PieceColor, tempPos };
 				else if (j == 1 || j == 6) //Knight
-					p_ptr = new Knight{'N', PieceColor, tempPos};
+					p_ptr = new Knight{ 'N', PieceColor, tempPos };
 				else if (j == 2 || j == 5) //Bishop
-					p_ptr = new Bishop{'B', PieceColor, tempPos};
+					p_ptr = new Bishop{ 'B', PieceColor, tempPos };
 				else if (j == 3) //Queen
-					p_ptr = new Queen{'Q', PieceColor, tempPos};
+					p_ptr = new Queen{ 'Q', PieceColor, tempPos };
 				else if (j == 4) //King
-					p_ptr = new King{'K', PieceColor, tempPos};
+					p_ptr = new King{ 'K', PieceColor, tempPos };
 				m_board[i][j] = p_ptr;
 			}
 			else

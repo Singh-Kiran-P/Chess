@@ -13,7 +13,7 @@ public:
 	Position getPos();
 	void setPos(Position p);
 
-	char Id();
+	char getId();
 	virtual bool moveRestrictions(Piece* nextpiece, Position nextPos) = 0;
 
 	Piece(char id, Color color, Position Pos);

@@ -11,24 +11,26 @@
 #include "queen.h"
 #include "knight.h"
 #include "bishop.h"
-
+#include "player.h"
 class Board {
-    public:
+public:
 
-        bool move(Position current, Position next, Player* player);
+	bool move(Position current, Position next, Player* player);
 
-        void printBoard() const;
-        bool checkWin() const;
+	void printBoard() const;
+	bool getWin();
+	Piece* getPiece(Position p);
 
-        Piece* getPiece(Position p);
+	Board();
+	~Board();
+protected:
+	bool winEndGame;
 
-        Board();
-        ~Board();
+private:
+	static const int SIZE_BOARD = 8;
+	void checkWin(Color currColor) ;
 
-    private:
-        static const int SIZE_BOARD = 8;
-
-        Piece* m_board[SIZE_BOARD][SIZE_BOARD];
-        bool noBlockers(Position current, Position next) const;
+	Piece* m_board[SIZE_BOARD][SIZE_BOARD];
+	bool noBlockers(Position current, Position next) const;
 
 };

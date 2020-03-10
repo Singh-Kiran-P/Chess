@@ -12,7 +12,7 @@ void Piece::setPos(Position p) {
 	m_position = p;
 };
 
-char Piece::Id() {
+char Piece::getId() {
 	return m_id;
 };
 
