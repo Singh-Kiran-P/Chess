@@ -1,31 +1,21 @@
 #include "board.h"
 
-void Board::checkWin(Color currColor) {
+bool Board::checkWin() {
+	int KingCount{ 0 };
 
 	for (int i = 0; i < SIZE_BOARD; ++i) {
-		for (int j = 0; j < SIZE_BOARD; j++)
-		{
+		for (int j = 0; j < SIZE_BOARD; j++) {
 			if (m_board[i][j] != nullptr) {
 				if (auto* playertype = dynamic_cast<King*>(m_board[i][j])) {
-					if (playertype->getColor() != currColor) {
-
-						winEndGame = false;
-						return;
-					}
-
+					KingCount++;
 				}
+
 			}
 		}
-
 	}
-	winEndGame = true;
+	return (KingCount != 2);
+
 };
-
-bool Board::getWin()
-{
-	return winEndGame;
-}
-
 
 bool Board::move(Position current, Position next, Player* player) {
 	Piece* movingpiece = m_board[current.getx()][current.gety()];
@@ -48,7 +38,7 @@ bool Board::move(Position current, Position next, Player* player) {
 		m_board[current.getx()][current.gety()] = nullptr;
 		if (nextpiece != nullptr)
 			delete nextpiece;
-		checkWin(player->color());
+		// checkWin(player->color());
 		return true;
 	}
 

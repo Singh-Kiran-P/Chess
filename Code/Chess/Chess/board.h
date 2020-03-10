@@ -18,8 +18,9 @@ public:
 	bool move(Position current, Position next, Player* player);
 
 	void printBoard() const;
-	bool getWin();
 	Piece* getPiece(Position p);
+
+    bool checkWin();
 
 	Board();
 	~Board();
@@ -28,7 +29,6 @@ protected:
 
 private:
 	static const int SIZE_BOARD = 8;
-	void checkWin(Color currColor) ;
 
 	Piece* m_board[SIZE_BOARD][SIZE_BOARD];
 	bool noBlockers(Position current, Position next) const;

@@ -71,7 +71,7 @@ Player* Game::currentPlayer() {
 };
 
 void Game::run() {
-	bool checkwin;
+	bool win;
 
 	// Creates the board and places the pawns
 	m_board.printBoard();
@@ -91,10 +91,10 @@ void Game::run() {
 	        clearScreen();
 
 			m_board.printBoard();
-			if ((checkwin = m_board.getWin()) == false)
+			if ((win = m_board.checkWin()) == false)
 				this->nextturn();
 
-		} while (checkwin == false); //as long as no one has won, ask the next player for their move
+		} while (win == false); //as long as no one has won, ask the next player for their move
 
 		printWinner((this->currentPlayer())->name());
 };
