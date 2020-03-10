@@ -21,7 +21,7 @@ Game::Game(bool vsAI) {
 	Color color2{};
 
 	srand((unsigned int)time(nullptr)); // Use current time for random seed
-	int coinflip{rand() % 2};
+	int coinflip{ rand() % 2 };
 	if (coinflip == 1) {
 		color1 = Color::White;
 		color2 = Color::Black;
@@ -31,7 +31,11 @@ Game::Game(bool vsAI) {
 		color2 = Color::White;
 	}
 
-	m_player1 = new HumanPlayer{ name1, color1 };
+	if (name1 == "AI2")
+		m_player1 = new AIPlayer{ name1, color1,m_board };
+
+	else
+		m_player1 = new HumanPlayer{ name1, color1 };
 
 
 	if (!vsAI) {
@@ -86,15 +90,15 @@ void Game::run() {
 			curr = currentPlayer()->moveFrom(currentPlayer()->color());
 			next = currentPlayer()->moveTo(curr, currentPlayer()->color());
 
-			} while (!m_board.move(curr, next, (this->currentPlayer()))); // If a move is invalid, a turn isn't skipped
+		} while (!m_board.move(curr, next, (this->currentPlayer()))); // If a move is invalid, a turn isn't skipped
 
-	        clearScreen();
+		clearScreen();
 
-			m_board.printBoard();
-			if ((win = m_board.checkWin()) == false)
-				this->nextturn();
+		m_board.printBoard();
+		if ((win = m_board.checkWin()) == false)
+			this->nextturn();
 
-		} while (win == false); //as long as no one has won, ask the next player for their move
+	} while (win == false); //as long as no one has won, ask the next player for their move
 
-		printWinner((this->currentPlayer())->name());
+	printWinner((this->currentPlayer())->name());
 };

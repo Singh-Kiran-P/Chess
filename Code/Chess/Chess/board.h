@@ -16,7 +16,7 @@ class Board {
 public:
 
 	bool move(Position current, Position next, Player* player);
-
+  
 	void printBoard() const;
 	Piece* getPiece(Position p);
 
