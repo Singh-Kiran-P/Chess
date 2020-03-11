@@ -6,7 +6,7 @@ bool Board::checkWin() {
 	for (int i = 0; i < SIZE_BOARD; ++i) {
 		for (int j = 0; j < SIZE_BOARD; j++) {
 			if (m_board[i][j] != nullptr) {
-				if (auto* playertype = dynamic_cast<King*>(m_board[i][j])) {
+				if (m_board[i][j]->getId() == 'K') {
 					KingCount++;
 				}
 
@@ -38,7 +38,6 @@ bool Board::move(Position current, Position next, Player* player) {
 		m_board[current.getx()][current.gety()] = nullptr;
 		if (nextpiece != nullptr)
 			delete nextpiece;
-		// checkWin(player->color());
 		return true;
 	}
 
