@@ -25,15 +25,15 @@ Position AIPlayer::moveTo(Position currPos, Color playerColor) {
     int next_x{};
 	int next_y{};
 	Position nextPos{};
-    int attemps{ 0 };
+    int attempts{ 0 };
 
 	do {
-        attemps++;
+        attempts++;
 		next_x = rand() % 8;
 		next_y = rand() % 8;
 		nextPos.setpos(next_x, next_y);
 
-	} while (!(m_board->getPiece(currPos))->moveRestrictions((m_board->getPiece(nextPos)), nextPos) && attemps < m_attemptCount);
+	} while (!(m_board->getPiece(currPos))->moveRestrictions((m_board->getPiece(nextPos)), nextPos) && attempts < m_attemptCount);
     return nextPos;
 };
 
