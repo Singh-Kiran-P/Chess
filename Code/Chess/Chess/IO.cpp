@@ -51,3 +51,9 @@ void clearScreen() {
     std::system ("clear");
 #endif
 };
+
+bool InvalidMove(Player* player) {
+	if (auto* playertype = dynamic_cast<HumanPlayer*>(player)) // Only print this error message when a player causes it
+		std::cout << termcolor::red << "Invalid move" << termcolor::white << std::endl;
+	return false;
+};

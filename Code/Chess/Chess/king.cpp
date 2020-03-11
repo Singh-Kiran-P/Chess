@@ -8,6 +8,9 @@ bool King::moveRestrictions(Piece* nextpiece, Position nextPos) {
 	int next_x = nextPos.getx();
 	int next_y = nextPos.gety();
 
+	if (curr_x == next_x && curr_y == next_y)
+		return false;
+
 	if (nextpiece != nullptr) {
 		if (nextpiece->getColor() == m_color)
 			return false;

@@ -3,47 +3,99 @@
 bool Board::checkWin() {
 	int KingCount{ 0 };
 
-	for (int i = 0; i < SIZE_BOARD; ++i) {
-		for (int j = 0; j < SIZE_BOARD; j++) {
-			if (m_board[i][j] != nullptr) {
-				if (m_board[i][j]->getId() == 'K') {
-					KingCount++;
-				}
+	Piece* WhiteKing{ FindKing(Color::White) };
+	Piece* BlackKing{ FindKing(Color::Black) };
 
+	Piece* CheckedKing{ nullptr };
+	if (!SafePos(WhiteKing, WhiteKing->getPos()))
+		CheckedKing = WhiteKing;
+	else if (!SafePos(BlackKing, BlackKing->getPos()))
+		CheckedKing = BlackKing;
+
+	if (CheckedKing == nullptr)
+		return false;
+	else {
+		int curr_x = (CheckedKing->getPos()).getx();
+		int curr_y = (CheckedKing->getPos()).gety();
+		Position PossibleMove{};
+
+		for (int i = -1; i < 2; i++) {
+			for (int j = -1; j < 2; j++) {
+				if ((i != 0 || j != 0) && 0 <= curr_x + i  && curr_x + i < SIZE_BOARD && 0 <= curr_y + j && curr_y + j < SIZE_BOARD) {
+					PossibleMove.setpos(curr_x + i, curr_y + j);
+					if (SafePos(CheckedKing, PossibleMove)) { // Checks if king can move out of check
+						if ((m_board[curr_x + i][curr_y + j] == nullptr || m_board[curr_x + i][curr_y + j]->getColor() != CheckedKing->getColor()))
+							return false;
+					}
+				}
+			}
+		}
+		return true;
+	}
+};
+
+bool Board::SafePos(Piece* movingpiece, Position next) {
+	for(int i = 0; i < SIZE_BOARD; i++) {
+		for(int j = 0; j < SIZE_BOARD; j++) {
+			if (m_board[i][j] != nullptr && m_board[i][j]->getColor() != movingpiece->getColor()) {
+				if (m_board[i][j]->moveRestrictions(movingpiece, next) && noBlockers(m_board[i][j]->getPos(), next)) //Checks if any enenmy piece can take the king's next position
+					return false;
 			}
 		}
 	}
-	return (KingCount != 2);
+	return true;
+};
 
+Piece* Board::FindKing(Color color) {
+	for (int i = 0; i < SIZE_BOARD; i++) {
+		for (int j = 0; j < SIZE_BOARD; j++) {
+			if (m_board[i][j] != nullptr && m_board[i][j]->getId() == 'K') {
+				if(m_board[i][j]->getColor() == color)
+					return m_board[i][j];
+			}
+		}
+	}
+	return nullptr;
 };
 
 bool Board::move(Position current, Position next, Player* player) {
 	Piece* movingpiece = m_board[current.getx()][current.gety()];
-	if (movingpiece == nullptr || movingpiece->getColor() != player->color()) { // A piece must be selected to move it
-		if (auto* playertype = dynamic_cast<HumanPlayer*>(player)) // Only print this error message when a player causes it
-			std::cout << termcolor::red << "Invalid move" << termcolor::white << std::endl;
-		return false;
-	}
+	Piece* nextpiece = m_board[next.getx()][next.gety()];
+
+	if (movingpiece == nullptr || movingpiece->getColor() != player->color()) // A piece must be selected to move it
+		return InvalidMove(player);
+
 
 	bool PossibleWalk{ true };
 	if (movingpiece->getId() != 'N')
 		PossibleWalk = noBlockers(current, next);
+	if (movingpiece->getId() == 'K')
+		PossibleWalk = SafePos(movingpiece, next);
 
-	Piece* nextpiece = m_board[next.getx()][next.gety()];
-	if (movingpiece->moveRestrictions(nextpiece, next) && PossibleWalk) {
-		if (auto* i = dynamic_cast<Pawn*>(movingpiece))
-			i->increaseTurnCount();
+	if (PossibleWalk && movingpiece->moveRestrictions(nextpiece, next)) {
 		m_board[next.getx()][next.gety()] = movingpiece;
-		movingpiece->setPos(next);
 		m_board[current.getx()][current.gety()] = nullptr;
-		if (nextpiece != nullptr)
-			delete nextpiece;
-		return true;
+		movingpiece->setPos(next);
+
+		Piece* TeamKing = FindKing(movingpiece->getColor());
+		if (!SafePos(TeamKing, TeamKing->getPos())) { // A move that puts the king in check is illegal
+			m_board[current.getx()][current.gety()] = movingpiece;
+			m_board[next.getx()][next.gety()] = nextpiece;
+			movingpiece->setPos(current);
+			return InvalidMove(player);
+		}
+		else {
+if (auto* i = dynamic_cast<Pawn*>(movingpiece))
+				i->increaseTurnCount();
+
+			if (nextpiece != nullptr)
+				delete nextpiece;
+			return true;
+		}
 	}
 
 	if (auto* playertype = dynamic_cast<HumanPlayer*>(player))
-		std::cout << termcolor::red << "Invalid move" << termcolor::white << std::endl;
-	return false;
+		return InvalidMove(player);
 };
 
 bool Board::noBlockers(Position current, Position next) const {

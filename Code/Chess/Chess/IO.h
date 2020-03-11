@@ -1,6 +1,7 @@
 #pragma once
 const int MAX_SIZE = 8;
 #include "TermColor.hpp"
+#include "humanplayer.h"
 #include <stdio.h>
 #include <ctype.h>
 #include <cstdlib>
@@ -12,3 +13,4 @@ bool checkChoice();
 void printLogo();
 void printWinner(std::string name);
 void clearScreen();
+bool InvalidMove(Player* player);

@@ -16,6 +16,9 @@ bool Pawn::moveRestrictions(Piece* nextpiece, Position nextPos) {
 	int next_x{ nextPos.getx() };
 	int next_y{ nextPos.gety() };
 
+	if (curr_x == next_x && curr_y == next_y)
+		return false;
+
 	int max_delta_x{ 1 };
 	if (m_color == Color::White) {
 		if (next_x >= curr_x)
@@ -36,9 +39,13 @@ bool Pawn::moveRestrictions(Piece* nextpiece, Position nextPos) {
 		else
 			return false;
 	}
-	else if (abs(curr_y - next_y) == 1 && abs(next_x - curr_x) == 1 && nextpiece != nullptr) {
-		if (m_color != nextpiece->getColor())
-			return true;
+	else if (abs(curr_y - next_y) == 1 && abs(next_x - curr_x) == 1) {
+		if (nextpiece != nullptr) {
+			if (m_color != nextpiece->getColor())
+				return true;
+			else
+				return false;
+		}
 		else
 			return false;
 	}
