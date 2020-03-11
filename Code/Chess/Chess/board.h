@@ -20,6 +20,8 @@ public:
 	void printBoard() const;
 	Piece* getPiece(Position p);
 
+
+	void changePawn(Pawn*);
     bool checkWin();
 
 	Board();

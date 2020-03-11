@@ -1,16 +1,46 @@
 #include "board.h"
 
+void Board::changePawn(Pawn* p)
+{
+
+	Position posP = p->getPos();
+	//char choice;
+	//std::cout << "Switch pawn with: ";
+	//std::cin >> choice;
+
+	if (p->getColor() == Color::Black)
+	{
+		delete p;
+
+		m_board[posP.getx()][posP.gety()] = new Queen('Q', Color::Black, posP);
+
+	}
+	else
+	{
+		delete p;
+
+		m_board[posP.getx()][posP.gety()] = new Queen('Q', Color::White, posP);
+
+	}
+
+}
+
 bool Board::checkWin() {
-	int KingCount{ 0 };
+	/*int KingCount{ 0 };*/
 
 	Piece* WhiteKing{ FindKing(Color::White) };
 	Piece* BlackKing{ FindKing(Color::Black) };
 
 	Piece* CheckedKing{ nullptr };
-	if (!SafePos(WhiteKing, WhiteKing->getPos()))
+	if (!SafePos(WhiteKing, WhiteKing->getPos())) {
 		CheckedKing = WhiteKing;
-	else if (!SafePos(BlackKing, BlackKing->getPos()))
+		cout << termcolor::red << "\nCheck White King\n" << termcolor::reset << endl;
+
+	}
+	else if (!SafePos(BlackKing, BlackKing->getPos())) {
 		CheckedKing = BlackKing;
+		cout <<termcolor::red<< "\nCheck Black King\n" << termcolor::reset<< endl;
+	}
 
 	if (CheckedKing == nullptr)
 		return false;
@@ -21,10 +51,11 @@ bool Board::checkWin() {
 
 		for (int i = -1; i < 2; i++) {
 			for (int j = -1; j < 2; j++) {
-				if ((i != 0 || j != 0) && 0 <= curr_x + i  && curr_x + i < SIZE_BOARD && 0 <= curr_y + j && curr_y + j < SIZE_BOARD) {
+				if ((i != 0 || j != 0) && 0 <= curr_x + i && curr_x + i < SIZE_BOARD && 0 <= curr_y + j && curr_y + j < SIZE_BOARD) {
 					PossibleMove.setpos(curr_x + i, curr_y + j);
 					if (SafePos(CheckedKing, PossibleMove)) { // Checks if king can move out of check
 						if ((m_board[curr_x + i][curr_y + j] == nullptr || m_board[curr_x + i][curr_y + j]->getColor() != CheckedKing->getColor()))
+							cout << termcolor::red << "\nCheckmate\n" << termcolor::reset << endl;
 							return false;
 					}
 				}
@@ -35,8 +66,8 @@ bool Board::checkWin() {
 };
 
 bool Board::SafePos(Piece* movingpiece, Position next) {
-	for(int i = 0; i < SIZE_BOARD; i++) {
-		for(int j = 0; j < SIZE_BOARD; j++) {
+	for (int i = 0; i < SIZE_BOARD; i++) {
+		for (int j = 0; j < SIZE_BOARD; j++) {
 			if (m_board[i][j] != nullptr && m_board[i][j]->getColor() != movingpiece->getColor()) {
 				if (m_board[i][j]->moveRestrictions(movingpiece, next) && noBlockers(m_board[i][j]->getPos(), next)) //Checks if any enenmy piece can take the king's next position
 					return false;
@@ -50,7 +81,7 @@ Piece* Board::FindKing(Color color) {
 	for (int i = 0; i < SIZE_BOARD; i++) {
 		for (int j = 0; j < SIZE_BOARD; j++) {
 			if (m_board[i][j] != nullptr && m_board[i][j]->getId() == 'K') {
-				if(m_board[i][j]->getColor() == color)
+				if (m_board[i][j]->getColor() == color)
 					return m_board[i][j];
 			}
 		}
@@ -85,18 +116,24 @@ bool Board::move(Position current, Position next, Player* player) {
 			return InvalidMove(player);
 		}
 		else {
-if (auto* i = dynamic_cast<Pawn*>(movingpiece))
+			if (auto* i = dynamic_cast<Pawn*>(movingpiece))
 				i->increaseTurnCount();
 
 			if (nextpiece != nullptr)
 				delete nextpiece;
+			if (auto* i = dynamic_cast<Pawn*>(movingpiece))
+			{
+				if (i->getPos().getx() == SIZE_BOARD - 1 || i->getPos().getx() == 0)
+					changePawn(i);
+			}
 			return true;
 		}
 	}
 
 	if (auto* playertype = dynamic_cast<HumanPlayer*>(player))
 		return InvalidMove(player);
-};
+}
+
 
 bool Board::noBlockers(Position current, Position next) const {
 	int curr_x{ current.getx() };
@@ -153,7 +190,7 @@ void Board::printBoard() const {
 
 Piece* Board::getPiece(Position p) {
 	return m_board[p.getx()][p.gety()];
-};
+}
 
 Board::Board() {
 	Color PieceColor{};
