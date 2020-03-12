@@ -96,7 +96,7 @@ bool Board::move(Position current, Position next, Player* player) {
 	Piece* nextpiece = m_board[next.getx()][next.gety()];
 
 	if (movingpiece == nullptr || movingpiece->getColor() != player->color()) // A piece must be selected to move it
-		return InvalidMove(player);
+		return false;
 
 
 	bool PossibleWalk{ true };
@@ -113,7 +113,7 @@ bool Board::move(Position current, Position next, Player* player) {
 			m_board[current.getx()][current.gety()] = movingpiece;
 			m_board[next.getx()][next.gety()] = nextpiece;
 			movingpiece->setPos(current);
-			return InvalidMove(player);
+			return false;
 		}
 		else {
 			if (auto* i = dynamic_cast<Pawn*>(movingpiece))
@@ -130,7 +130,7 @@ bool Board::move(Position current, Position next, Player* player) {
 		}
 	}
 
-	return InvalidMove(player);
+	return false;
 }
 
 
@@ -156,36 +156,6 @@ bool Board::noBlockers(Position current, Position next) const {
 	}
 	return true;
 };
-
-void Board::printBoard() const {
-	std::cout << termcolor::green << "   _______________" << std::endl;
-	for (int i = 0; i < SIZE_BOARD; i++) {
-		std::cout << termcolor::green << SIZE_BOARD - i << " |" << termcolor::white; //Board is zero-indexed, while the chess game is flipped and has 1 at the bottom
-		for (int j = 0; j < SIZE_BOARD; j++) {
-			if (m_board[i][j] != nullptr) {
-
-				if (m_board[i][j]->getColor() == Color::Black)
-					std::cout << termcolor::blue;
-				std::cout << m_board[i][j]->getId();
-				std::cout << termcolor::white;
-
-				if (j < SIZE_BOARD - 1)
-					std::cout << " ";
-			}
-			else {
-				std::cout << ".";
-				if (j < SIZE_BOARD - 1)
-					std::cout << " ";
-			}
-		}
-		std::cout << termcolor::green << '|';
-		std::cout << '\n';
-	}
-	std::cout << termcolor::green << "   _______________" << std::endl;
-	std::cout << "   A B C D E F G H" << termcolor::white << std::endl;
-
-}
-
 
 Piece* Board::getPiece(Position p) {
 	return m_board[p.getx()][p.gety()];

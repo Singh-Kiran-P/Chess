@@ -13,7 +13,7 @@ class Game {
 		~Game();
 
 		void nextturn() ;
-		Player* currentPlayer();
+		//Player* currentPlayer();
 		void run();
 
 	private:

@@ -3,7 +3,6 @@
 #include <string>
 #include <stdlib.h>
 #include <stdio.h>
-#include "io.h"
 #include "TermColor.hpp"
 #include "pawn.h"
 #include "rook.h"

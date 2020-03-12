@@ -70,35 +70,37 @@ void Game::nextturn() {
 		m_turn = m_player1;
 };
 
-Player* Game::currentPlayer() {
-	return m_turn;
-};
+//Player* Game::currentPlayer() {
+//	return m_turn;
+//};
 
 void Game::run() {
 	bool win;
 
 	// Creates the board and places the pawns
-	m_board.printBoard();
+	printBoard(&m_board);
 
 	Position curr{};
 	Position next{};
 
 	do {
-		std::cout << "It's " << (this->currentPlayer())->name() << "'s turn" << std::endl;
+		std::cout << "It's " << m_turn->name() << "'s turn" << std::endl;
 		do {
 
-			curr = currentPlayer()->moveFrom(currentPlayer()->color());
-			next = currentPlayer()->moveTo(curr, currentPlayer()->color());
+			curr = m_turn->moveFrom(m_turn->color());
+			next = m_turn->moveTo(curr, m_turn->color());
 
-		} while (!m_board.move(curr, next, (this->currentPlayer()))); // If a move is invalid, a turn isn't skipped
+		} while (!m_board.move(curr, next, m_turn)); // If a move is invalid, a turn isn't skipped
 
 		clearScreen();
 
-		m_board.printBoard();
+		printBoard(&m_board);
 		if ((win = m_board.checkWin()) == false)
 			this->nextturn();
+		else
+			InvalidMove(m_turn);
 
 	} while (win == false); //as long as no one has won, ask the next player for their move
 
-	printWinner((this->currentPlayer())->name());
+	printWinner((m_turn)->name());
 };
