@@ -69,44 +69,38 @@ void Game::nextturn() {
 	else
 		m_turn = m_player1;
 };
-
-//Player* Game::currentPlayer() {
-//	return m_turn;
-//};
-
 void Game::run() {
-	bool win;
-
-	// Creates the board and places the pawns
+	bool win;
+
+	// Creates the board and places the pawns
 	printBoard(&m_board);
-
-	Position curr{};
+	Position curr{};
 	Position next{};
-
 	do {
 		std::cout << "It's " << m_turn->name() << "'s turn" << std::endl;
-		do {
-
+		do {
 			curr = m_turn->moveFrom(m_turn->color());
-			next = m_turn->moveTo(curr, m_turn->color());
+			next = m_turn->moveTo(curr, m_turn->color());
 
 		} while (!m_board.move(curr, next, m_turn)); // If a move is invalid, a turn isn't skipped
-
-		clearScreen();
-
+		clearScreen();
 		printBoard(&m_board);
-		if ((win = m_board.checkWin()) == false){
+		if ((win = m_board.checkWin()) == false) {
 			this->nextturn();
-			char id = m_board.getPiece(next)->getId();
-			Color color = m_board.getPiece(next)->getColor();
+			char id = m_board.getPiece(next)->getId();
+			Color color = m_board.getPiece(next)->getColor();
 			m_moves.addMove(id, color, curr, next);
-		}
-		else
-			InvalidMove(m_turn);
-
-
-	} while (win == false); //as long as no one has won, ask the next player for their move
-
-	printWinner((m_turn)->name());
+		}
+		else
+			InvalidMove(m_turn);
+
+	} while (win == false); //as long as no one has won, ask the next player for their move	printWinner((m_turn)->name());	cout << "Show Logs (y,n)";
+	char res;
+	cin >> res;
+	if (res == 'y')
+	{
+		m_moves.print();
+
+	}
 };
 
