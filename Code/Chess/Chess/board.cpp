@@ -52,7 +52,7 @@ bool Board::checkWin() {
 			for (int j = -1; j < 2; j++) {
 				if ((i != 0 || j != 0) && 0 <= curr_x + i && curr_x + i < SIZE_BOARD && 0 <= curr_y + j && curr_y + j < SIZE_BOARD) {
 					PossibleMove.setpos(curr_x + i, curr_y + j);
-					if (SafePos(CheckedKing, PossibleMove)) { // Checks if king can move out of check
+						if (SafePos(CheckedKing, PossibleMove)) { // Checks if king can move out of check
 						if ((m_board[curr_x + i][curr_y + j] == nullptr || m_board[curr_x + i][curr_y + j]->getColor() != CheckedKing->getColor()))
 							return false;
 					}
@@ -94,7 +94,6 @@ bool Board::move(Position current, Position next, Player* player) {
 
 	if (movingpiece == nullptr || movingpiece->getColor() != player->color()) // A piece must be selected to move it
 		return false;
-
 
 	bool PossibleWalk{ true };
 	if (movingpiece->getId() != 'N')
