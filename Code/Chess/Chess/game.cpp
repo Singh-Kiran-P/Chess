@@ -94,11 +94,27 @@ void Game::run() {
 
 		clearScreen();
 
+
 		m_board.printBoard();
-		if ((win = m_board.checkWin()) == false)
+		if ((win = m_board.checkWin()) == false) {
 			this->nextturn();
+			char id = m_board.getPiece(next)->getId();
+			Color color = m_board.getPiece(next)->getColor();
+			m_moves.addMove(id, color, curr, next);
+		}
+
 
 	} while (win == false); //as long as no one has won, ask the next player for their move
 
 	printWinner((this->currentPlayer())->name());
+	cout << "Show Logs (y,n)";
+	char res;
+	cin >> res;
+	if (res=='y')
+	{
+		m_moves.print();
+
+	}
+
 };
+

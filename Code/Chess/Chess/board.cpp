@@ -4,9 +4,6 @@ void Board::changePawn(Pawn* p)
 {
 
 	Position posP = p->getPos();
-	//char choice;
-	//std::cout << "Switch pawn with: ";
-	//std::cin >> choice;
 
 	if (p->getColor() == Color::Black)
 	{
@@ -26,8 +23,6 @@ void Board::changePawn(Pawn* p)
 }
 
 bool Board::checkWin() {
-	/*int KingCount{ 0 };*/
-
 	Piece* WhiteKing{ FindKing(Color::White) };
 	Piece* BlackKing{ FindKing(Color::Black) };
 

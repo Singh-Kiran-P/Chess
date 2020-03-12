@@ -8,7 +8,15 @@ int Position::getx() const {
 
 int Position::gety() const {
 	return m_ypos;
-};
+}
+char Position::getYstr() const
+{
+	char c = 'A';
+	char res = c + m_ypos;
+
+	return res;
+}
+;
 
 void Position::setpos(int x, int y) {
 	m_xpos = x;
