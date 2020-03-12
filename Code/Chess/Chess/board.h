@@ -30,6 +30,8 @@ protected:
 
 private:
 	static const int SIZE_BOARD = 8;
+	int m_blackPieceCount = 1;
+	int m_whitePieceCount = 16;
 
 	Piece* m_board[SIZE_BOARD][SIZE_BOARD];
 	Piece* FindKing(Color color);
