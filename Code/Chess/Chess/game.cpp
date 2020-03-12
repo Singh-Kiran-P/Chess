@@ -82,17 +82,17 @@ void Game::run() {
 		do {
 			curr = m_turn->moveFrom(m_turn->color());
 			next = m_turn->moveTo(curr, m_turn->color());
-			if ((validmove = m_board.move(curr, next, m_turn)) == false)				InvalidMove(m_turn);
+			if ((validmove = m_board.move(curr, next, m_turn)) == false)
+				InvalidMove(m_turn);
+
 		} while (!validmove); // If a move is invalid, a turn isn't skipped
+
 		clearScreen();
 		printBoard(&m_board);
-		if ((win = m_board.checkWin()) == false) {
+		if ((win = m_board.checkWin()) == false)
 			this->nextturn();
-			char id = m_board.getPiece(next)->getId();
-			Color color = m_board.getPiece(next)->getColor();
-			m_moves.addMove(id, color, curr, next);
-		}
-		
+
+		m_moves.addMove(m_board.getPiece(next)->getId();, _board.getPiece(next)->getColor();, curr, next);
 
 	} while (win == false); //as long as no one has won, ask the next player for their move
 	printWinner((m_turn)->name());

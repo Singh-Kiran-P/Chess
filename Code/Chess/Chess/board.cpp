@@ -1,34 +1,24 @@
 #include "board.h"
 
-void Board::changePawn(Pawn* p)
-{
+void Board::changePawn(Pawn* p) {
 
 	Position posP = p->getPos();
 
-	if (p->getColor() == Color::Black)
-	{
+	if (p->getColor() == Color::Black) {
 		delete p;
 
 		m_board[posP.getx()][posP.gety()] = new Queen('Q', Color::Black, posP);
 
 	}
-	else
-	{
+	else {
 		delete p;
-
 		m_board[posP.getx()][posP.gety()] = new Queen('Q', Color::White, posP);
-
 	}
-
-}
+};
 
 bool Board::checkWin() {
-
 	Piece* WhiteKing{ FindKing(Color::White) };
 	Piece* BlackKing{ FindKing(Color::Black) };
-
-	if (WhiteKing == nullptr || BlackKing == nullptr)
-		return true;
 
 	Piece* CheckedKing{ nullptr };
 	if (!SafePos(WhiteKing, WhiteKing->getPos())) {
@@ -47,11 +37,10 @@ bool Board::checkWin() {
 			CheckedKing = WhiteKing;
 	}
 
-	if (CheckedKing != nullptr || m_blackPieceCount == 1 || m_whitePieceCount == 1) {
+	if (CheckedKing != nullptr) {
 		int curr_x = (CheckedKing->getPos()).getx();
 		int curr_y = (CheckedKing->getPos()).gety();
 		Position PossibleMove{};
-
 		for (int i = -1; i < 2; i++) {
 			for (int j = -1; j < 2; j++) {
 				if ((i != 0 || j != 0) && 0 <= curr_x + i && curr_x + i < SIZE_BOARD && 0 <= curr_y + j && curr_y + j < SIZE_BOARD) {
@@ -133,8 +122,8 @@ bool Board::move(Position current, Position next, Player* player) {
 				else
 					m_blackPieceCount--;
 			delete nextpiece;
-			if (auto* i = dynamic_cast<Pawn*>(movingpiece))
-			{
+			if (auto* i = dynamic_cast<Pawn*>(movingpiece)) {
+				i->increaseTurnCount();
 				if (i->getPos().getx() == SIZE_BOARD - 1 || i->getPos().getx() == 0)
 					changePawn(i);
 			}
@@ -143,8 +132,7 @@ bool Board::move(Position current, Position next, Player* player) {
 	}
 
 	return false;
-}
-
+};
 
 bool Board::noBlockers(Position current, Position next) const {
 	int curr_x{ current.getx() };
@@ -171,7 +159,7 @@ bool Board::noBlockers(Position current, Position next) const {
 
 Piece* Board::getPiece(Position p) {
 	return m_board[p.getx()][p.gety()];
-}
+};
 
 Board::Board() {
 	Color PieceColor{};
