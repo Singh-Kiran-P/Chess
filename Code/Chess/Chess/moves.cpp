@@ -33,10 +33,9 @@ void Moves::addMove(char id,Color color, Position curr, Position next)
 void Moves::print() const
 {
 	for (int i = 0; i < m_moves.size(); i++) {
-		std::cout <<endl<<"Id:"<< m_moves.at(i).getId()<< m_moves.at(i).getColor()<< " from: x="<<m_moves.at(i).getCurrPos().getx()
-			<<" y="<<  m_moves.at(i).getCurrPos().getYstr()
-			<< " To: x="<< m_moves.at(i).getNextPos().getx()
-			<< " y=" << m_moves.at(i).getNextPos().getYstr()
+		std::cout << "Id: " << m_moves.at(i).getId() << m_moves.at(i).getColor()
+			<< " From: " <<  m_moves.at(i).getCurrPos().getYstr() << m_moves.at(i).getCurrPos().getx()
+			<< " To: " << m_moves.at(i).getNextPos().getYstr() << m_moves.at(i).getNextPos().getx()
 			<<endl;
 	}
 }

@@ -70,7 +70,8 @@ void Game::nextturn() {
 		m_turn = m_player1;
 };
 void Game::run() {
-	bool win;
+	bool win{};
+	bool validmove{};
 
 	// Creates the board and places the pawns
 	printBoard(&m_board);
@@ -81,8 +82,8 @@ void Game::run() {
 		do {
 			curr = m_turn->moveFrom(m_turn->color());
 			next = m_turn->moveTo(curr, m_turn->color());
-
-		} while (!m_board.move(curr, next, m_turn)); // If a move is invalid, a turn isn't skipped
+			if ((validmove = m_board.move(curr, next, m_turn)) == false)				InvalidMove(m_turn);
+		} while (!validmove); // If a move is invalid, a turn isn't skipped
 		clearScreen();
 		printBoard(&m_board);
 		if ((win = m_board.checkWin()) == false) {
@@ -91,16 +92,14 @@ void Game::run() {
 			Color color = m_board.getPiece(next)->getColor();
 			m_moves.addMove(id, color, curr, next);
 		}
-		else
-			InvalidMove(m_turn);
+		
 
-	} while (win == false); //as long as no one has won, ask the next player for their move	printWinner((m_turn)->name());	cout << "Show Logs (y,n)";
+	} while (win == false); //as long as no one has won, ask the next player for their move
+	printWinner((m_turn)->name());
+	cout << "Show Logs (y,n)";
 	char res;
 	cin >> res;
 	if (res == 'y')
-	{
 		m_moves.print();
-
-	}
 };
 
