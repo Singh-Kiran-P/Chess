@@ -66,6 +66,7 @@ bool Board::checkWin() {
 		cout << termcolor::red << "Checkmate\n" << termcolor::reset << endl;
 		return true;
 	}
+	return false;
 };
 
 bool Board::SafePos(Piece* movingpiece, Position next) {
