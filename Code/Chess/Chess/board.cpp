@@ -37,7 +37,6 @@ bool Board::checkWin() {
 	if (!SafePos(WhiteKing, WhiteKing->getPos())) {
 		CheckedKing = WhiteKing;
 		cout << termcolor::red << "Check White King\n" << termcolor::reset << endl;
-
 	}
 	else if (!SafePos(BlackKing, BlackKing->getPos())) {
 		CheckedKing = BlackKing;
@@ -46,6 +45,7 @@ bool Board::checkWin() {
 
 	if (CheckedKing == nullptr)
 		return false;
+
 	else {
 		int curr_x = (CheckedKing->getPos()).getx();
 		int curr_y = (CheckedKing->getPos()).gety();
@@ -109,7 +109,7 @@ bool Board::move(Position current, Position next, Player* player) {
 		movingpiece->setPos(next);
 
 		Piece* TeamKing = FindKing(movingpiece->getColor());
-		if (!SafePos(TeamKing, TeamKing->getPos())) { // A move that puts the king in check is illegal
+		if (TeamKing == nullptr || !SafePos(TeamKing, TeamKing->getPos())) { // A move that puts the king in check is illegal
 			m_board[current.getx()][current.gety()] = movingpiece;
 			m_board[next.getx()][next.gety()] = nextpiece;
 			movingpiece->setPos(current);
