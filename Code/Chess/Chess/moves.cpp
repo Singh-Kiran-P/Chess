@@ -1,4 +1,3 @@
-#pragma once
 #include "moves.h"
 
 Moves::Moves(char id, Color color, Position currPos, Position nextPos) :m_color{ color }, m_PieseId{ id }, m_currPos{ currPos }, m_nextPos{ nextPos }{}
