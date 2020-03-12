@@ -36,6 +36,37 @@ void printLogo()
 
 };
 
+void printBoard(Board* board) {
+	std::cout << termcolor::green << "   _______________" << std::endl;
+	for (int i = 0; i < 8; i++) {
+		std::cout << termcolor::green << 8 - i << " |" << termcolor::white; //Board is zero-indexed, while the chess game is flipped and has 1 at the bottom
+		for (int j = 0; j < 8; j++) {
+			Position tempPos{i, j};
+			Piece* tempPiece;
+			if ((tempPiece = board->getPiece(tempPos)) != nullptr) {
+
+				if (tempPiece->getColor() == Color::Black)
+					std::cout << termcolor::blue;
+				std::cout << tempPiece->getId();
+				std::cout << termcolor::white;
+
+				if (j < 8 - 1)
+					std::cout << " ";
+			}
+			else {
+				std::cout << ".";
+				if (j < 8 - 1)
+					std::cout << " ";
+			}
+		}
+		std::cout << termcolor::green << '|';
+		std::cout << '\n';
+	}
+	std::cout << termcolor::green << "   _______________" << std::endl;
+	std::cout << "   A B C D E F G H" << termcolor::white << std::endl;
+
+};
+
 void printWinner(string name) {
     cout << "\n##################################   ";
     cout <<    name << " won the game!";

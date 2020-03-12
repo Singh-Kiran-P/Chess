@@ -12,9 +12,8 @@ public:
 	Game(bool vsAI);
 	~Game();
 
-	void nextturn();
-	Player* currentPlayer();
-	void run();
+		void nextturn() ;
+		void run();
 
 private:
 	Board m_board;

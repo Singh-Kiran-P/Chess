@@ -31,8 +31,8 @@ Game::Game(bool vsAI) {
 		color2 = Color::White;
 	}
 
-	if (name1 == "AI2")
-		m_player1 = new AIPlayer{ name1, color1,m_board };
+	if (name1 == "AI2")
+		m_player1 = new AIPlayer{ name1, color1,m_board };
 
 	else
 		m_player1 = new HumanPlayer{ name1, color1 };
@@ -68,53 +68,45 @@ void Game::nextturn() {
 		m_turn = m_player2;
 	else
 		m_turn = m_player1;
+};
+
+//Player* Game::currentPlayer() {
+//	return m_turn;
+//};
+
+void Game::run() {
+	bool win;
+
+	// Creates the board and places the pawns
+	printBoard(&m_board);
+
+	Position curr{};
+	Position next{};
+
+	do {
+		std::cout << "It's " << m_turn->name() << "'s turn" << std::endl;
+		do {
+
+			curr = m_turn->moveFrom(m_turn->color());
+			next = m_turn->moveTo(curr, m_turn->color());
+
+		} while (!m_board.move(curr, next, m_turn)); // If a move is invalid, a turn isn't skipped
+
+		clearScreen();
+
+		printBoard(&m_board);
+		if ((win = m_board.checkWin()) == false){
+			this->nextturn();
+			char id = m_board.getPiece(next)->getId();
+			Color color = m_board.getPiece(next)->getColor();
+			m_moves.addMove(id, color, curr, next);
+		}
+		else
+			InvalidMove(m_turn);
+
+
+	} while (win == false); //as long as no one has won, ask the next player for their move
+
+	printWinner((m_turn)->name());
 };
-
-Player* Game::currentPlayer() {
-	return m_turn;
-};
-
-void Game::run() {
-	bool win;
-
-	// Creates the board and places the pawns
-	m_board.printBoard();
-
-	Position curr{};
-	Position next{};
-
-	do {
-		std::cout << "It's " << (this->currentPlayer())->name() << "'s turn" << std::endl;
-		do {
-
-			curr = currentPlayer()->moveFrom(currentPlayer()->color());
-			next = currentPlayer()->moveTo(curr, currentPlayer()->color());
-
-		} while (!m_board.move(curr, next, (this->currentPlayer()))); // If a move is invalid, a turn isn't skipped
-
-		clearScreen();
-
-
-		m_board.printBoard();
-		if ((win = m_board.checkWin()) == false) {
-			this->nextturn();
-			char id = m_board.getPiece(next)->getId();
-			Color color = m_board.getPiece(next)->getColor();
-			m_moves.addMove(id, color, curr, next);
-		}
-
-
-	} while (win == false); //as long as no one has won, ask the next player for their move
-
-	printWinner((this->currentPlayer())->name());
-	cout << "Show Logs (y,n)";
-	char res;
-	cin >> res;
-	if (res=='y')
-	{
-		m_moves.print();
-
-	}
-
-};
-
+
