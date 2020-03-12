@@ -26,20 +26,22 @@ void Board::changePawn(Pawn* p)
 }
 
 bool Board::checkWin() {
-	/*int KingCount{ 0 };*/
 
 	Piece* WhiteKing{ FindKing(Color::White) };
 	Piece* BlackKing{ FindKing(Color::Black) };
 
+	if (WhiteKing == nullptr || BlackKing == nullptr)
+		return true;
+
 	Piece* CheckedKing{ nullptr };
 	if (!SafePos(WhiteKing, WhiteKing->getPos())) {
 		CheckedKing = WhiteKing;
-		cout << termcolor::red << "\nCheck White King\n" << termcolor::reset << endl;
+		cout << termcolor::red << "Check White King\n" << termcolor::reset << endl;
 
 	}
 	else if (!SafePos(BlackKing, BlackKing->getPos())) {
 		CheckedKing = BlackKing;
-		cout <<termcolor::red<< "\nCheck Black King\n" << termcolor::reset<< endl;
+		cout <<termcolor::red<< "Check Black King\n" << termcolor::reset<< endl;
 	}
 
 	if (CheckedKing == nullptr)
@@ -55,12 +57,12 @@ bool Board::checkWin() {
 					PossibleMove.setpos(curr_x + i, curr_y + j);
 					if (SafePos(CheckedKing, PossibleMove)) { // Checks if king can move out of check
 						if ((m_board[curr_x + i][curr_y + j] == nullptr || m_board[curr_x + i][curr_y + j]->getColor() != CheckedKing->getColor()))
-							cout << termcolor::red << "\nCheckmate\n" << termcolor::reset << endl;
 							return false;
 					}
 				}
 			}
 		}
+		cout << termcolor::red << "Checkmate\n" << termcolor::reset << endl;
 		return true;
 	}
 };
@@ -100,8 +102,6 @@ bool Board::move(Position current, Position next, Player* player) {
 	bool PossibleWalk{ true };
 	if (movingpiece->getId() != 'N')
 		PossibleWalk = noBlockers(current, next);
-	if (movingpiece->getId() == 'K')
-		PossibleWalk = SafePos(movingpiece, next);
 
 	if (PossibleWalk && movingpiece->moveRestrictions(nextpiece, next)) {
 		m_board[next.getx()][next.gety()] = movingpiece;
@@ -130,8 +130,7 @@ bool Board::move(Position current, Position next, Player* player) {
 		}
 	}
 
-	if (auto* playertype = dynamic_cast<HumanPlayer*>(player))
-		return InvalidMove(player);
+	return InvalidMove(player);
 }
 
 
