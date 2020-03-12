@@ -92,7 +92,7 @@ void Game::run() {
 		if ((win = m_board.checkWin()) == false)
 			this->nextturn();
 
-		m_moves.addMove(m_board.getPiece(next)->getId();, _board.getPiece(next)->getColor();, curr, next);
+		m_moves.addMove(m_board.getPiece(next)->getId(), m_board.getPiece(next)->getColor(), curr, next);
 
 	} while (win == false); //as long as no one has won, ask the next player for their move
 	printWinner((m_turn)->name());
