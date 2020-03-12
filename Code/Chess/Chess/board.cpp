@@ -73,11 +73,18 @@ bool Board::SafePos(Piece* movingpiece, Position next) {
 	for (int i = 0; i < SIZE_BOARD; i++) {
 		for (int j = 0; j < SIZE_BOARD; j++) {
 			if (m_board[i][j] != nullptr && m_board[i][j]->getColor() != movingpiece->getColor()) {
-				if (m_board[i][j]->moveRestrictions(movingpiece, next) && noBlockers(m_board[i][j]->getPos(), next)) //Checks if any enenmy piece can take the king's next position
-					return false;
+				if (m_board[i][j]->moveRestrictions(movingpiece, next)) { //Checks if any enenmy piece can take the king's next position
+					if (m_board[i][j]->getId() != 'N') {
+						if (noBlockers(m_board[i][j]->getPos(), next))
+							return false;
+					}
+					else
+						return false;
+				}
 			}
 		}
 	}
+
 	return true;
 };
 
