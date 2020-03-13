@@ -40,13 +40,30 @@ bool Board::checkWin() {
 	if (CheckedKing != nullptr) {
 		int curr_x = (CheckedKing->getPos()).getx();
 		int curr_y = (CheckedKing->getPos()).gety();
+		Piece* takenPiece{};
 		Position PossibleMove{};
+		Position KingPos{};
+		bool SafeMove{};
+
 		for (int i = -1; i < 2; i++) {
 			for (int j = -1; j < 2; j++) {
 				if ((i != 0 || j != 0) && 0 <= curr_x + i && curr_x + i < SIZE_BOARD && 0 <= curr_y + j && curr_y + j < SIZE_BOARD) {
-					PossibleMove.setpos(curr_x + i, curr_y + j);
-						if (SafePos(CheckedKing, PossibleMove)) { // Checks if king can move out of check
-						if ((m_board[curr_x + i][curr_y + j] == nullptr || m_board[curr_x + i][curr_y + j]->getColor() != CheckedKing->getColor()))
+					if ((m_board[curr_x + i][curr_y + j] == nullptr || m_board[curr_x + i][curr_y + j]->getColor() != CheckedKing->getColor())) {
+
+						PossibleMove.setpos(curr_x + i, curr_y + j);
+						takenPiece = m_board[curr_x + i][curr_y + j];
+						m_board[curr_x + i][curr_y + j] = CheckedKing;
+						m_board[curr_x][curr_y] = nullptr;
+						KingPos = CheckedKing->getPos();
+						CheckedKing->setPos(PossibleMove);
+
+						SafeMove = SafePos(CheckedKing, PossibleMove); // Checks if king can move out of check
+						
+						m_board[curr_x + i][curr_y + j] = takenPiece;
+						m_board[curr_x][curr_y] = CheckedKing;
+						CheckedKing->setPos(KingPos);
+
+						if (SafeMove)
 							return false;
 					}
 				}
@@ -168,7 +185,8 @@ Board::Board() {
 
 	for (int i = 0; i < SIZE_BOARD; i++) {
 		for (int j = 0; j < SIZE_BOARD; j++) {
-					if (i <= 1) {
+
+			if (i <= 1) {
 				tempPos.setpos(i, j);
 				PieceColor = Color::Black; // top of board is black
 			}
@@ -176,14 +194,12 @@ Board::Board() {
 				tempPos.setpos(i, j);
 				PieceColor = Color::White; // bottom of board is white
 			}
-
 			if (i == 1 || i == 6) {
 				p_ptr = new Pawn{ 'P', PieceColor, tempPos };
 				m_board[i][j] = p_ptr;
 			}
 			else if (i == 0 || i == 7) {
-
-				if (j == 0 || j == 7) // Rooks
+					if (j == 0 || j == 7) // Rooks
 					p_ptr = new Rook{ 'R', PieceColor, tempPos };
 				else if (j == 1 || j == 6) //Knight
 					p_ptr = new Knight{ 'N', PieceColor, tempPos };
