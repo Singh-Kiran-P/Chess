@@ -13,6 +13,7 @@ using namespace std;
 bool checkChoice();
 void printLogo();
 void printBoard(Board* board);
-void printWinner(std::string name);
+void printWinner(Player* player);
+bool checkInput(string inputStr);
 void clearScreen();
 bool InvalidMove(Player* player);

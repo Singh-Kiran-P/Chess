@@ -1,17 +1,13 @@
 #include "board.h"
 
 void Board::changePawn(Pawn* p) {
-
 	Position posP = p->getPos();
+	delete p;
 
 	if (p->getColor() == Color::Black) {
-		delete p;
-
 		m_board[posP.getx()][posP.gety()] = new Queen('Q', Color::Black, posP);
-
 	}
 	else {
-		delete p;
 		m_board[posP.getx()][posP.gety()] = new Queen('Q', Color::White, posP);
 	}
 };
@@ -58,7 +54,7 @@ bool Board::checkWin() {
 						CheckedKing->setPos(PossibleMove);
 
 						SafeMove = SafePos(CheckedKing, PossibleMove); // Checks if king can move out of check
-						
+
 						m_board[curr_x + i][curr_y + j] = takenPiece;
 						m_board[curr_x][curr_y] = CheckedKing;
 						CheckedKing->setPos(KingPos);
@@ -90,7 +86,6 @@ bool Board::SafePos(Piece* movingpiece, Position next) {
 			}
 		}
 	}
-
 	return true;
 };
 
@@ -110,11 +105,11 @@ bool Board::move(Position current, Position next, Player* player) {
 	Piece* movingpiece = m_board[current.getx()][current.gety()];
 	Piece* nextpiece = m_board[next.getx()][next.gety()];
 
-	if (movingpiece == nullptr || movingpiece->getColor() != player->color()) // A piece must be selected to move it
+	if (movingpiece == nullptr || movingpiece->getColor() != player->color()) // A valid piece must be selected to move it
 		return false;
 
 	bool PossibleWalk{ true };
-	if (movingpiece->getId() != 'N')
+	if (movingpiece->getId() != 'N') // Only knights can ignore blockers
 		PossibleWalk = noBlockers(current, next);
 
 	if (PossibleWalk && movingpiece->moveRestrictions(nextpiece, next)) {
@@ -124,34 +119,32 @@ bool Board::move(Position current, Position next, Player* player) {
 
 		Piece* TeamKing = FindKing(movingpiece->getColor());
 		if (TeamKing == nullptr || !SafePos(TeamKing, TeamKing->getPos())) { // A move that puts the king in check is illegal
-			m_board[current.getx()][current.gety()] = movingpiece;
+			m_board[current.getx()][current.gety()] = movingpiece;	// move gets undone
 			m_board[next.getx()][next.gety()] = nextpiece;
 			movingpiece->setPos(current);
 			return false;
 		}
 		else {
-			if (auto* i = dynamic_cast<Pawn*>(movingpiece))
-				i->increaseTurnCount();
-
-			if (nextpiece != nullptr)
-				if (player->color() == Color::Black)
-					m_whitePieceCount--;
-				else
-					m_blackPieceCount--;
-			delete nextpiece;
 			if (auto* i = dynamic_cast<Pawn*>(movingpiece)) {
 				i->increaseTurnCount();
 				if (i->getPos().getx() == SIZE_BOARD - 1 || i->getPos().getx() == 0)
 					changePawn(i);
 			}
+
+			if (nextpiece != nullptr) {
+				if (player->color() == Color::Black)
+					m_whitePieceCount--;
+				else
+					m_blackPieceCount--;
+			}
+			delete nextpiece;
 			return true;
 		}
 	}
-
 	return false;
 };
 
-bool Board::noBlockers(Position current, Position next) const {
+bool Board::noBlockers(Position current, Position next) const { // Checks every position between current and next for pieces
 	int curr_x{ current.getx() };
 	int curr_y{ current.gety() };
 	int next_x{ next.getx() };

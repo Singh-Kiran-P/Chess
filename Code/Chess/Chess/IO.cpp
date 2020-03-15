@@ -37,54 +37,65 @@ void printLogo()
 };
 
 void printBoard(Board* board) {
-	std::cout << termcolor::green << "   _______________" << std::endl;
+	cout << termcolor::green << "   _______________" << endl;
 	for (int i = 0; i < 8; i++) {
-		std::cout << termcolor::green << 8 - i << " |" << termcolor::white; //Board is zero-indexed, while the chess game is flipped and has 1 at the bottom
+		cout << termcolor::green << 8 - i << " |" << termcolor::white; //Board is zero-indexed, while the chess game is flipped and has 1 at the bottom
 		for (int j = 0; j < 8; j++) {
 			Position tempPos{i, j};
 			Piece* tempPiece;
 			if ((tempPiece = board->getPiece(tempPos)) != nullptr) {
 
 				if (tempPiece->getColor() == Color::Black)
-					std::cout << termcolor::blue;
-				std::cout << tempPiece->getId();
-				std::cout << termcolor::white;
+					cout << termcolor::blue;
+				cout << tempPiece->getId();
+				cout << termcolor::white;
 
 				if (j < 8 - 1)
-					std::cout << " ";
+					cout << " ";
 			}
 			else {
-				std::cout << ".";
+				cout << ".";
 				if (j < 8 - 1)
-					std::cout << " ";
+					cout << " ";
 			}
 		}
-		std::cout << termcolor::green << '|';
-		std::cout << '\n';
+		cout << termcolor::green << '|';
+		cout << '\n';
 	}
-	std::cout << termcolor::green << "   _______________" << std::endl;
-	std::cout << "   A B C D E F G H" << termcolor::white << std::endl;
+	cout << termcolor::green << "   _______________" << endl;
+	cout << "   A B C D E F G H" << termcolor::white << endl;
 
 };
 
-void printWinner(string name) {
-    cout << "\n##################################   ";
-    cout <<    name << " won the game!";
-    cout << "   ##################################\n" << endl;
-    cin;
+bool checkInput(string inputStr) {
+	try {
+		char letter = inputStr[0];
+		int num = stoi(inputStr.substr(1)) - 1; //input value must be of the form CHARINT
+		if (('A' <=  letter <= 'H') && (1 <= num <= 8)) //input value must be between A1 and H8
+			return true;
+	}
+	catch (const exception&) {
+		cout << termcolor::red << "Invaild input" << termcolor::white<<endl;
+	}
+	return false;
+};
 
+void printWinner(Player* player) {
+    cout << "##################################  ";
+    cout <<    player->name() << " won the game!";
+    cout << "  ##################################\n" << endl;
 };
 
 void clearScreen() {
 #ifdef _WIN32
-    std::system("cls");
+    system("cls");
 #else
-    std::system ("clear");
+    system ("clear");
 #endif
 };
 
 bool InvalidMove(Player* player) {
 	if (auto* playertype = dynamic_cast<HumanPlayer*>(player)) // Only print this error message when a player causes it
-		std::cout << termcolor::red << "Invalid move" << termcolor::white << std::endl;
+		cout << termcolor::red << "Invalid move" << termcolor::white << endl;
 	return false;
 };

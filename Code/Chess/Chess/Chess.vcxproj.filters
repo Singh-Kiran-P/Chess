@@ -96,6 +96,9 @@
     <ClInclude Include="moves.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
+    <ClInclude Include="move.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -144,6 +147,9 @@
       <Filter>Source Files\Pieces</Filter>
     </ClCompile>
     <ClCompile Include="moves.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="move.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
   </ItemGroup>

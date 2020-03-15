@@ -1,5 +1,4 @@
 #include "game.h"
-#include "io.h"
 using namespace std;
 
 Game::Game(bool vsAI) {
@@ -14,8 +13,6 @@ Game::Game(bool vsAI) {
 	}
 	else
 		name2 = "AI";
-
-	clearScreen();
 
 	Color color1{};
 	Color color2{};
@@ -33,19 +30,13 @@ Game::Game(bool vsAI) {
 
 	if (name1 == "AI2")
 		m_player1 = new AIPlayer{ name1, color1,m_board };
-
 	else
 		m_player1 = new HumanPlayer{ name1, color1 };
 
-
-	if (!vsAI) {
+	if (!vsAI)
 		m_player2 = new HumanPlayer{ name2, color2 };
-	}
-	else {
+	else
 		m_player2 = new AIPlayer{ name2, color2, m_board };
-	}
-
-
 
 	if (coinflip == 1) {
 		cout << m_player1->name() << " is white, " << m_player2->name() << " is black." << endl;
@@ -69,16 +60,19 @@ void Game::nextturn() {
 	else
 		m_turn = m_player1;
 };
+
 void Game::run() {
 	bool win{};
 	bool validmove{};
+
+	clearScreen();
 
 	// Creates the board and places the pawns
 	printBoard(&m_board);
 	Position curr{};
 	Position next{};
 	do {
-		std::cout << "It's " << m_turn->name() << "'s turn" << std::endl;
+		cout << "It's " << m_turn->name() << "'s turn" << endl;
 		do {
 			curr = m_turn->moveFrom(m_turn->color());
 			next = m_turn->moveTo(curr, m_turn->color());
@@ -91,15 +85,16 @@ void Game::run() {
 		printBoard(&m_board);
 		if ((win = m_board.checkWin()) == false)
 			this->nextturn();
-
 		m_moves.addMove(m_board.getPiece(next)->getId(), m_board.getPiece(next)->getColor(), curr, next);
 
 	} while (win == false); //as long as no one has won, ask the next player for their move
-	printWinner((m_turn)->name());
-	cout << "Show Logs (y,n)";
-	char res;
-	cin >> res;
-	if (res == 'y')
-		m_moves.print();
+
+	printWinner(m_turn);
+	char res{};
+	do {
+		cout << "Show Logs? (y,n)";
+		cin >> res;
+		if (res == 'y')
+			m_moves.print();
+	} while (res != 'y' && res != 'n');
 };
-
