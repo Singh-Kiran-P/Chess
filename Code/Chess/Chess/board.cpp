@@ -2,7 +2,6 @@
 
 void Board::changePawn(Pawn* p) {
 	Position posP = p->getPos();
-	delete p;
 
 	if (p->getColor() == Color::Black) {
 		m_board[posP.getx()][posP.gety()] = new Queen('Q', Color::Black, posP);
@@ -10,6 +9,7 @@ void Board::changePawn(Pawn* p) {
 	else {
 		m_board[posP.getx()][posP.gety()] = new Queen('Q', Color::White, posP);
 	}
+	delete p;
 };
 
 bool Board::checkWin() {
@@ -125,10 +125,11 @@ bool Board::move(Position current, Position next, Player* player) {
 			return false;
 		}
 		else {
-			if (auto* i = dynamic_cast<Pawn*>(movingpiece)) {
-				i->increaseTurnCount();
-				if (i->getPos().getx() == SIZE_BOARD - 1 || i->getPos().getx() == 0)
-					changePawn(i);
+			if (movingpiece->getId() == 'P') {
+				Pawn* pawn = (Pawn*)movingpiece;
+				pawn->increaseTurnCount();
+				if (pawn->getPos().getx() == SIZE_BOARD - 1 || pawn->getPos().getx() == 0)
+					changePawn(pawn);
 			}
 
 			if (nextpiece != nullptr) {
