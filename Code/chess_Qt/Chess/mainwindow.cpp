@@ -4,9 +4,9 @@
 Piece::Piece(QColor color) {
     QString path;
     if (color == Qt::white)
-        path = ":/images/white.png";
+        path = ":/images/white/pawn.png";
     else if (color == Qt::black)
-        path = ":/images/black.png";
+        path = ":/images/black/pawn.png";
 
     QPixmap pawn(path);
     setPixmap(pawn);
