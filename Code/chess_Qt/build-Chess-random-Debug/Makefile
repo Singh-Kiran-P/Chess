@@ -275,6 +275,7 @@ Makefile: ..\Chess\Chess.pro C:\Qt\5.14.1\msvc2017_64\mkspecs\win32-msvc\qmake.c
 		C:\Qt\5.14.1\msvc2017_64\lib\Qt5Core.prl \
 		C:\Qt\5.14.1\msvc2017_64\lib\qtmain.prl \
 		C:\Qt\5.14.1\msvc2017_64\mkspecs\features\build_pass.prf \
+		..\Chess\resource.qrc \
 		C:\Qt\5.14.1\msvc2017_64\lib\Qt5Widgetsd.prl \
 		C:\Qt\5.14.1\msvc2017_64\lib\Qt5Guid.prl \
 		C:\Qt\5.14.1\msvc2017_64\lib\Qt5Cored.prl \
@@ -471,6 +472,7 @@ C:\Qt\5.14.1\msvc2017_64\lib\Qt5Gui.prl:
 C:\Qt\5.14.1\msvc2017_64\lib\Qt5Core.prl:
 C:\Qt\5.14.1\msvc2017_64\lib\qtmain.prl:
 C:\Qt\5.14.1\msvc2017_64\mkspecs\features\build_pass.prf:
+..\Chess\resource.qrc:
 C:\Qt\5.14.1\msvc2017_64\lib\Qt5Widgetsd.prl:
 C:\Qt\5.14.1\msvc2017_64\lib\Qt5Guid.prl:
 C:\Qt\5.14.1\msvc2017_64\lib\Qt5Cored.prl:

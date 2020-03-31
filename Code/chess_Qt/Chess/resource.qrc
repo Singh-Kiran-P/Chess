@@ -1,2 +1,16 @@
-<!DOCTYPE RCC>
-<RCC version="1.0"/>
+<RCC>
+    <qresource prefix="/">
+        <file>images/black/bisshop.png</file>
+        <file>images/black/king.png</file>
+        <file>images/black/knight.png</file>
+        <file>images/black/pawn.png</file>
+        <file>images/black/queen.png</file>
+        <file>images/black/rook.png</file>
+        <file>images/white/bisshop.png</file>
+        <file>images/white/king.png</file>
+        <file>images/white/knight.png</file>
+        <file>images/white/pawn.png</file>
+        <file>images/white/queen.png</file>
+        <file>images/white/rook.png</file>
+    </qresource>
+</RCC>
