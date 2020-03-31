@@ -72,6 +72,7 @@ void Game::run() {
 	Position next{};
 	do {
 		cout << "It's " << m_turn->name() << "'s turn" << endl;
+        m_turn->GenerateMoves();
 		do {
             tuple<Position, Position> currMove = m_turn->getMove();
 

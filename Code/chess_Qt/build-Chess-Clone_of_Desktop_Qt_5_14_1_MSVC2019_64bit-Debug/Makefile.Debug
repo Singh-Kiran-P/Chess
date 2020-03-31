@@ -238,14 +238,14 @@ debug\qrc_resource.cpp: ..\Chess\resource.qrc \
 		..\Chess\images\white\knight.png \
 		..\Chess\images\white\pawn.png \
 		..\Chess\images\white\queen.png \
-		..\Chess\images\white\bisshop.png \
 		..\Chess\images\white\rook.png \
+		..\Chess\images\white\bishop.png \
 		..\Chess\images\black\king.png \
 		..\Chess\images\black\knight.png \
 		..\Chess\images\black\pawn.png \
 		..\Chess\images\black\queen.png \
-		..\Chess\images\black\bisshop.png \
-		..\Chess\images\black\rook.png
+		..\Chess\images\black\rook.png \
+		..\Chess\images\black\bishop.png
 	C:\Qt\5.14.1\msvc2017_64\bin\rcc.exe -name resource ..\Chess\resource.qrc -o debug\qrc_resource.cpp
 
 compiler_moc_predefs_make_all: debug\moc_predefs.h
@@ -412,8 +412,47 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 
 ####### Compile
 
-debug\AIPlayer.obj: ..\Chess\AIPlayer.cpp ..\Chess\AIPlayer.h \
+debug\AIPlayer.obj: ..\Chess\AIPlayer.cpp ..\Chess\AIplayer.h \
 		..\Chess\player.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\Qvector \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qvector.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qalgorithms.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qglobal.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qconfig-bootstrapped.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qconfig.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qtcore-config.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qsystemdetection.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qprocessordetection.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qcompilerdetection.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qtypeinfo.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qsysinfo.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qlogging.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qflags.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qatomic.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qbasicatomic.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qatomic_bootstrap.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qgenericatomic.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qatomic_cxx11.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qatomic_msvc.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qglobalstatic.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qmutex.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qnumeric.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qversiontagging.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qiterator.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qrefcount.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qarraydata.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qhashfunctions.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qstring.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qchar.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qbytearray.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qnamespace.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qstringliteral.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qstringalgorithms.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qstringview.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qstringbuilder.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qpair.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qcontainertools_impl.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qpoint.h \
 		..\Chess\position.h \
 		..\Chess\color.h \
 		..\Chess\board.h \
@@ -428,14 +467,12 @@ debug\AIPlayer.obj: ..\Chess\AIPlayer.cpp ..\Chess\AIPlayer.h \
 debug\bishop.obj: ..\Chess\bishop.cpp ..\Chess\bishop.h \
 		..\Chess\piece.h \
 		..\Chess\position.h \
-		..\Chess\player.h \
 		..\Chess\color.h
 
 debug\board.obj: ..\Chess\board.cpp ..\Chess\board.h \
 		..\Chess\pawn.h \
 		..\Chess\piece.h \
 		..\Chess\position.h \
-		..\Chess\player.h \
 		..\Chess\color.h \
 		..\Chess\rook.h \
 		..\Chess\king.h \
@@ -446,9 +483,47 @@ debug\board.obj: ..\Chess\board.cpp ..\Chess\board.h \
 debug\game.obj: ..\Chess\game.cpp ..\Chess\game.h \
 		..\Chess\humanplayer.h \
 		..\Chess\player.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\Qvector \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qvector.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qalgorithms.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qglobal.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qconfig-bootstrapped.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qconfig.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qtcore-config.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qsystemdetection.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qprocessordetection.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qcompilerdetection.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qtypeinfo.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qsysinfo.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qlogging.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qflags.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qatomic.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qbasicatomic.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qatomic_bootstrap.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qgenericatomic.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qatomic_cxx11.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qatomic_msvc.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qglobalstatic.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qmutex.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qnumeric.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qversiontagging.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qiterator.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qrefcount.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qarraydata.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qhashfunctions.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qstring.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qchar.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qbytearray.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qnamespace.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qstringliteral.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qstringalgorithms.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qstringview.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qstringbuilder.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qpair.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qcontainertools_impl.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qpoint.h \
 		..\Chess\position.h \
 		..\Chess\color.h \
-		..\Chess\aiplayer.h \
 		..\Chess\board.h \
 		..\Chess\pawn.h \
 		..\Chess\piece.h \
@@ -457,24 +532,70 @@ debug\game.obj: ..\Chess\game.cpp ..\Chess\game.h \
 		..\Chess\queen.h \
 		..\Chess\knight.h \
 		..\Chess\bishop.h \
+		..\Chess\aiplayer.h \
 		..\Chess\moves.h \
 		..\Chess\move.h
 
 debug\humanplayer.obj: ..\Chess\humanplayer.cpp ..\Chess\humanplayer.h \
 		..\Chess\player.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\Qvector \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qvector.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qalgorithms.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qglobal.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qconfig-bootstrapped.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qconfig.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qtcore-config.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qsystemdetection.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qprocessordetection.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qcompilerdetection.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qtypeinfo.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qsysinfo.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qlogging.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qflags.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qatomic.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qbasicatomic.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qatomic_bootstrap.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qgenericatomic.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qatomic_cxx11.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qatomic_msvc.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qglobalstatic.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qmutex.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qnumeric.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qversiontagging.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qiterator.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qrefcount.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qarraydata.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qhashfunctions.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qstring.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qchar.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qbytearray.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qnamespace.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qstringliteral.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qstringalgorithms.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qstringview.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qstringbuilder.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qpair.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qcontainertools_impl.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qpoint.h \
 		..\Chess\position.h \
-		..\Chess\color.h
+		..\Chess\color.h \
+		..\Chess\board.h \
+		..\Chess\pawn.h \
+		..\Chess\piece.h \
+		..\Chess\rook.h \
+		..\Chess\king.h \
+		..\Chess\queen.h \
+		..\Chess\knight.h \
+		..\Chess\bishop.h
 
 debug\king.obj: ..\Chess\king.cpp ..\Chess\king.h \
 		..\Chess\piece.h \
 		..\Chess\position.h \
-		..\Chess\player.h \
 		..\Chess\color.h
 
 debug\knight.obj: ..\Chess\knight.cpp ..\Chess\knight.h \
 		..\Chess\piece.h \
 		..\Chess\position.h \
-		..\Chess\player.h \
 		..\Chess\color.h
 
 debug\main.obj: ..\Chess\main.cpp ..\Chess\mainwindow.h \
@@ -757,7 +878,6 @@ debug\move.obj: ..\Chess\move.cpp ..\Chess\move.h \
 		..\Chess\board.h \
 		..\Chess\pawn.h \
 		..\Chess\piece.h \
-		..\Chess\player.h \
 		..\Chess\rook.h \
 		..\Chess\king.h \
 		..\Chess\queen.h \
@@ -771,7 +891,6 @@ debug\moves.obj: ..\Chess\moves.cpp ..\Chess\moves.h \
 		..\Chess\board.h \
 		..\Chess\pawn.h \
 		..\Chess\piece.h \
-		..\Chess\player.h \
 		..\Chess\rook.h \
 		..\Chess\king.h \
 		..\Chess\queen.h \
@@ -781,30 +900,73 @@ debug\moves.obj: ..\Chess\moves.cpp ..\Chess\moves.h \
 debug\pawn.obj: ..\Chess\pawn.cpp ..\Chess\pawn.h \
 		..\Chess\piece.h \
 		..\Chess\position.h \
-		..\Chess\player.h \
 		..\Chess\color.h
 
 debug\piece.obj: ..\Chess\piece.cpp ..\Chess\piece.h \
 		..\Chess\position.h \
-		..\Chess\player.h \
 		..\Chess\color.h
 
 debug\player.obj: ..\Chess\player.cpp ..\Chess\player.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\Qvector \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qvector.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qalgorithms.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qglobal.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qconfig-bootstrapped.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qconfig.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qtcore-config.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qsystemdetection.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qprocessordetection.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qcompilerdetection.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qtypeinfo.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qsysinfo.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qlogging.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qflags.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qatomic.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qbasicatomic.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qatomic_bootstrap.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qgenericatomic.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qatomic_cxx11.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qatomic_msvc.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qglobalstatic.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qmutex.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qnumeric.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qversiontagging.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qiterator.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qrefcount.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qarraydata.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qhashfunctions.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qstring.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qchar.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qbytearray.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qnamespace.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qstringliteral.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qstringalgorithms.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qstringview.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qstringbuilder.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qpair.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qcontainertools_impl.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qpoint.h \
 		..\Chess\position.h \
-		..\Chess\color.h
+		..\Chess\color.h \
+		..\Chess\board.h \
+		..\Chess\pawn.h \
+		..\Chess\piece.h \
+		..\Chess\rook.h \
+		..\Chess\king.h \
+		..\Chess\queen.h \
+		..\Chess\knight.h \
+		..\Chess\bishop.h
 
 debug\position.obj: ..\Chess\position.cpp ..\Chess\position.h
 
 debug\queen.obj: ..\Chess\queen.cpp ..\Chess\queen.h \
 		..\Chess\piece.h \
 		..\Chess\position.h \
-		..\Chess\player.h \
 		..\Chess\color.h
 
 debug\rook.obj: ..\Chess\rook.cpp ..\Chess\rook.h \
 		..\Chess\piece.h \
 		..\Chess\position.h \
-		..\Chess\player.h \
 		..\Chess\color.h
 
 debug\qrc_resource.obj: debug\qrc_resource.cpp 
