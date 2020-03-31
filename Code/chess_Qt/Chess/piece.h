@@ -1,6 +1,5 @@
 #pragma once
 #include "position.h"
-#include "player.h"
 #include "color.h"
 #include <iostream>
 

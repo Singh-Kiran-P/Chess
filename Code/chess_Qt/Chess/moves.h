@@ -8,5 +8,5 @@ class Moves {
 		void print();
 
 	private:
-		vector<Move> m_moves;
+        std::vector<Move> m_moves;
 };

@@ -29,14 +29,14 @@ Game::Game(bool vsAI) {
 	}
 
 	if (name1 == "AI2")
-		m_player1 = new AIPlayer{ name1, color1,m_board };
+        m_player1 = new AIPlayer{ name1, color1, &m_board };
 	else
-		m_player1 = new HumanPlayer{ name1, color1 };
+        m_player1 = new HumanPlayer{ name1, color1, &m_board };
 
 	if (!vsAI)
-		m_player2 = new HumanPlayer{ name2, color2 };
+        m_player2 = new HumanPlayer{ name2, color2, &m_board };
 	else
-		m_player2 = new AIPlayer{ name2, color2, m_board };
+        m_player2 = new AIPlayer{ name2, color2, &m_board };
 
 	if (coinflip == 1) {
 		cout << m_player1->name() << " is white, " << m_player2->name() << " is black." << endl;
@@ -73,17 +73,20 @@ void Game::run() {
 	do {
 		cout << "It's " << m_turn->name() << "'s turn" << endl;
 		do {
-			curr = m_turn->moveFrom(m_turn->color());
-			next = m_turn->moveTo(curr, m_turn->color());
-            if ((validmove = m_board.move(curr, next, m_turn)) == false){
+            tuple<Position, Position> currMove = m_turn->getMove();
+
+            curr = std::get<0>(currMove);
+            next = std::get<1>(currMove);
+            if ((validmove = m_board.Validmove(curr, next, m_turn->color())) == false){
 //				InvalidMove(m_turn);
             }
 
 		} while (!validmove); // If a move is invalid, a turn isn't skipped
+        m_board.move(curr, next);
 
 //		clearScreen();
 //		printBoard(&m_board);
-		if ((win = m_board.checkWin()) == false)
+        if (win = ((m_player1->numOfMoves() == 0) || (m_player2->numOfMoves() == 0)))
 			this->nextturn();
 		m_moves.addMove(m_board.getPiece(next)->getId(), m_board.getPiece(next)->getColor(), curr, next);
 

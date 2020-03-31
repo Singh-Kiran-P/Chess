@@ -1,32 +1,7 @@
 #include "humanplayer.h"
 
-Position HumanPlayer::moveFrom(Color playerColor) {
-//        std::string curr{};
-
-//        do {
-//            curr = "";
-//            std::cout << "Move which pawn? ";
-//            std::cin >> curr;
-//            curr[0] = toupper(curr[0]);
-//        } while (checkInput(curr) == false);
-
-
-        Position nextPos{"a0"};
-        return nextPos;
-};
-
-Position HumanPlayer::moveTo(Position currPos, Color playerColor) {
-//    std::string next{};
-
-//    do {
-//        next = "";
-//        std::cout << "To where? ";
-//        std::cin >> next;
-//        next[0] = toupper(next[0]);
-//    } while (checkInput(next) == false);
-
-    Position nextPos{"a0"};
-    return nextPos;
+tuple<Position, Position> HumanPlayer::getMove() {
+    return m_Possiblemoves[0]; // TEMP
 }
 
-HumanPlayer::HumanPlayer(string nameStr, Color color) : Player(nameStr, color) {};
+HumanPlayer::HumanPlayer(string nameStr, Color color, Board* board) : Player(nameStr, color, board) {};

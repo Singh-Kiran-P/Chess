@@ -12,20 +12,17 @@
 
 class Board {
 	public:
-
-		bool move(Position current, Position next, Player* player);
+        bool Validmove(Position current, Position next, Color playercolor);
+        void move(Position current, Position next);
 
 		void printBoard() const;
 		Piece* getPiece(Position p);
 
 
 		void changePawn(Pawn*);
-	    bool checkWin();
 
 		Board();
 		~Board();
-	protected:
-		bool winEndGame;
 
 	private:
 		static const int SIZE_BOARD = 8;

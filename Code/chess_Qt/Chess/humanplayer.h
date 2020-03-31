@@ -4,7 +4,7 @@
 
 class HumanPlayer : public Player {
     public:
-        Position moveFrom(Color playerColor);
-        Position moveTo(Position currPos, Color playerColor);
-        HumanPlayer(string nameStr, Color color);
+        tuple <Position, Position> getMove();
+
+        HumanPlayer(string nameStr, Color color, Board* board);
 };
