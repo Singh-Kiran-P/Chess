@@ -16,13 +16,46 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    AIPlayer.cpp \
+    bishop.cpp \
+    board.cpp \
+    game.cpp \
+    humanplayer.cpp \
+    king.cpp \
+    knight.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    move.cpp \
+    moves.cpp \
+    pawn.cpp \
+    piece.cpp \
+    player.cpp \
+    position.cpp \
+    queen.cpp \
+    rook.cpp
 
 HEADERS += \
-    mainwindow.h
+    AIplayer.h \
+    Game.h \
+    bishop.h \
+    board.h \
+    color.h \
+    humanplayer.h \
+    king.h \
+    knight.h \
+    mainwindow.h \
+    move.h \
+    moves.h \
+    pawn.h \
+    piece.h \
+    player.h \
+    position.h \
+    queen.h \
+    resource.h \
+    rook.h
 
 FORMS += \
+    mainwindow.ui \
     mainwindow.ui
 
 # Default rules for deployment.

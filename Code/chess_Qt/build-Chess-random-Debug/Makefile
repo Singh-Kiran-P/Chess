@@ -125,10 +125,14 @@ Makefile: ..\Chess\Chess.pro C:\Qt\5.14.1\msvc2017_64\mkspecs\win32-msvc\qmake.c
 		C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_bluetooth.pri \
 		C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_bluetooth_private.pri \
 		C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_bootstrap_private.pri \
+		C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_charts.pri \
+		C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_charts_private.pri \
 		C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_concurrent.pri \
 		C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_concurrent_private.pri \
 		C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_core.pri \
 		C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_core_private.pri \
+		C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_datavisualization.pri \
+		C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_datavisualization_private.pri \
 		C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_dbus.pri \
 		C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_dbus_private.pri \
 		C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_designer.pri \
@@ -216,6 +220,13 @@ Makefile: ..\Chess\Chess.pro C:\Qt\5.14.1\msvc2017_64\mkspecs\win32-msvc\qmake.c
 		C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_vulkan_support_private.pri \
 		C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_webchannel.pri \
 		C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_webchannel_private.pri \
+		C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_webengine.pri \
+		C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_webengine_private.pri \
+		C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_webenginecore.pri \
+		C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_webenginecore_private.pri \
+		C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_webenginecoreheaders_private.pri \
+		C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_webenginewidgets.pri \
+		C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_webenginewidgets_private.pri \
 		C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_websockets.pri \
 		C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_websockets_private.pri \
 		C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_webview.pri \
@@ -233,6 +244,7 @@ Makefile: ..\Chess\Chess.pro C:\Qt\5.14.1\msvc2017_64\mkspecs\win32-msvc\qmake.c
 		C:\Qt\5.14.1\msvc2017_64\mkspecs\features\qt_config.prf \
 		C:\Qt\5.14.1\msvc2017_64\mkspecs\win32-msvc\qmake.conf \
 		C:\Qt\5.14.1\msvc2017_64\mkspecs\features\spec_post.prf \
+		.qmake.stash \
 		C:\Qt\5.14.1\msvc2017_64\mkspecs\features\exclusive_builds.prf \
 		C:\Qt\5.14.1\msvc2017_64\mkspecs\common\msvc-version.conf \
 		C:\Qt\5.14.1\msvc2017_64\mkspecs\features\toolchain.prf \
@@ -262,7 +274,6 @@ Makefile: ..\Chess\Chess.pro C:\Qt\5.14.1\msvc2017_64\mkspecs\win32-msvc\qmake.c
 		C:\Qt\5.14.1\msvc2017_64\lib\Qt5Gui.prl \
 		C:\Qt\5.14.1\msvc2017_64\lib\Qt5Core.prl \
 		C:\Qt\5.14.1\msvc2017_64\lib\qtmain.prl \
-		.qmake.stash \
 		C:\Qt\5.14.1\msvc2017_64\mkspecs\features\build_pass.prf \
 		C:\Qt\5.14.1\msvc2017_64\lib\Qt5Widgetsd.prl \
 		C:\Qt\5.14.1\msvc2017_64\lib\Qt5Guid.prl \
@@ -310,10 +321,14 @@ C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_axserver_private.pri:
 C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_bluetooth.pri:
 C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_bluetooth_private.pri:
 C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_bootstrap_private.pri:
+C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_charts.pri:
+C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_charts_private.pri:
 C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_concurrent.pri:
 C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_concurrent_private.pri:
 C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_core.pri:
 C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_core_private.pri:
+C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_datavisualization.pri:
+C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_datavisualization_private.pri:
 C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_dbus.pri:
 C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_dbus_private.pri:
 C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_designer.pri:
@@ -401,6 +416,13 @@ C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_uitools_private.pri:
 C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_vulkan_support_private.pri:
 C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_webchannel.pri:
 C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_webchannel_private.pri:
+C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_webengine.pri:
+C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_webengine_private.pri:
+C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_webenginecore.pri:
+C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_webenginecore_private.pri:
+C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_webenginecoreheaders_private.pri:
+C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_webenginewidgets.pri:
+C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_webenginewidgets_private.pri:
 C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_websockets.pri:
 C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_websockets_private.pri:
 C:\Qt\5.14.1\msvc2017_64\mkspecs\modules\qt_lib_webview.pri:
@@ -418,6 +440,7 @@ C:\Qt\5.14.1\msvc2017_64\mkspecs\features\qt_functions.prf:
 C:\Qt\5.14.1\msvc2017_64\mkspecs\features\qt_config.prf:
 C:\Qt\5.14.1\msvc2017_64\mkspecs\win32-msvc\qmake.conf:
 C:\Qt\5.14.1\msvc2017_64\mkspecs\features\spec_post.prf:
+.qmake.stash:
 C:\Qt\5.14.1\msvc2017_64\mkspecs\features\exclusive_builds.prf:
 C:\Qt\5.14.1\msvc2017_64\mkspecs\common\msvc-version.conf:
 C:\Qt\5.14.1\msvc2017_64\mkspecs\features\toolchain.prf:
@@ -447,7 +470,6 @@ C:\Qt\5.14.1\msvc2017_64\lib\Qt5Widgets.prl:
 C:\Qt\5.14.1\msvc2017_64\lib\Qt5Gui.prl:
 C:\Qt\5.14.1\msvc2017_64\lib\Qt5Core.prl:
 C:\Qt\5.14.1\msvc2017_64\lib\qtmain.prl:
-.qmake.stash:
 C:\Qt\5.14.1\msvc2017_64\mkspecs\features\build_pass.prf:
 C:\Qt\5.14.1\msvc2017_64\lib\Qt5Widgetsd.prl:
 C:\Qt\5.14.1\msvc2017_64\lib\Qt5Guid.prl:
