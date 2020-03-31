@@ -11,6 +11,8 @@ std::string Player::name()const {
 void Player::GenerateMoves() {
     Position currpos;
     Position nextpos;
+
+    m_Possiblemoves.clear();
     for (int currentx = 0; currentx < 8; currentx++) {
         for (int currenty = 0; currenty < 8; currenty++) {
             for (int nextx = 0; nextx < 8; nextx++) {
