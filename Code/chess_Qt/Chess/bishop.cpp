@@ -23,4 +23,4 @@ bool Bishop::moveRestrictions(Piece* nextpiece, Position nextPos) {
 
 };
 
-Bishop::Bishop(char id, Color color, Position Pos) : Piece(id, color, Pos) {};
+Bishop::Bishop(char id, QColor color, Position Pos) : Piece(id, color, Pos) {};

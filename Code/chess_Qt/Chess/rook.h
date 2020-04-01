@@ -5,7 +5,7 @@ class Rook : public Piece {
 public:
 	bool moveRestrictions(Piece* nextpiece, Position nextPos);
 
-	Rook(char id, Color color, Position Pos);
+    Rook(char id, QColor color, Position Pos);
 private:
 
 };

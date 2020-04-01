@@ -3,11 +3,11 @@
 void Board::changePawn(Pawn* p) {
 	Position posP = p->getPos();
 
-	if (p->getColor() == Color::Black) {
-		m_board[posP.getx()][posP.gety()] = new Queen('Q', Color::Black, posP);
+    if (p->getColor() == Qt::black) {
+        m_board[posP.getx()][posP.gety()] = new Queen('Q', Qt::black, posP);
 	}
 	else {
-		m_board[posP.getx()][posP.gety()] = new Queen('Q', Color::White, posP);
+        m_board[posP.getx()][posP.gety()] = new Queen('Q', Qt::white, posP);
 	}
 	delete p;
 };
@@ -30,7 +30,7 @@ bool Board::SafePos(Piece* movingpiece, Position next) {
 	return true;
 };
 
-Piece* Board::FindKing(Color color) {
+Piece* Board::FindKing(QColor color) {
 	for (int i = 0; i < SIZE_BOARD; i++) {
 		for (int j = 0; j < SIZE_BOARD; j++) {
 			if (m_board[i][j] != nullptr && m_board[i][j]->getId() == 'K') {
@@ -42,18 +42,19 @@ Piece* Board::FindKing(Color color) {
 	return nullptr;
 };
 
-void Board::move(Position current, Position next) {
+void Board::move(Position current, Position next, bool realMove) {
     Piece* movingpiece = m_board[current.getx()][current.gety()];
 
 		m_board[next.getx()][next.gety()] = movingpiece;
 		m_board[current.getx()][current.gety()] = nullptr;
 		movingpiece->setPos(next);
-
+        if (realMove) {
         if (auto pawn = dynamic_cast<Pawn*>(movingpiece))
             pawn->increaseTurnCount();
+        }
 };
 
-bool Board::Validmove(Position current, Position next, Color playercolor) {
+bool Board::Validmove(Position current, Position next, QColor playercolor) {
     Piece* movingpiece = m_board[current.getx()][current.gety()];
     Piece* nextpiece = m_board[next.getx()][next.gety()];
 
@@ -114,7 +115,7 @@ Piece* Board::getPiece(Position p) {
 };
 
 Board::Board() {
-	Color PieceColor{};
+    QColor PieceColor{};
 	Position tempPos{};
 	Piece* p_ptr{};
 
@@ -123,11 +124,11 @@ Board::Board() {
 
 			if (i <= 1) {
 				tempPos.setpos(i, j);
-				PieceColor = Color::Black; // top of board is black
+                PieceColor = Qt::black; // top of board is black
 			}
 			else if (i >= 6) {
 				tempPos.setpos(i, j);
-				PieceColor = Color::White; // bottom of board is white
+                PieceColor = Qt::white; // bottom of board is white
 			}
 			if (i == 1 || i == 6) {
 				p_ptr = new Pawn{ 'P', PieceColor, tempPos };

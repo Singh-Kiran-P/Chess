@@ -1,9 +1,9 @@
 #include "move.h"
 
-Move::Move(char id, Color color, Position currPos, Position nextPos) : m_Id{ id }, m_color{ color }, m_currPos{ currPos }, m_nextPos { nextPos } {};
+Move::Move(char id, QColor color, Position currPos, Position nextPos) : m_Id{ id }, m_color{ color }, m_currPos{ currPos }, m_nextPos { nextPos } {};
 
-std::string Move::ColorToStr(Color color) {
-    if (color == Color::Black)
+std::string Move::ColorToStr(QColor color) {
+    if (color == Qt::black)
         return "(Black)";
     else
         return "(White)";

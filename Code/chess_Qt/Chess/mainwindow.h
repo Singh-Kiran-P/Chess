@@ -3,21 +3,12 @@
 #include <QDebug>
 #include <QMainWindow>
 
+#include "pieceview.h"
+#include "boardview.h"
+#include "tileview.h"
+
 #include <QGraphicsView>
 #include <QGraphicsScene>
-#include <QGraphicsRectItem>
-#include <QGraphicsSceneMouseEvent>
-#include <QGraphicsPixmapItem>
-
-class Piece : public QGraphicsPixmapItem {
-public:
-    Piece(QColor color);
-};
-
-class BoardView : public QGraphicsView {
-public:
-    BoardView();
-};
 
 class MainWindow : public QMainWindow
 {
@@ -25,24 +16,13 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
-    void BuildBoard();
-    void PlacePawns();
-    QGraphicsItem* getSelectedPawn();
+    bool eventFilter(QObject *target, QEvent *event);
 
 private:
     QGraphicsScene* scene;
     QGraphicsView* view;
-    QGraphicsItem* selectedpawn;
-
+    BoardView* m_board;
 };
 
-class Tile : public QGraphicsRectItem {
-public:
-    Tile(QColor color, QGraphicsScene* scene);
-    void mousePressEvent(QGraphicsSceneMouseEvent* event);
-
-private:
-    QGraphicsScene* scene;
-};
 
 #endif // MAINWINDOW_H

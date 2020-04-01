@@ -22,4 +22,4 @@ bool King::moveRestrictions(Piece* nextpiece, Position nextPos) {
 		return false;
 };
 
-King::King(char id, Color color, Position Pos) : Piece(id, color, Pos) {};
+King::King(char id, QColor color, Position Pos) : Piece(id, color, Pos) {};

@@ -6,5 +6,5 @@ class HumanPlayer : public Player {
     public:
         tuple <Position, Position> getMove();
 
-        HumanPlayer(string nameStr, Color color, Board* board);
+        HumanPlayer(QString nameStr, QColor color, Board* board);
 };

@@ -1,10 +1,11 @@
 #pragma once
 #include <vector>
 #include "move.h"
+#include <QColor>
 
 class Moves {
 	public:
-		void addMove(char id,Color color,Position curr,Position next);
+        void addMove(char id, QColor color, Position curr, Position next);
 		void print();
 
 	private:

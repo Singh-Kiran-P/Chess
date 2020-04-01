@@ -9,7 +9,7 @@ class Pawn : public Piece {
 
 		bool moveRestrictions(Piece* nextpiece, Position nextPos);
 
-		Pawn(char id, Color color, Position Pos);
+        Pawn(char id, QColor color, Position Pos);
 	private:
 		int m_turnCount = 0;
 };

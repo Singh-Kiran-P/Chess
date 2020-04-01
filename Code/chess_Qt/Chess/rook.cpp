@@ -22,4 +22,4 @@ bool Rook::moveRestrictions(Piece* nextpiece, Position nextPos) {
 		return false;
 };
 
-Rook::Rook(char id, Color color, Position Pos) :Piece(id, color, Pos) {};
+Rook::Rook(char id, QColor color, Position Pos) :Piece(id, color, Pos) {};

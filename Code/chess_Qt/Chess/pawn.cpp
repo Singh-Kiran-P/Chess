@@ -20,12 +20,12 @@ bool Pawn::moveRestrictions(Piece* nextpiece, Position nextPos) {
 		return false;
 
 	int max_delta_x{ 1 };
-	if (m_color == Color::White) {
+    if (m_color == Qt::white) {
 		if (next_x >= curr_x)
 			return false;
 	}
 
-	else if (m_color == Color::Black) {
+    else if (m_color == Qt::black) {
 		if (next_x <= curr_x)
 			return false;
 	}
@@ -52,4 +52,4 @@ bool Pawn::moveRestrictions(Piece* nextpiece, Position nextPos) {
 	return false;
 };
 
-Pawn::Pawn(char id, Color color, Position Pos) : Piece(id, color, Pos) {};
+Pawn::Pawn(char id, QColor color, Position Pos) : Piece(id, color, Pos) {};

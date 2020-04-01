@@ -12,8 +12,8 @@
 
 class Board {
 	public:
-        bool Validmove(Position current, Position next, Color playercolor);
-        void move(Position current, Position next);
+        bool Validmove(Position current, Position next, QColor playercolor);
+        void move(Position current, Position next, bool realMove = false);
 
 		void printBoard() const;
 		Piece* getPiece(Position p);
@@ -26,11 +26,9 @@ class Board {
 
 	private:
 		static const int SIZE_BOARD = 8;
-		int m_blackPieceCount = 16;
-		int m_whitePieceCount = 16;
 
 		Piece* m_board[SIZE_BOARD][SIZE_BOARD];
-		Piece* FindKing(Color color);
+        Piece* FindKing(QColor color);
 		bool SafePos(Piece* movingpiece, Position next);
 		bool noBlockers(Position current, Position next) const;
 

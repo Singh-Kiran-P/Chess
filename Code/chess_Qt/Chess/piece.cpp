@@ -1,6 +1,6 @@
 #include "piece.h"
 
-Color Piece::getColor() const {
+QColor Piece::getColor() const {
 	return m_color;
 };
 
@@ -16,4 +16,4 @@ char Piece::getId() {
 	return m_id;
 };
 
-Piece::Piece(char id, Color color, Position Pos) : m_id{ id }, m_color{ color }, m_position{ Pos } {};
+Piece::Piece(char id, QColor color, Position Pos) : m_id{ id }, m_color{ color }, m_position{ Pos } {};

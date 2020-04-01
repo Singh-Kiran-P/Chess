@@ -2,7 +2,7 @@
 #include <ctime>
 #include <iostream>
 #include "humanplayer.h"
-#include "aiplayer.h"
+#include "AIplayer.h"
 #include "board.h"
 #include "moves.h"
 #include "IO.h"

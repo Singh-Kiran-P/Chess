@@ -1,6 +1,6 @@
 #include "moves.h"
 
-void Moves::addMove(char id, Color color, Position curr, Position next) {
+void Moves::addMove(char id, QColor color, Position curr, Position next) {
 	Move m(id, color, curr, next);
 	m_moves.push_back(m);
 };

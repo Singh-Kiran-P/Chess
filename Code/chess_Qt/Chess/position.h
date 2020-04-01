@@ -1,5 +1,5 @@
 #pragma once
-#include <string>
+#include <QString>
 
 class Position {
     public:
@@ -9,11 +9,11 @@ class Position {
     char getYstr() const;
 
     void setpos(int x, int y);
-    void setpos(std::string pos);
+    void setpos(QString pos);
 
     Position() {};
     Position(int x, int y);
-    Position(std::string pos);
+    Position(QString pos);
 
     private:
         int m_xpos;

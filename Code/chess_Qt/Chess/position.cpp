@@ -23,12 +23,12 @@ void Position::setpos(int x, int y) {
 	m_ypos = y;
 };
 
-void Position::setpos(std::string pos)
+void Position::setpos(QString pos)
 {
-	m_ypos = (char)pos[0] - 'A';
-	m_xpos = SIZE_BOARD - (stoi(pos.substr(1)));
+    m_ypos = pos[0].unicode() - 'A';
+    m_xpos = SIZE_BOARD - (pos[1].digitValue());
 };
 
 Position::Position(int x, int y) : m_xpos{x}, m_ypos{y} {};
 
-Position::Position(std::string pos) : m_xpos{SIZE_BOARD - (stoi(pos.substr(1)))}, m_ypos{(char)pos[0] - 'A'} {};
+Position::Position(QString pos) : m_xpos{SIZE_BOARD - (pos[1]).digitValue()}, m_ypos{pos[0].unicode() - 'A'} {};

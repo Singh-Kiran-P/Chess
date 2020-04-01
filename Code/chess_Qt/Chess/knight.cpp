@@ -23,5 +23,5 @@ bool Knight::moveRestrictions(Piece* nextpiece, Position nextPos) {
 		return false;
 };
 
-Knight::Knight(char id, Color color, Position Pos) : Piece(id, color, Pos) {};
+Knight::Knight(char id, QColor color, Position Pos) : Piece(id, color, Pos) {};
 

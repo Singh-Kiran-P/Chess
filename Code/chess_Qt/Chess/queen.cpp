@@ -25,4 +25,4 @@ bool Queen::moveRestrictions(Piece* nextpiece, Position nextPos) {
 
 };
 
-Queen::Queen(char id, Color color, Position Pos) :Piece(id, color, Pos) {};
+Queen::Queen(char id, QColor color, Position Pos) :Piece(id, color, Pos) {};

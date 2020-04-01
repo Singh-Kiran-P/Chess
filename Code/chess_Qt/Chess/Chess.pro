@@ -19,6 +19,7 @@ SOURCES += \
     AIPlayer.cpp \
     bishop.cpp \
     board.cpp \
+    boardview.cpp \
     game.cpp \
     humanplayer.cpp \
     king.cpp \
@@ -29,17 +30,19 @@ SOURCES += \
     moves.cpp \
     pawn.cpp \
     piece.cpp \
+    pieceview.cpp \
     player.cpp \
     position.cpp \
     queen.cpp \
-    rook.cpp
+    rook.cpp \
+    tileview.cpp
 
 HEADERS += \
     AIplayer.h \
     Game.h \
     bishop.h \
     board.h \
-    color.h \
+    boardview.h \
     humanplayer.h \
     king.h \
     knight.h \
@@ -48,11 +51,13 @@ HEADERS += \
     moves.h \
     pawn.h \
     piece.h \
+    pieceview.h \
     player.h \
     position.h \
     queen.h \
     resource.h \
-    rook.h
+    rook.h \
+    tileview.h
 
 FORMS += \
     mainwindow.ui \

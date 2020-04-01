@@ -1,30 +1,30 @@
 #pragma once
-#include <string>
-#include <Qvector>
+#include <QString>
+#include <QList>
 #include <tuple>
 #include "position.h"
-#include "color.h"
+#include <QColor>
 #include "board.h"
 
 using namespace std;
 
 class Player {
     public:
-        Color color() const;
-        std::string name() const;
+        QColor color() const;
+        QString name() const;
 
         virtual tuple<Position, Position> getMove() = 0;
         void GenerateMoves();
         int numOfMoves() { return m_Possiblemoves.size(); }
 
-        Player(string nameStr, Color color, Board* board);
+        Player(QString nameStr, QColor color, Board* board);
 
     private:
-        string m_playername;
+        QString m_playername;
 
     protected:
-        Color m_color;
+        QColor m_color;
         Board* m_board;
-        QVector<tuple<Position, Position>> m_Possiblemoves;
+        QList<tuple<Position, Position>> m_Possiblemoves;
 
 };

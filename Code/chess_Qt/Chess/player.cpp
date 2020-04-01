@@ -1,10 +1,10 @@
 #include "player.h"
 
-Color Player::color() const{
+QColor Player::color() const{
     return m_color;
 };
 
-std::string Player::name()const {
+QString Player::name()const {
     return m_playername;
 };
 
@@ -20,11 +20,12 @@ void Player::GenerateMoves() {
                     currpos.setpos(currentx, currenty);
                     nextpos.setpos(nextx, nexty);
                     if (m_board->Validmove(currpos, nextpos, m_color))
-                        m_Possiblemoves.push_back(std::make_tuple(currpos, nextpos));
+                        m_Possiblemoves.push_back(tuple<Position, Position>{currpos, nextpos});
                 }
             }
         }
     }
 };
 
-Player::Player(string nameStr, Color color, Board* board) : m_playername{ nameStr }, m_color{ color }, m_board{board} {};
+Player::Player(QString nameStr, QColor color, Board* board) : m_playername{ nameStr }, m_color{ color }, m_board{board} {
+};
