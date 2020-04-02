@@ -1,7 +1,8 @@
 #include "AIplayer.h"
 
-tuple<Position, Position> AIPlayer::getMove() {
+tuple<Position, Position> AIPlayer::getMove()
+{
     return m_Possiblemoves[rand() % (m_Possiblemoves.size() - 1)];
 };
 
-AIPlayer::AIPlayer(QString nameStr, QColor color, Board* board) : Player(nameStr, color, board) {};
+AIPlayer::AIPlayer(QString nameStr, QColor color, Board *board) : Player(nameStr, color, board){};

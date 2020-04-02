@@ -9,5 +9,4 @@ int main(int argc, char *argv[])
     GameView game;
     game.show();
     return a.exec();
-
 }

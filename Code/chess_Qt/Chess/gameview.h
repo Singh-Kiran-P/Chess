@@ -31,5 +31,4 @@ public slots:
 
 };
 
-
 #endif // MAINWINDOW_H
