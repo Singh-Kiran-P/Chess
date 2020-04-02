@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
+{
 
     scene = new QGraphicsScene{};
     view = new QGraphicsView{scene};
@@ -20,7 +21,7 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
     {
         if (event->type() == QEvent::GraphicsSceneMousePress)
         {
-            const QGraphicsSceneMouseEvent* const me = static_cast<const QGraphicsSceneMouseEvent*>(event);
+            const QGraphicsSceneMouseEvent *const me = static_cast<const QGraphicsSceneMouseEvent *>(event);
             const QPointF position = me->scenePos();
 
             qDebug() << floor(position.x() / 100) * 100 << "," << floor(position.y() / 100) * 100 << endl;
@@ -28,6 +29,3 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
     }
     return QMainWindow::eventFilter(target, event);
 }
-
-
-

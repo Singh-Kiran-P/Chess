@@ -1,6 +1,7 @@
 #include "king.h"
 
-bool King::moveRestrictions(Piece* nextpiece, Position nextPos) {
+bool King::moveRestrictions(Piece *nextpiece, Position nextPos)
+{
 
 	int curr_x = m_position.getx();
 	int curr_y = m_position.gety();
@@ -11,7 +12,8 @@ bool King::moveRestrictions(Piece* nextpiece, Position nextPos) {
 	if (curr_x == next_x && curr_y == next_y)
 		return false;
 
-	if (nextpiece != nullptr) {
+	if (nextpiece != nullptr)
+	{
 		if (nextpiece->getColor() == m_color)
 			return false;
 	}
@@ -22,4 +24,4 @@ bool King::moveRestrictions(Piece* nextpiece, Position nextPos) {
 		return false;
 };
 
-King::King(char id, QColor color, Position Pos) : Piece(id, color, Pos) {};
+King::King(char id, QColor color, Position Pos) : Piece(id, color, Pos){};

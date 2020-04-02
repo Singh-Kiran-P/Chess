@@ -8,9 +8,8 @@ TileView::TileView(QColor color, Position postion)
     m_position = postion;
 }
 
-void TileView::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
-        if(mouseEvent->button() == Qt::LeftButton)
-            qDebug() <<"x="<< m_position.getx()<<"y="<<m_position.gety()<<endl;
-
+void TileView::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
+{
+    if (mouseEvent->button() == Qt::LeftButton)
+        qDebug() << "x=" << m_position.getx() << "y=" << m_position.gety() << endl;
 }
-

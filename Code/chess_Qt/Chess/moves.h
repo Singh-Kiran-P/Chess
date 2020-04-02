@@ -3,11 +3,12 @@
 #include "move.h"
 #include <QColor>
 
-class Moves {
-	public:
-        void addMove(char id, QColor color, Position curr, Position next);
-		void print();
+class Moves
+{
+public:
+	void addMove(char id, QColor color, Position curr, Position next);
+	void print();
 
-	private:
-        std::vector<Move> m_moves;
+private:
+	std::vector<Move> m_moves;
 };
