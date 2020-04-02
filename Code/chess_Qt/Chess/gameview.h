@@ -1,6 +1,5 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-#include <QDebug>
 #include <QMainWindow>
 
 #include "button.h"
@@ -17,7 +16,6 @@ class GameView : public QMainWindow
 
 public:
     GameView(QWidget *parent = nullptr);
-//    bool eventFilter(QObject *target, QEvent *event);
 
 private:
     QGraphicsScene* scene;
@@ -27,6 +25,7 @@ private:
 public slots:
     void newgame();
     void gamestart();
+    void gamestartAI();
     void loadgame();
 
 };

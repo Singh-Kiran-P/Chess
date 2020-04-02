@@ -10,25 +10,33 @@
 #include "knight.h"
 #include "bishop.h"
 
-class Board
-{
+#include <QObject>
+#include<QPoint>
+
+class Board : public QObject {
+    Q_OBJECT
 public:
-	bool Validmove(Position current, Position next, QColor playercolor);
-	void move(Position current, Position next, bool realMove = false);
+    bool Validmove(QPoint current, QPoint next, QColor playercolor);
+    void move(QPoint current, QPoint next, bool realMove = false);
 
-	void printBoard() const;
-	Piece *getPiece(Position p);
+//	void printBoard() const;
+    Piece *getPiece(QPoint p);
 
-	void changePawn(Pawn *);
+//	void changePawn(Pawn *);
 
 	Board();
 	~Board();
+
+signals:
+    void moved(QPoint current, QPoint next);
+    void placedpiece(Piece* piece);
 
 private:
 	static const int SIZE_BOARD = 8;
 
 	Piece *m_board[SIZE_BOARD][SIZE_BOARD];
+    void changePawn(Pawn *);
 	Piece *FindKing(QColor color);
-	bool SafePos(Piece *movingpiece, Position next);
-	bool noBlockers(Position current, Position next) const;
+    bool SafePos(Piece *movingpiece, QPoint next);
+    bool noBlockers(QPoint current, QPoint next) const;
 };

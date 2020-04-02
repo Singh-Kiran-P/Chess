@@ -4,9 +4,9 @@
 class Queen : public Piece
 {
 public:
-    bool moveRestrictions(Piece *nextpiece, Position nextPos);
+    bool moveRestrictions(Piece *nextpiece, QPoint nextPos);
 
-    Queen(char id, QColor color, Position Pos);
+    Queen(char id, QColor color, QPoint Pos);
 
 private:
 };

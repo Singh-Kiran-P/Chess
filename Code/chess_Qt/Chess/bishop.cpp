@@ -1,13 +1,13 @@
 #include "bishop.h"
 
-bool Bishop::moveRestrictions(Piece *nextpiece, Position nextPos)
+bool Bishop::moveRestrictions(Piece *nextpiece, QPoint nextPos)
 {
 
-	int curr_x = m_position.getx();
-	int curr_y = m_position.gety();
+    int curr_x = m_position.x();
+    int curr_y = m_position.y();
 
-	int next_x = nextPos.getx();
-	int next_y = nextPos.gety();
+    int next_x = nextPos.x();
+    int next_y = nextPos.y();
 
 	if (curr_x == next_x && curr_y == next_y)
 		return false;
@@ -24,4 +24,4 @@ bool Bishop::moveRestrictions(Piece *nextpiece, Position nextPos)
 		return false;
 };
 
-Bishop::Bishop(char id, QColor color, Position Pos) : Piece(id, color, Pos){};
+Bishop::Bishop(char id, QColor color, QPoint Pos) : Piece(id, color, Pos){};

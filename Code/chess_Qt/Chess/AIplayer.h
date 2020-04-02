@@ -5,7 +5,7 @@
 class AIPlayer : public Player
 {
 public:
-    tuple<Position, Position> getMove();
+    tuple<QPoint, QPoint> getMove();
 
     AIPlayer(QString nameStr, QColor color, Board *board);
 

@@ -10,42 +10,42 @@ void Pawn::increaseTurnCount()
 	m_turnCount++;
 };
 
-bool Pawn::moveRestrictions(Piece *nextpiece, Position nextPos)
+bool Pawn::moveRestrictions(Piece *nextpiece, QPoint nextPos)
 {
 
-	int curr_x{m_position.getx()};
-	int curr_y{m_position.gety()};
+    int curr_x = m_position.x();
+    int curr_y = m_position.y();
 
-	int next_x{nextPos.getx()};
-	int next_y{nextPos.gety()};
+    int next_x = nextPos.x();
+    int next_y = nextPos.y();
 
 	if (curr_x == next_x && curr_y == next_y)
 		return false;
 
-	int max_delta_x{1};
+    int max_delta_y{1};
 	if (m_color == Qt::white)
 	{
-		if (next_x >= curr_x)
+        if (next_y >= curr_y)
 			return false;
 	}
 
 	else if (m_color == Qt::black)
 	{
-		if (next_x <= curr_x)
+        if (next_y <= curr_y)
 			return false;
 	}
 
 	if (m_turnCount == 0)
-		max_delta_x = 2;
+        max_delta_y = 2;
 
-	if (curr_y == next_y && abs(next_x - curr_x) <= max_delta_x)
+    if (curr_x == next_x && abs(next_y - curr_y) <= max_delta_y)
 	{
 		if (nextpiece == nullptr)
 			return true;
 		else
 			return false;
 	}
-	else if (abs(curr_y - next_y) == 1 && abs(next_x - curr_x) == 1)
+    else if (abs(curr_x - next_x) == 1 && abs(next_y - curr_y) == 1)
 	{
 		if (nextpiece != nullptr)
 		{
@@ -60,4 +60,4 @@ bool Pawn::moveRestrictions(Piece *nextpiece, Position nextPos)
 	return false;
 };
 
-Pawn::Pawn(char id, QColor color, Position Pos) : Piece(id, color, Pos){};
+Pawn::Pawn(char id, QColor color, QPoint Pos) : Piece(id, color, Pos){};

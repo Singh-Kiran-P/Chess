@@ -1,13 +1,13 @@
 #include "knight.h"
 
-bool Knight::moveRestrictions(Piece *nextpiece, Position nextPos)
+bool Knight::moveRestrictions(Piece *nextpiece, QPoint nextPos)
 {
 
-	int curr_x = m_position.getx();
-	int curr_y = m_position.gety();
+    int curr_x = m_position.x();
+    int curr_y = m_position.y();
 
-	int next_x = nextPos.getx();
-	int next_y = nextPos.gety();
+    int next_x = nextPos.x();
+    int next_y = nextPos.y();
 
 	if (curr_x == next_x && curr_y == next_y)
 		return false;
@@ -18,10 +18,10 @@ bool Knight::moveRestrictions(Piece *nextpiece, Position nextPos)
 			return false;
 	}
 
-	if ((abs(next_x - curr_x) == 2 && abs(next_y - curr_y) == 1) || (abs(next_x - curr_x) == 1 && abs(next_y - curr_y) == 2))
+    if ((abs(next_x - curr_x) == 2 && abs(next_y - curr_y) == 1) || (abs(next_x - curr_x) == 1 && abs(next_y - curr_y) == 2))
 		return true;
 	else
 		return false;
 };
 
-Knight::Knight(char id, QColor color, Position Pos) : Piece(id, color, Pos){};
+Knight::Knight(char id, QColor color, QPoint Pos) : Piece(id, color, Pos){};

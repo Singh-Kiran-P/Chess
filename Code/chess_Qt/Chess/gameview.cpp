@@ -48,8 +48,12 @@ void GameView::newgame() {
     Button* AIButton = new Button("Player vs. AI");
     xButtonPos = view->sceneRect().width()/2 - PlayerButton->boundingRect().width()/2;
     AIButton->setPos(xButtonPos, 400);
-    connect(AIButton, SIGNAL(clicked()), this, SLOT(gamestart()));
+    connect(AIButton, SIGNAL(clicked()), this, SLOT(gamestartAI()));
     scene->addItem(AIButton);
+
+}
+
+void GameView::gamestartAI() {
 
 }
 
@@ -59,21 +63,3 @@ void GameView::gamestart() {
 
     m_board = new BoardView(scene);
 }
-
-//bool GameView::eventFilter(QObject *target, QEvent *event)
-//{
-//    if (target == scene)
-//    {
-//        if (event->type() == QEvent::GraphicsSceneMousePress)
-//        {
-//            const QGraphicsSceneMouseEvent* const me = static_cast<const QGraphicsSceneMouseEvent*>(event);
-//            const QPointF position = me->scenePos();
-
-//            qDebug() << floor(position.x() / 100) * 100 << "," << floor(position.y() / 100) * 100 << endl;
-//        }
-//    }
-//    return QMainWindow::eventFilter(target, event);
-//}
-
-
-

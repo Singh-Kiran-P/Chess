@@ -3,8 +3,8 @@
 class King : public Piece
 {
 public:
-	bool moveRestrictions(Piece *nextpiece, Position nextPos);
-	King(char id, QColor color, Position Pos);
+    bool moveRestrictions(Piece *nextpiece, QPoint nextPos);
+    King(char id, QColor color, QPoint Pos);
 
 private:
 	bool castlingDone = false;

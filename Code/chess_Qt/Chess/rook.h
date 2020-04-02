@@ -4,9 +4,9 @@
 class Rook : public Piece
 {
 public:
-    bool moveRestrictions(Piece *nextpiece, Position nextPos);
+    bool moveRestrictions(Piece *nextpiece, QPoint nextPos);
 
-    Rook(char id, QColor color, Position Pos);
+    Rook(char id, QColor color, QPoint Pos);
 
 private:
 };

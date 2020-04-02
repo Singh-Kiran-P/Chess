@@ -2,7 +2,6 @@
 #include <QString>
 #include <QList>
 #include <tuple>
-#include "position.h"
 #include <QColor>
 #include "board.h"
 
@@ -14,7 +13,7 @@ public:
     QColor color() const;
     QString name() const;
 
-    virtual tuple<Position, Position> getMove() = 0;
+    virtual tuple<QPoint, QPoint> getMove() = 0;
     void GenerateMoves();
     int numOfMoves() { return m_Possiblemoves.size(); }
 
@@ -26,5 +25,5 @@ private:
 protected:
     QColor m_color;
     Board *m_board;
-    QList<tuple<Position, Position>> m_Possiblemoves;
+    QList<tuple<QPoint, QPoint>> m_Possiblemoves;
 };

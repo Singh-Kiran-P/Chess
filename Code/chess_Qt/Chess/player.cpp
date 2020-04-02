@@ -12,22 +12,24 @@ QString Player::name() const
 
 void Player::GenerateMoves()
 {
-    Position currpos;
-    Position nextpos;
+    QPoint currpos;
+    QPoint nextpos;
 
     m_Possiblemoves.clear();
-    for (int currentx = 0; currentx < 8; currentx++)
+    for (int currenty = 0; currenty < 8; currenty++)
     {
-        for (int currenty = 0; currenty < 8; currenty++)
+        for (int currentx= 0; currentx < 8; currentx++)
         {
-            for (int nextx = 0; nextx < 8; nextx++)
+            for (int nexty = 0; nexty < 8; nexty++)
             {
-                for (int nexty = 0; nexty < 8; nexty++)
+                for (int nextx = 0; nextx < 8; nextx++)
                 {
-                    currpos.setpos(currentx, currenty);
-                    nextpos.setpos(nextx, nexty);
+                    currpos.setX(currentx);
+                    currpos.setY(currenty);
+                    nextpos.setX(nextx);
+                    nextpos.setY(nexty);
                     if (m_board->Validmove(currpos, nextpos, m_color))
-                        m_Possiblemoves.push_back(tuple<Position, Position>{currpos, nextpos});
+                        m_Possiblemoves.push_back(tuple<QPoint, QPoint>{currpos, nextpos});
                 }
             }
         }

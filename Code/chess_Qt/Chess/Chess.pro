@@ -27,13 +27,10 @@ SOURCES += \
     king.cpp \
     knight.cpp \
     main.cpp \
-    move.cpp \
-    moves.cpp \
     pawn.cpp \
     piece.cpp \
     pieceview.cpp \
     player.cpp \
-    position.cpp \
     queen.cpp \
     rook.cpp \
     tileview.cpp
@@ -49,13 +46,10 @@ HEADERS += \
     humanplayer.h \
     king.h \
     knight.h \
-    move.h \
-    moves.h \
     pawn.h \
     piece.h \
     pieceview.h \
     player.h \
-    position.h \
     queen.h \
     resource.h \
     rook.h \

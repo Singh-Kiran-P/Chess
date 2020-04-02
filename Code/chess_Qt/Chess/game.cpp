@@ -19,7 +19,7 @@ Game::Game(bool vsAI)
 	QColor color2{};
 
 	srand((unsigned int)time(nullptr)); // Use current time for random seed
-	int coinflip{rand() % 2};
+    int coinflip{0}; //rand() % 2};
 	if (coinflip == 1)
 	{
 		color1 = Qt::white;
@@ -65,8 +65,8 @@ void Game::nextturn()
 	else
 		m_turn = m_player1;
 
-	m_player1->GenerateMoves();
-	m_player2->GenerateMoves();
+    m_player1->GenerateMoves();
+    m_player2->GenerateMoves();
 };
 
 void Game::run()
@@ -76,8 +76,11 @@ void Game::run()
 
 	// Creates the board and places the pawns
 	//	printBoard(&m_board);
-	Position curr{};
-	Position next{};
+    QPoint curr{};
+    QPoint next{};
+
+    m_player1->GenerateMoves();
+    m_player2->GenerateMoves();
 
 	do
 	{
@@ -85,7 +88,7 @@ void Game::run()
 
 		do
 		{
-			tuple<Position, Position> currMove = m_turn->getMove();
+            tuple<QPoint, QPoint> currMove = m_turn->getMove();
 
 			curr = std::get<0>(currMove);
 			next = std::get<1>(currMove);
@@ -102,17 +105,17 @@ void Game::run()
 		win = ((m_player1->numOfMoves() == 0) || (m_player2->numOfMoves() == 0));
 		if (!win)
 			this->nextturn();
-		m_moves.addMove(m_board.getPiece(next)->getId(), m_board.getPiece(next)->getColor(), curr, next);
+//		m_moves.addMove(m_board.getPiece(next)->getId(), m_board.getPiece(next)->getColor(), curr, next);
 
 	} while (!win); //as long as no one has won, ask the next player for their move
 
 	//	printWinner(m_turn);
-	char res{};
-	do
-	{
-		cout << "Show Logs? (y,n)";
-		cin >> res;
-		if (res == 'y')
-			m_moves.print();
-	} while (res != 'y' && res != 'n');
+//	char res{};
+//	do
+//	{
+//		cout << "Show Logs? (y,n)";
+//		cin >> res;
+//		if (res == 'y')
+//			m_moves.print();
+//	} while (res != 'y' && res != 'n');
 };

@@ -1,6 +1,6 @@
 #include "humanplayer.h"
 
-tuple<Position, Position> HumanPlayer::getMove()
+tuple<QPoint, QPoint> HumanPlayer::getMove()
 {
     return m_Possiblemoves[0]; // TEMP
 }

@@ -4,7 +4,7 @@
 #include "humanplayer.h"
 #include "AIplayer.h"
 #include "board.h"
-#include "moves.h"
+//#include "moves.h"
 #include "IO.h"
 
 class Game
@@ -24,5 +24,5 @@ private:
 	Player *m_player1;
 	Player *m_player2;
 	Player *m_turn;
-	Moves m_moves;
+//	Moves m_moves;
 };

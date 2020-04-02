@@ -1,6 +1,6 @@
 #include "AIplayer.h"
 
-tuple<Position, Position> AIPlayer::getMove()
+tuple<QPoint, QPoint> AIPlayer::getMove()
 {
     return m_Possiblemoves[rand() % (m_Possiblemoves.size() - 1)];
 };

@@ -1,5 +1,4 @@
 #pragma once
-#include "position.h"
 #include <QColor>
 #include <iostream>
 
@@ -7,16 +6,16 @@ class Piece
 {
 public:
 	QColor getColor() const;
-	Position getPos();
-	void setPos(Position p);
+    QPoint getPos();
+    void setPos(QPoint p);
 
 	char getId();
-	virtual bool moveRestrictions(Piece *nextpiece, Position nextPos) = 0;
+    virtual bool moveRestrictions(Piece *nextpiece, QPoint nextPos) = 0;
 
-	Piece(char id, QColor color, Position Pos);
+    Piece(char id, QColor color, QPoint Pos);
 
 protected:
-	Position m_position;
+    QPoint m_position;
 	QColor m_color;
 
 private:
