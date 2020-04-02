@@ -8,13 +8,13 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsScene>
 
-
-class BoardView : public QGraphicsView {
+class BoardView : public QGraphicsView
+{
 public:
-    BoardView(QGraphicsScene* scene);
-private:
-    QGraphicsScene* scene;
+    BoardView(QGraphicsScene *scene);
 
+private:
+    QGraphicsScene *scene;
 };
 
 #endif // BOARDVIEW_H

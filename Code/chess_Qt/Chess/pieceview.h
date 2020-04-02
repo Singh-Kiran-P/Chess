@@ -5,11 +5,13 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QString>
 #include <piece.h>
-class PieceView : public QGraphicsPixmapItem {
+class PieceView : public QGraphicsPixmapItem
+{
 public:
-    PieceView(QString path,Piece* piece);
+    PieceView(QString path, Piece *piece);
+
 protected:
-    Piece* m_Piece;
+    Piece *m_Piece;
     void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);
 };
 

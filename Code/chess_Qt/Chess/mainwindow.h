@@ -19,10 +19,9 @@ public:
     bool eventFilter(QObject *target, QEvent *event);
 
 private:
-    QGraphicsScene* scene;
-    QGraphicsView* view;
-    BoardView* m_board;
+    QGraphicsScene *scene;
+    QGraphicsView *view;
+    BoardView *m_board;
 };
-
 
 #endif // MAINWINDOW_H

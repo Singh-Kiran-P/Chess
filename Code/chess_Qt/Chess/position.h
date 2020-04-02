@@ -1,8 +1,9 @@
 #pragma once
 #include <QString>
 
-class Position {
-    public:
+class Position
+{
+public:
     int getx() const;
 
     int gety() const;
@@ -11,12 +12,11 @@ class Position {
     void setpos(int x, int y);
     void setpos(QString pos);
 
-    Position() {};
+    Position(){};
     Position(int x, int y);
     Position(QString pos);
 
-    private:
-        int m_xpos;
-        int m_ypos;
+private:
+    int m_xpos;
+    int m_ypos;
 };
-
