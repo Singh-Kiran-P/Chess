@@ -3,6 +3,7 @@
 #include <QDebug>
 #include <QMainWindow>
 
+#include "button.h"
 #include "pieceview.h"
 #include "boardview.h"
 #include "tileview.h"
@@ -10,18 +11,24 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 
-class MainWindow : public QMainWindow
+class GameView : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
-    bool eventFilter(QObject *target, QEvent *event);
+    GameView(QWidget *parent = nullptr);
+//    bool eventFilter(QObject *target, QEvent *event);
 
 private:
     QGraphicsScene* scene;
     QGraphicsView* view;
     BoardView* m_board;
+
+public slots:
+    void newgame();
+    void gamestart();
+    void loadgame();
+
 };
 
 

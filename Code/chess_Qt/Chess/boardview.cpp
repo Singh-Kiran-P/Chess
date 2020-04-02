@@ -11,10 +11,15 @@ BoardView::BoardView(QGraphicsScene* scene) : scene{scene} {
                 tile = new TileView{Qt::white};
 
             QString path;
-            if (j <=1)
+            QColor color;
+            if (j <=1) {
                 path += ":/images/black/";
-            if (j >= 6)
+                color = Qt::black;
+            }
+            if (j >= 6) {
                 path += ":/images/white/";
+                color = Qt::white;
+            }
 
             if (j == 1 || j == 6)
                 path += "pawn";
@@ -32,7 +37,7 @@ BoardView::BoardView(QGraphicsScene* scene) : scene{scene} {
             }
 
             if (path != "") {
-                PieceView* piece = new PieceView{path};
+                PieceView* piece = new PieceView{color, path};
                 piece->setParentItem(tile);
             }
 

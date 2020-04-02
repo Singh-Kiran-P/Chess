@@ -1,6 +1,6 @@
 #include "pieceview.h"
 
-PieceView::PieceView(QString path) {
+PieceView::PieceView(QColor color, QString path) : m_color{color} {
 
     QPixmap pawn(path);
     setPixmap(pawn);

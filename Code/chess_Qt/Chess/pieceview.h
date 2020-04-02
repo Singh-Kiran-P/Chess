@@ -7,9 +7,11 @@
 
 class PieceView : public QGraphicsPixmapItem {
 public:
-    PieceView(QString path);
+    PieceView(QColor color, QString path);
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);
+private:
+    QColor m_color;
 };
 
 #endif // PIECEVIEW_H

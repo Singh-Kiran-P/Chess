@@ -20,12 +20,13 @@ SOURCES += \
     bishop.cpp \
     board.cpp \
     boardview.cpp \
+    button.cpp \
     game.cpp \
+    gameview.cpp \
     humanplayer.cpp \
     king.cpp \
     knight.cpp \
     main.cpp \
-    mainwindow.cpp \
     move.cpp \
     moves.cpp \
     pawn.cpp \
@@ -43,10 +44,11 @@ HEADERS += \
     bishop.h \
     board.h \
     boardview.h \
+    button.h \
+    gameview.h \
     humanplayer.h \
     king.h \
     knight.h \
-    mainwindow.h \
     move.h \
     moves.h \
     pawn.h \
