@@ -3,17 +3,10 @@
 
 #include <QGraphicsView>
 #include <QGraphicsRectItem>
-#include <position.h>
-#include <QGraphicsSceneMouseEvent>
-class TileView : public QGraphicsRectItem
-{
-public:
-    TileView(QColor color, Position postion);
-    Position getPostion();
-    void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);
 
-private:
-    Position m_position;
+class TileView : public QGraphicsRectItem {
+public:
+    TileView(QColor color);
 };
 
 #endif // TILEVIEW_H
