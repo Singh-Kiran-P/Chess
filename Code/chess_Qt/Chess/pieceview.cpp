@@ -7,7 +7,23 @@ PieceView::PieceView(QColor color, QString path) : m_color{color} {
     setFlag(QGraphicsItem::ItemIsSelectable);
 }
 
-void PieceView::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
-        if(mouseEvent->modifiers() & Qt::ControlModifier)
-            mouseEvent->ignore();
+void PieceView::select() {
+    QPen pen(Qt::red);
+    QBrush brush(Qt::NoBrush);
+    pen.setWidth(3);
+
+    m_selection = new QGraphicsRectItem(0, 0, 100, 100);
+    m_selection->setParentItem(this);
+}
+
+void PieceView::deselect() {
+}
+
+QColor PieceView::color() const {
+    return m_color;
+}
+
+void PieceView::mousePressEvent(QGraphicsSceneMouseEvent *event) {
+
+    event->ignore();
 }

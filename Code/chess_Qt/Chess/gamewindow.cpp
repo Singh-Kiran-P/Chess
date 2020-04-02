@@ -1,6 +1,6 @@
-#include "gameview.h"
+#include "gamewindow.h"
 
-GameView::GameView(QWidget *parent) : QMainWindow(parent) {
+GameWindow::GameWindow(QWidget *parent) : QMainWindow(parent) {
 
     scene = new QGraphicsScene{};
     view = new QGraphicsView{scene};
@@ -26,17 +26,14 @@ GameView::GameView(QWidget *parent) : QMainWindow(parent) {
     connect(LoadGamebutton, SIGNAL(clicked()), this, SLOT(loadgame()));
     scene->addItem(LoadGamebutton);
 
-//    m_board = new BoardView(scene);
-
 }
 
-void GameView::loadgame() {
+void GameWindow::loadgame() {
     qDebug() << "Loading games has not been implemented";
 }
 
-void GameView::newgame() {
-    for (auto item : scene->items())
-        scene->removeItem(item);
+void GameWindow::newgame() {
+    scene->clear();
 
     int xButtonPos;
     Button* PlayerButton = new Button("Player vs. Player");
@@ -48,18 +45,25 @@ void GameView::newgame() {
     Button* AIButton = new Button("Player vs. AI");
     xButtonPos = view->sceneRect().width()/2 - PlayerButton->boundingRect().width()/2;
     AIButton->setPos(xButtonPos, 400);
-    connect(AIButton, SIGNAL(clicked()), this, SLOT(gamestartAI()));
+    connect(AIButton, SIGNAL(clicked()), this, SLOT(gamestart()));
     scene->addItem(AIButton);
-
 }
 
-void GameView::gamestartAI() {
+void GameWindow::gamestart() {
+    game = new Game{false};
 
+    scene->clear();
+    BoardScene* board = new BoardScene{game};
+    connect(board, SIGNAL(doMove(PieceView*, QGraphicsItem*)), this, SLOT(move(PieceView*, QGraphicsItem*)));
+    scene = board;
+    view->setScene(scene);
 }
 
-void GameView::gamestart() {
-    for (auto item : scene->items())
-        scene->removeItem(item);
-
-    m_board = new BoardView(scene);
+void GameWindow::move(PieceView* movingpiece, QGraphicsItem* nextpiece) {
+    if (game->currentPlayer()->color() == movingpiece->color()) {
+        QPoint currPos = movingpiece->scenePos().toPoint() / 100;
+        QPoint nextPos = nextpiece->scenePos().toPoint() / 100;
+        game->move(currPos, nextPos);
+    }
 }
+

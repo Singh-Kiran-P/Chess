@@ -10,6 +10,14 @@ QString Player::name() const
     return m_playername;
 };
 
+bool Player::possibleMove(const tuple<QPoint, QPoint> &move) {
+    return (m_Possiblemoves.contains(move));
+}
+
+void Player::setBoard(Board *board) {
+    m_board = board;
+}
+
 void Player::GenerateMoves()
 {
     QPoint currpos;

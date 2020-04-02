@@ -1,28 +1,31 @@
 #ifndef BOARDVIEW_H
 #define BOARDVIEW_H
 
+#include "game.h"
 #include "tileview.h"
 #include "pieceview.h"
 #include "board.h"
 
 #include <QDebug>
-#include <QGraphicsView>
-#include <QMouseEvent>
 #include <QGraphicsItem>
 #include <QGraphicsScene>
 
-class BoardView : public QGraphicsView
+class BoardScene : public QGraphicsScene
 {
+    Q_OBJECT
 public:
-    BoardView(QGraphicsScene *scene);
+    BoardScene(Game* game);
+    void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);
 
 public slots:
-    void movepiece(QPoint current, QPoint next);
+    void movedpiece();
+
+signals:
+    void doMove(PieceView*, QGraphicsItem*);
 
 private:
-    QGraphicsScene *scene;
     Board* m_board;
-    QGraphicsItem* m_movingpiece = nullptr;
+    PieceView* m_movingpiece = nullptr;
     QGraphicsItem* m_nextpiece = nullptr;
 };
 

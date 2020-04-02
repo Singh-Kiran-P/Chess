@@ -1,11 +1,7 @@
 #pragma once
 #include <ctime>
-#include <iostream>
 #include "humanplayer.h"
 #include "AIplayer.h"
-#include "board.h"
-//#include "moves.h"
-#include "IO.h"
 
 class Game
 {
@@ -14,15 +10,19 @@ public:
 	~Game();
 
 	void nextturn();
-	Player *currentPlayer();
-	void run();
+    Player* currentPlayer();
 
-	void printMoves();
+	void run();
+    void move(const QPoint &currPos, const QPoint &nextPos);
+
+    void setBoard(Board* board);
+
+
 
 private:
-	Board m_board;
-	Player *m_player1;
-	Player *m_player2;
+    Board* m_board;
+    Player *m_player1;
+    Player *m_player2;
 	Player *m_turn;
 //	Moves m_moves;
 };

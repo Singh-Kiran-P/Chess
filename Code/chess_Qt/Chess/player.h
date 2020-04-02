@@ -13,8 +13,9 @@ public:
     QColor color() const;
     QString name() const;
 
-    virtual tuple<QPoint, QPoint> getMove() = 0;
+    void setBoard(Board* board);
     void GenerateMoves();
+    bool possibleMove(const tuple<QPoint, QPoint> &move);
     int numOfMoves() { return m_Possiblemoves.size(); }
 
     Player(QString nameStr, QColor color, Board *board);

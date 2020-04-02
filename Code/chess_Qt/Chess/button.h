@@ -1,6 +1,7 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
+#include <QPen>
 #include <QFont>
 #include <QBrush>
 #include <QString>

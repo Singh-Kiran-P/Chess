@@ -65,11 +65,11 @@ void Board::move(QPoint current, QPoint next, bool realMove)
 	movingpiece->setPos(next);
 	if (realMove)
 	{
-        if (auto pawn = dynamic_cast<Pawn *>(movingpiece)) {
+        if (auto pawn = dynamic_cast<Pawn *>(movingpiece))
 			pawn->increaseTurnCount();
-            delete nextpiece;
-            emit moved(current, next);
-        }
+        delete nextpiece;
+        emit moved();
+
 	}
 };
 

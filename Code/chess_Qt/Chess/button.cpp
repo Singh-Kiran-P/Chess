@@ -1,14 +1,14 @@
 #include "button.h"
 
 Button::Button(QString title, QGraphicsItem* parent) : QGraphicsRectItem(parent) {
-    //draw the rect
     setRect(0,0,250,70);
-    QBrush brush;
+    QBrush brush(Qt::darkGray);
+    QPen pen;
+    pen.setWidth(5);
     brush.setStyle(Qt::SolidPattern);
-    brush.setColor(Qt::darkGray);
+    setPen(pen);
     setBrush(brush);
 
-    //draw Text
     auto text = new QGraphicsTextItem(title,this);
     text->setFont(QFont("Arial", 20, QFont::Bold));
     text->setDefaultTextColor(Qt::white);
@@ -17,8 +17,8 @@ Button::Button(QString title, QGraphicsItem* parent) : QGraphicsRectItem(parent)
     text->setPos(xPos,yPos);
 }
 
-void Button::mousePressEvent(QGraphicsSceneMouseEvent *event)
+void Button::mousePressEvent(QGraphicsSceneMouseEvent* event)
 {
-    if((event->type() == QEvent::GraphicsSceneMousePress))
+    if((event->button() == Qt::LeftButton))
         emit clicked();
 }

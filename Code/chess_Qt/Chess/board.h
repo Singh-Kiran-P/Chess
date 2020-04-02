@@ -28,8 +28,7 @@ public:
 	~Board();
 
 signals:
-    void moved(QPoint current, QPoint next);
-    void placedpiece(Piece* piece);
+    void moved();
 
 private:
 	static const int SIZE_BOARD = 8;

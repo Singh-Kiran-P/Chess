@@ -2,31 +2,33 @@
 #define MAINWINDOW_H
 #include <QMainWindow>
 
+#include "game.h"
 #include "button.h"
 #include "pieceview.h"
-#include "boardview.h"
+#include "boardscene.h"
 #include "tileview.h"
 
 #include <QGraphicsView>
 #include <QGraphicsScene>
+#include <QGraphicsSceneMouseEvent>
 
-class GameView : public QMainWindow
+class GameWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    GameView(QWidget *parent = nullptr);
-
-private:
-    QGraphicsScene* scene;
-    QGraphicsView* view;
-    BoardView* m_board;
+    GameWindow(QWidget *parent = nullptr);
 
 public slots:
     void newgame();
     void gamestart();
-    void gamestartAI();
     void loadgame();
+    void move(PieceView* movingpiece, QGraphicsItem* nextpiece);
+
+private:
+    QGraphicsScene* scene;
+    QGraphicsView* view;
+    Game* game;
 
 };
 

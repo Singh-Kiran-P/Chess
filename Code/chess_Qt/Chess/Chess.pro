@@ -19,10 +19,10 @@ SOURCES += \
     AIPlayer.cpp \
     bishop.cpp \
     board.cpp \
-    boardview.cpp \
+    boardscene.cpp \
     button.cpp \
     game.cpp \
-    gameview.cpp \
+    gamewindow.cpp \
     humanplayer.cpp \
     king.cpp \
     knight.cpp \
@@ -37,12 +37,12 @@ SOURCES += \
 
 HEADERS += \
     AIplayer.h \
-    Game.h \
     bishop.h \
     board.h \
-    boardview.h \
+    boardscene.h \
     button.h \
-    gameview.h \
+    game.h \
+    gamewindow.h \
     humanplayer.h \
     king.h \
     knight.h \
