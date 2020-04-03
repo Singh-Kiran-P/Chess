@@ -7,7 +7,7 @@ GameWindow::GameWindow(QWidget *parent) : QMainWindow(parent) {
 
     scene->installEventFilter(this);
     view->setSceneRect(0, 0, 800, 800);
-    setFixedSize(850,850);
+    setFixedSize(800, 900);
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setCentralWidget(view);
@@ -25,7 +25,6 @@ GameWindow::GameWindow(QWidget *parent) : QMainWindow(parent) {
     LoadGamebutton->setPos(xButtonPos, 400);
     connect(LoadGamebutton, SIGNAL(clicked()), this, SLOT(loadgame()));
     scene->addItem(LoadGamebutton);
-
 }
 
 void GameWindow::loadgame() {
@@ -65,7 +64,19 @@ void GameWindow::newgame() {
 }
 
 void GameWindow::gamestart(int vsAI) {
-    game = new Game{"P1", "P2", vsAI}; // toggle betwween pvp and AI
+    QString player1;
+    while (player1.isEmpty())
+        player1 = QInputDialog::getText(nullptr, "Input player name", "Player 1");
+
+    QString player2;
+    if (vsAI == 0) {
+        while (player2.isEmpty())
+            player2 = QInputDialog::getText(nullptr, "Input player name", "Player 2");
+    }
+    else
+        player2 = "AI";
+
+    game = new Game{player1, player2, vsAI};
     connect(game, SIGNAL(gameOver()), this, SLOT(gameOver()));
 
     scene->clear();
@@ -73,6 +84,18 @@ void GameWindow::gamestart(int vsAI) {
     connect(board, SIGNAL(doMove(PieceView*, QGraphicsItem*)), this, SLOT(move(PieceView*, QGraphicsItem*)));
     scene = board;
     view->setScene(scene);
+
+    auto blackPlayer = new QGraphicsTextItem(game->blackPlayer());
+    blackPlayer->setFont(QFont("Arial", 20, QFont::Bold));
+    blackPlayer->setDefaultTextColor(Qt::black);
+    blackPlayer->setPos(0, -blackPlayer->boundingRect().height());
+    scene->addItem(blackPlayer);
+
+    auto whitePlayer = new QGraphicsTextItem(game->whitePlayer());
+    whitePlayer->setFont(QFont("Arial", 20, QFont::Bold));
+    whitePlayer->setDefaultTextColor(Qt::black);
+    whitePlayer->setPos(scene->width() - whitePlayer->boundingRect().width(), scene->height() - whitePlayer->boundingRect().height());
+    scene->addItem(whitePlayer);
 
     if (auto AI = dynamic_cast<AIPlayer*>(game->currentPlayer()))
         game->move();

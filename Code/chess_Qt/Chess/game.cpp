@@ -3,38 +3,33 @@ using namespace std;
 
 Game::Game(QString p1, QString p2, int vsAI)
 {
-	QColor color1{};
-	QColor color2{};
+    Player* player1 = new HumanPlayer{p1, m_board};
+    Player* player2 = new HumanPlayer{p2, m_board};
+    if(vsAI == 1) {
+        delete player2;
+        player2 = new AIPlayer{"AI", m_board};
+    }
 
-	srand((unsigned int)time(nullptr)); // Use current time for random seed
+    srand((unsigned int)time(nullptr)); // Use current time for random seed
     int coinflip{rand() % 2};
-	if (coinflip == 1)
-	{
-		color1 = Qt::white;
-        color2 = Qt::black;
+    if (coinflip == 1) {
+        m_whiteplayer = player1;
+        m_blackplayer = player2;
 	}
-	else
-	{
-		color1 = Qt::black;
-        color2 = Qt::white;
-	}
+    else {
+        m_whiteplayer = player2;
+        m_blackplayer = player1;
+    }
+    m_whiteplayer->setColor(Qt::white);
+    m_blackplayer->setColor(Qt::black);
 
-    m_player1 = new HumanPlayer{p1, color1, m_board};
-    if (vsAI == 0)
-        m_player2 = new HumanPlayer{p2, color2, m_board};
-	else
-        m_player2 = new AIPlayer{"AI", color2, m_board};
-
-    if (coinflip == 1)
-        m_turn = m_player1;
-    else
-        m_turn = m_player2;
+    m_turn = m_whiteplayer;
 };
 
 Game::~Game()
 {
-	delete m_player1;
-	delete m_player2;
+    delete m_whiteplayer;
+    delete m_blackplayer;
 }
 
 Player* Game::currentPlayer() {
@@ -43,27 +38,27 @@ Player* Game::currentPlayer() {
 
 void Game::nextturn()
 {
-	if (m_turn == m_player1)
-		m_turn = m_player2;
+    if (m_turn == m_whiteplayer)
+        m_turn = m_blackplayer;
 	else
-		m_turn = m_player1;
+        m_turn = m_whiteplayer;
 
     if (auto AI = dynamic_cast<AIPlayer*>(m_turn))
         move();
 };
 
 void Game::move(const QPoint &currPos, const QPoint &nextPos) {
-    m_player1->GenerateMoves();
-    m_player2->GenerateMoves();
+    m_whiteplayer->GenerateMoves();
+    m_blackplayer->GenerateMoves();
 
-    if (m_player1->numOfMoves() == 0 ||m_player2->numOfMoves() == 0)
+    if (m_whiteplayer->numOfMoves() == 0 ||m_blackplayer->numOfMoves() == 0)
         emit gameOver();
     else {
          if(m_turn->doMove(currPos, nextPos)) {
-            m_player1->GenerateMoves();
-            m_player2->GenerateMoves();
+            m_whiteplayer->GenerateMoves();
+            m_blackplayer->GenerateMoves();
 
-            if (m_player1->numOfMoves() == 0 ||m_player2->numOfMoves() == 0)
+            if (m_whiteplayer->numOfMoves() == 0 ||m_blackplayer->numOfMoves() == 0)
                 emit gameOver();
 
             nextturn();
@@ -73,7 +68,7 @@ void Game::move(const QPoint &currPos, const QPoint &nextPos) {
 
 void Game::setBoard(Board* board) {
     m_board = board;
-    m_player1->setBoard(board);
-    m_player2->setBoard(board);
+    m_whiteplayer->setBoard(board);
+    m_blackplayer->setBoard(board);
 }
 

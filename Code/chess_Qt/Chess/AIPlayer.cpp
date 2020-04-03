@@ -10,4 +10,4 @@ bool AIPlayer::doMove(const QPoint &currPos, const QPoint &nextPos) {
     return false;
 }
 
-AIPlayer::AIPlayer(QString nameStr, QColor color, Board *board) : Player(nameStr, color, board){};
+AIPlayer::AIPlayer(QString nameStr, Board *board) : Player(nameStr, board){};

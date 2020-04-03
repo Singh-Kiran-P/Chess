@@ -44,4 +44,4 @@ void Player::GenerateMoves()
     }
 };
 
-Player::Player(QString nameStr, QColor color, Board *board) : m_playername{nameStr}, m_color{color}, m_board{board} {};
+Player::Player(QString nameStr, Board *board) : m_playername{nameStr}, m_board{board} {};

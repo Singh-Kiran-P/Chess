@@ -9,4 +9,4 @@ bool HumanPlayer::doMove(const QPoint &currPos, const QPoint &nextPos) {
     return false;
 }
 
-HumanPlayer::HumanPlayer(QString nameStr, QColor color, Board *board) : Player(nameStr, color, board){};
+HumanPlayer::HumanPlayer(QString nameStr, Board *board) : Player(nameStr, board){};

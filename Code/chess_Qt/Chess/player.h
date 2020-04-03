@@ -20,7 +20,8 @@ public:
 
     virtual bool doMove(const QPoint &currPos, const QPoint &nextPos) = 0;
 
-    Player(QString nameStr, QColor color, Board *board);
+    Player(QString nameStr, Board *board);
+    void setColor(const QColor &color) {m_color = color;};
 
 private:
     QString m_playername;

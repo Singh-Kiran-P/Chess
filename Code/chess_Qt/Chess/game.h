@@ -13,6 +13,8 @@ public:
 
 	void nextturn();
     Player* currentPlayer();
+    QString whitePlayer() {return m_whiteplayer->name();};
+    QString blackPlayer() {return m_blackplayer->name();};
 
 	void run();
     void move(const QPoint &currPos = QPoint{0, 0}, const QPoint &nextPos = QPoint{0, 0});
@@ -24,8 +26,8 @@ signals:
 
 private:
     Board* m_board;
-    Player *m_player1;
-    Player *m_player2;
+    Player *m_whiteplayer;
+    Player *m_blackplayer;
 	Player *m_turn;
 //	Moves m_moves;
 };
