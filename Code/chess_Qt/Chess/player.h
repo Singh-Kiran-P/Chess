@@ -18,6 +18,8 @@ public:
     bool possibleMove(const tuple<QPoint, QPoint> &move);
     int numOfMoves() { return m_Possiblemoves.size(); }
 
+    virtual void doMove(const QPoint &currPos, const QPoint &nextPos) = 0;
+
     Player(QString nameStr, QColor color, Board *board);
 
 private:

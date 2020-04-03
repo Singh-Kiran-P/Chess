@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 #include <QMainWindow>
+#include <QApplication>
 
 #include "game.h"
 #include "button.h"
@@ -10,6 +11,8 @@
 
 #include <QGraphicsView>
 #include <QGraphicsScene>
+#include <QMessageBox>
+#include <QInputDialog>
 #include <QGraphicsSceneMouseEvent>
 
 class GameWindow : public QMainWindow
@@ -24,6 +27,7 @@ public slots:
     void gamestart();
     void loadgame();
     void move(PieceView* movingpiece, QGraphicsItem* nextpiece);
+    void gameOver();
 
 private:
     QGraphicsScene* scene;

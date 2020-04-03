@@ -3,7 +3,7 @@
 BoardScene::BoardScene(Game* game) {
 
     m_board = new Board{};
-    connect(m_board, SIGNAL(moved()), this, SLOT(movedpiece()));
+    connect(m_board, SIGNAL(moved(QPoint, QPoint)), this, SLOT(movedpiece(QPoint, QPoint)));
     game->setBoard(m_board);
 
     for (int y = 0; y < 8; y++) {
@@ -49,17 +49,18 @@ BoardScene::BoardScene(Game* game) {
     }
 }
 
-void BoardScene::movedpiece() {
-    QGraphicsItem* parent = m_nextpiece;
-    if (auto i = dynamic_cast<QGraphicsPixmapItem*>(m_nextpiece)) {
-        parent = m_nextpiece->parentItem();
-        removeItem(m_nextpiece);
+void BoardScene::movedpiece(QPoint curr, QPoint next) {
+    QGraphicsItem* parent = itemAt(next, QTransform());
+    if (auto i = dynamic_cast<QGraphicsPixmapItem*>(parent)) {
+        parent = parent->parentItem();
+        removeItem(itemAt(next, QTransform()));
     }
     else {
-        for (auto child : m_nextpiece->childItems())
+        for (auto child : parent->childItems())
             removeItem(child);
     }
-    m_movingpiece->setParentItem(parent);
+    for (auto movingpiece : itemAt(curr, QTransform())->childItems())
+        movingpiece->setParentItem(parent);
 }
 
 void BoardScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {

@@ -50,7 +50,8 @@ void GameWindow::newgame() {
 }
 
 void GameWindow::gamestart() {
-    game = new Game{false};
+    game = new Game{"P1", "P2", false}; // toggle betwween pvp and AI
+    connect(game, SIGNAL(gameOver()), this, SLOT(gameOver()));
 
     scene->clear();
     BoardScene* board = new BoardScene{game};
@@ -65,5 +66,13 @@ void GameWindow::move(PieceView* movingpiece, QGraphicsItem* nextpiece) {
         QPoint nextPos = nextpiece->scenePos().toPoint() / 100;
         game->move(currPos, nextPos);
     }
+}
+
+void GameWindow::gameOver() {
+    QMessageBox GameOver;
+    GameOver.setText("<p align='left'>" + game->currentPlayer()->name() + " has won!</p>");
+    GameOver.exec();
+    scene->clear();
+    QApplication::quit();
 }
 

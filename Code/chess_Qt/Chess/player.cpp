@@ -37,7 +37,7 @@ void Player::GenerateMoves()
                     nextpos.setX(nextx);
                     nextpos.setY(nexty);
                     if (m_board->Validmove(currpos, nextpos, m_color))
-                        m_Possiblemoves.push_back(tuple<QPoint, QPoint>{currpos, nextpos});
+                        m_Possiblemoves.append(tuple<QPoint, QPoint>{currpos, nextpos});
                 }
             }
         }

@@ -3,10 +3,12 @@
 #include "humanplayer.h"
 #include "AIplayer.h"
 
-class Game
-{
+#include <QObject>
+
+class Game : public QObject
+{ Q_OBJECT
 public:
-	Game(bool vsAI);
+    Game(QString, QString, bool);
 	~Game();
 
 	void nextturn();
@@ -17,7 +19,8 @@ public:
 
     void setBoard(Board* board);
 
-
+signals:
+    void gameOver();
 
 private:
     Board* m_board;

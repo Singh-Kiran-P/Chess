@@ -10,6 +10,7 @@
 #include "knight.h"
 #include "bishop.h"
 
+
 #include <QObject>
 #include<QPoint>
 
@@ -28,7 +29,7 @@ public:
 	~Board();
 
 signals:
-    void moved();
+    void moved(QPoint, QPoint);
 
 private:
 	static const int SIZE_BOARD = 8;

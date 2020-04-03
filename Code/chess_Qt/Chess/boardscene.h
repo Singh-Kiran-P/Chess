@@ -18,7 +18,7 @@ public:
     void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);
 
 public slots:
-    void movedpiece();
+    void movedpiece(QPoint, QPoint);
 
 signals:
     void doMove(PieceView*, QGraphicsItem*);
