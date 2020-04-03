@@ -1,7 +1,7 @@
 #include "game.h"
 using namespace std;
 
-Game::Game(QString p1, QString p2, bool vsAI)
+Game::Game(QString p1, QString p2, int vsAI)
 {
 	QColor color1{};
 	QColor color2{};
@@ -20,7 +20,7 @@ Game::Game(QString p1, QString p2, bool vsAI)
 	}
 
     m_player1 = new HumanPlayer{p1, color1, m_board};
-	if (!vsAI)
+    if (vsAI == 0)
         m_player2 = new HumanPlayer{p2, color2, m_board};
 	else
         m_player2 = new AIPlayer{"AI", color2, m_board};

@@ -29,7 +29,11 @@ GameWindow::GameWindow(QWidget *parent) : QMainWindow(parent) {
 }
 
 void GameWindow::loadgame() {
-    qDebug() << "Loading games has not been implemented";
+    QMessageBox LoadGame{};
+    LoadGame.setIcon(QMessageBox::Warning);
+    LoadGame.setText("Loading games has not been implemented yet");
+    LoadGame.addButton(QMessageBox::Ok);
+    LoadGame.exec();
 }
 
 void GameWindow::newgame() {
@@ -39,18 +43,29 @@ void GameWindow::newgame() {
     Button* PlayerButton = new Button("Player vs. Player");
     xButtonPos = view->sceneRect().width()/2 - PlayerButton->boundingRect().width()/2;
     PlayerButton->setPos(xButtonPos, 250);
-    connect(PlayerButton, SIGNAL(clicked()), this, SLOT(gamestart()));
+
+    QSignalMapper *PlayerMap = new QSignalMapper;
+    connect(PlayerMap, SIGNAL(mapped(int)), this, SLOT(gamestart(int)));
+    connect(PlayerButton, SIGNAL(clicked()), PlayerMap, SLOT(map()));
+    PlayerMap->setMapping(PlayerButton, 0);
+
     scene->addItem(PlayerButton);
+
 
     Button* AIButton = new Button("Player vs. AI");
     xButtonPos = view->sceneRect().width()/2 - PlayerButton->boundingRect().width()/2;
     AIButton->setPos(xButtonPos, 400);
-    connect(AIButton, SIGNAL(clicked()), this, SLOT(gamestart()));
+
+    QSignalMapper *AIMap = new QSignalMapper;
+    connect(AIMap, SIGNAL(mapped(int)), this, SLOT(gamestart(int)));
+    connect(AIButton, SIGNAL(clicked()), AIMap, SLOT(map()));
+    AIMap->setMapping(AIButton, 1);
+
     scene->addItem(AIButton);
 }
 
-void GameWindow::gamestart() {
-    game = new Game{"P1", "P2", true}; // toggle betwween pvp and AI
+void GameWindow::gamestart(int vsAI) {
+    game = new Game{"P1", "P2", vsAI}; // toggle betwween pvp and AI
     connect(game, SIGNAL(gameOver()), this, SLOT(gameOver()));
 
     scene->clear();
@@ -72,7 +87,8 @@ void GameWindow::move(PieceView* movingpiece, QGraphicsItem* nextpiece) {
 }
 
 void GameWindow::gameOver() {
-    QMessageBox GameOver;
+    QMessageBox GameOver{};
+    GameOver.setWindowTitle("Checkmate");
     GameOver.setText(game->currentPlayer()->name() + " has won!");
     GameOver.exec();
     scene->clear();

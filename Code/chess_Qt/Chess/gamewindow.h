@@ -10,6 +10,7 @@
 #include "tileview.h"
 
 #include <QGraphicsView>
+#include <QSignalMapper>
 #include <QGraphicsScene>
 #include <QMessageBox>
 #include <QInputDialog>
@@ -24,7 +25,7 @@ public:
 
 public slots:
     void newgame();
-    void gamestart();
+    void gamestart(int);
     void loadgame();
     void move(PieceView* movingpiece, QGraphicsItem* nextpiece);
     void gameOver();
