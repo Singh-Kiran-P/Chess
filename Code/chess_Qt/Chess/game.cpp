@@ -7,7 +7,7 @@ Game::Game(QString p1, QString p2, bool vsAI)
 	QColor color2{};
 
 	srand((unsigned int)time(nullptr)); // Use current time for random seed
-    int coinflip{1}; //rand() % 2};
+    int coinflip{rand() % 2};
 	if (coinflip == 1)
 	{
 		color1 = Qt::white;
@@ -48,10 +48,8 @@ void Game::nextturn()
 	else
 		m_turn = m_player1;
 
-    if (m_turn->name() == "AI") {
-        move(QPoint{0, 0}, QPoint{0, 0});
-
-    }
+    if (auto AI = dynamic_cast<AIPlayer*>(m_turn))
+        move();
 };
 
 void Game::move(const QPoint &currPos, const QPoint &nextPos) {
@@ -61,15 +59,16 @@ void Game::move(const QPoint &currPos, const QPoint &nextPos) {
     if (m_player1->numOfMoves() == 0 ||m_player2->numOfMoves() == 0)
         emit gameOver();
     else {
-        m_turn->doMove(currPos, nextPos);
+         if(m_turn->doMove(currPos, nextPos)) {
+            m_player1->GenerateMoves();
+            m_player2->GenerateMoves();
 
-        m_player1->GenerateMoves();
-        m_player2->GenerateMoves();
-        if (m_player1->numOfMoves() == 0 ||m_player2->numOfMoves() == 0)
-            emit gameOver();
-        nextturn();
+            if (m_player1->numOfMoves() == 0 ||m_player2->numOfMoves() == 0)
+                emit gameOver();
+
+            nextturn();
+         }
     }
-
 }
 
 void Game::setBoard(Board* board) {

@@ -5,7 +5,7 @@
 class AIPlayer : public Player
 {
 public:
-    void doMove(const QPoint &currPos, const QPoint &nextPos) override;
+    bool doMove(const QPoint &currPos, const QPoint &nextPos) override;
     AIPlayer(QString nameStr, QColor color, Board *board);
 
 private:

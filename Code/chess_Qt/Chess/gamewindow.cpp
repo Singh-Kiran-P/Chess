@@ -50,7 +50,7 @@ void GameWindow::newgame() {
 }
 
 void GameWindow::gamestart() {
-    game = new Game{"P1", "P2", false}; // toggle betwween pvp and AI
+    game = new Game{"P1", "P2", true}; // toggle betwween pvp and AI
     connect(game, SIGNAL(gameOver()), this, SLOT(gameOver()));
 
     scene->clear();
@@ -58,6 +58,9 @@ void GameWindow::gamestart() {
     connect(board, SIGNAL(doMove(PieceView*, QGraphicsItem*)), this, SLOT(move(PieceView*, QGraphicsItem*)));
     scene = board;
     view->setScene(scene);
+
+    if (auto AI = dynamic_cast<AIPlayer*>(game->currentPlayer()))
+        game->move();
 }
 
 void GameWindow::move(PieceView* movingpiece, QGraphicsItem* nextpiece) {
@@ -70,7 +73,7 @@ void GameWindow::move(PieceView* movingpiece, QGraphicsItem* nextpiece) {
 
 void GameWindow::gameOver() {
     QMessageBox GameOver;
-    GameOver.setText("<p align='left'>" + game->currentPlayer()->name() + " has won!</p>");
+    GameOver.setText(game->currentPlayer()->name() + " has won!");
     GameOver.exec();
     scene->clear();
     QApplication::quit();
