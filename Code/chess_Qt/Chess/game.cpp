@@ -54,15 +54,17 @@ void Game::move(const QPoint &currPos, const QPoint &nextPos) {
     if (m_whiteplayer->numOfMoves() == 0 ||m_blackplayer->numOfMoves() == 0)
         emit gameOver();
     else {
-         if(m_turn->doMove(currPos, nextPos)) {
+         if (m_turn->doMove(currPos, nextPos)) {
+
             m_whiteplayer->GenerateMoves();
             m_blackplayer->GenerateMoves();
 
-            if (m_whiteplayer->numOfMoves() == 0 ||m_blackplayer->numOfMoves() == 0)
+            if (m_whiteplayer->numOfMoves() == 0 ||m_blackplayer->numOfMoves() == 0) {
                 emit gameOver();
-
+                return;
+            }
             nextturn();
-         }
+        }
     }
 }
 

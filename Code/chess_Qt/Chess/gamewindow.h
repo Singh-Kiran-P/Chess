@@ -22,17 +22,21 @@ class GameWindow : public QMainWindow
 
 public:
     GameWindow(QWidget *parent = nullptr);
+    void mainMenu();
 
 public slots:
+
     void newgame();
     void gamestart(int);
     void loadgame();
     void move(PieceView* movingpiece, QGraphicsItem* nextpiece);
     void gameOver();
+    void quitGame();
+    void backButton();
 
 private:
-    QGraphicsScene* scene;
-    QGraphicsView* view;
+    QGraphicsScene* scene = nullptr;
+    QGraphicsView* view = nullptr;
     Game* game;
 
 };

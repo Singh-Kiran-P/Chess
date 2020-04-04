@@ -17,7 +17,7 @@ public:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
 signals:
-    void clicked();
+    void pressed();
 };
 
 #endif // BUTTON_H

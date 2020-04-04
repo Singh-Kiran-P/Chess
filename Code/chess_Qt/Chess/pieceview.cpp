@@ -6,18 +6,6 @@ PieceView::PieceView(QColor color, QString path) : m_color{color} {
     setPixmap(piece);
 }
 
-void PieceView::select() {
-    QPen pen(Qt::red);
-    QBrush brush(Qt::NoBrush);
-    pen.setWidth(3);
-
-    m_selection = new QGraphicsRectItem(0, 0, 100, 100);
-    m_selection->setParentItem(this);
-}
-
-void PieceView::deselect() {
-}
-
 QColor PieceView::color() const {
     return m_color;
 }

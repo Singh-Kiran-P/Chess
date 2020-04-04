@@ -28,7 +28,7 @@ bool Board::SafePos(Piece *movingpiece, QPoint next)
 				}
 			}
 		}
-	}
+    }
 	return true;
 };
 

@@ -15,10 +15,12 @@ Button::Button(QString title, QGraphicsItem* parent) : QGraphicsRectItem(parent)
     int xPos = rect().width()/2 - text->boundingRect().width()/2;
     int yPos = rect().height()/2 - text->boundingRect().height()/2;
     text->setPos(xPos,yPos);
+
+    setFlag(QGraphicsItem::ItemIsMovable);
 }
 
 void Button::mousePressEvent(QGraphicsSceneMouseEvent* event)
 {
     if((event->button() == Qt::LeftButton))
-        emit clicked();
+        emit pressed();
 }
