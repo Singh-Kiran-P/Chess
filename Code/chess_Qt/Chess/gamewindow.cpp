@@ -5,7 +5,6 @@ GameWindow::GameWindow(QWidget *parent) : QMainWindow(parent) {
     scene = new QGraphicsScene{};
     view = new QGraphicsView{scene};
 
-    scene->installEventFilter(this);
     view->setSceneRect(0, 0, 800, 800);
     setFixedSize(800, 900);
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -66,12 +65,12 @@ void GameWindow::newgame() {
 void GameWindow::gamestart(int vsAI) {
     QString player1;
     while (player1.isEmpty())
-        player1 = QInputDialog::getText(nullptr, "Input player name", "Player 1");
+        player1 = QInputDialog::getText(nullptr, "Input player name", "Player 1", QLineEdit::Normal, "", nullptr, Qt::WindowSystemMenuHint | Qt::WindowTitleHint);
 
     QString player2;
     if (vsAI == 0) {
         while (player2.isEmpty())
-            player2 = QInputDialog::getText(nullptr, "Input player name", "Player 2");
+            player2 = QInputDialog::getText(nullptr, "Input player name", "Player 2",  QLineEdit::Normal, "", nullptr, Qt::WindowSystemMenuHint | Qt::WindowTitleHint);
     }
     else
         player2 = "AI";
@@ -84,18 +83,6 @@ void GameWindow::gamestart(int vsAI) {
     connect(board, SIGNAL(doMove(PieceView*, QGraphicsItem*)), this, SLOT(move(PieceView*, QGraphicsItem*)));
     scene = board;
     view->setScene(scene);
-
-    auto blackPlayer = new QGraphicsTextItem(game->blackPlayer());
-    blackPlayer->setFont(QFont("Arial", 20, QFont::Bold));
-    blackPlayer->setDefaultTextColor(Qt::black);
-    blackPlayer->setPos(0, -blackPlayer->boundingRect().height());
-    scene->addItem(blackPlayer);
-
-    auto whitePlayer = new QGraphicsTextItem(game->whitePlayer());
-    whitePlayer->setFont(QFont("Arial", 20, QFont::Bold));
-    whitePlayer->setDefaultTextColor(Qt::black);
-    whitePlayer->setPos(scene->width() - whitePlayer->boundingRect().width(), scene->height() - whitePlayer->boundingRect().height());
-    scene->addItem(whitePlayer);
 
     if (auto AI = dynamic_cast<AIPlayer*>(game->currentPlayer()))
         game->move();

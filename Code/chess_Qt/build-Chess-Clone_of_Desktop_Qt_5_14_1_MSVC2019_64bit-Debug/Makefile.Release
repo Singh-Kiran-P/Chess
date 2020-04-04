@@ -776,6 +776,13 @@ release\moc_gamewindow.cpp: ..\Chess\gamewindow.h \
 		C:\Qt\5.14.1\msvc2017_64\include\QtGui\qtouchdevice.h \
 		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\qtabwidget.h \
 		C:\Qt\5.14.1\msvc2017_64\include\QtGui\qicon.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\QApplication \
+		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\qapplication.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qcoreapplication.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qeventloop.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\qdesktopwidget.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtGui\qguiapplication.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtGui\qinputmethod.h \
 		..\Chess\game.h \
 		..\Chess\humanplayer.h \
 		..\Chess\player.h \
@@ -818,6 +825,16 @@ release\moc_gamewindow.cpp: ..\Chess\gamewindow.h \
 		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\qgraphicsscene.h \
 		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\QGraphicsItem \
 		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\QGraphicsScene \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\QSignalMapper \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qsignalmapper.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\QMessageBox \
+		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\qmessagebox.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\qdialog.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\QInputDialog \
+		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\qinputdialog.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\qlineedit.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtGui\qtextcursor.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtGui\qtextformat.h \
 		release\moc_predefs.h \
 		C:\Qt\5.14.1\msvc2017_64\bin\moc.exe
 	C:\Qt\5.14.1\msvc2017_64\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include D:/Users/jochem/Documents/_school/uni/_proj/_repos/ogp1-1920-practica08/Code/chess_Qt/build-Chess-Clone_of_Desktop_Qt_5_14_1_MSVC2019_64bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.1/msvc2017_64/mkspecs/win32-msvc -ID:/Users/jochem/Documents/_school/uni/_proj/_repos/ogp1-1920-practica08/Code/chess_Qt/Chess -IC:/Qt/5.14.1/msvc2017_64/include -IC:/Qt/5.14.1/msvc2017_64/include/QtWidgets -IC:/Qt/5.14.1/msvc2017_64/include/QtGui -IC:/Qt/5.14.1/msvc2017_64/include/QtANGLE -IC:/Qt/5.14.1/msvc2017_64/include/QtCore -I. -I"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.24.28314\ATLMFC\include" -I"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.24.28314\include" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt" ..\Chess\gamewindow.h -o release\moc_gamewindow.cpp
@@ -1471,6 +1488,13 @@ release\gamewindow.obj: ..\Chess\gamewindow.cpp ..\Chess\gamewindow.h \
 		C:\Qt\5.14.1\msvc2017_64\include\QtGui\qtouchdevice.h \
 		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\qtabwidget.h \
 		C:\Qt\5.14.1\msvc2017_64\include\QtGui\qicon.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\QApplication \
+		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\qapplication.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qcoreapplication.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qeventloop.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\qdesktopwidget.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtGui\qguiapplication.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtGui\qinputmethod.h \
 		..\Chess\game.h \
 		..\Chess\humanplayer.h \
 		..\Chess\player.h \
@@ -1512,7 +1536,17 @@ release\gamewindow.obj: ..\Chess\gamewindow.cpp ..\Chess\gamewindow.h \
 		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\qframe.h \
 		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\qgraphicsscene.h \
 		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\QGraphicsItem \
-		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\QGraphicsScene
+		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\QGraphicsScene \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\QSignalMapper \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qsignalmapper.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\QMessageBox \
+		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\qmessagebox.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\qdialog.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\QInputDialog \
+		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\qinputdialog.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\qlineedit.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtGui\qtextcursor.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtGui\qtextformat.h
 
 release\humanplayer.obj: ..\Chess\humanplayer.cpp ..\Chess\humanplayer.h \
 		..\Chess\player.h \
@@ -1799,6 +1833,13 @@ release\main.obj: ..\Chess\main.cpp ..\Chess\gamewindow.h \
 		C:\Qt\5.14.1\msvc2017_64\include\QtGui\qtouchdevice.h \
 		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\qtabwidget.h \
 		C:\Qt\5.14.1\msvc2017_64\include\QtGui\qicon.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\QApplication \
+		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\qapplication.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qcoreapplication.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qeventloop.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\qdesktopwidget.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtGui\qguiapplication.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtGui\qinputmethod.h \
 		..\Chess\game.h \
 		..\Chess\humanplayer.h \
 		..\Chess\player.h \
@@ -1841,13 +1882,16 @@ release\main.obj: ..\Chess\main.cpp ..\Chess\gamewindow.h \
 		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\qgraphicsscene.h \
 		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\QGraphicsItem \
 		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\QGraphicsScene \
-		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\QApplication \
-		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\qapplication.h \
-		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qcoreapplication.h \
-		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qeventloop.h \
-		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\qdesktopwidget.h \
-		C:\Qt\5.14.1\msvc2017_64\include\QtGui\qguiapplication.h \
-		C:\Qt\5.14.1\msvc2017_64\include\QtGui\qinputmethod.h
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\QSignalMapper \
+		C:\Qt\5.14.1\msvc2017_64\include\QtCore\qsignalmapper.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\QMessageBox \
+		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\qmessagebox.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\qdialog.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\QInputDialog \
+		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\qinputdialog.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtWidgets\qlineedit.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtGui\qtextcursor.h \
+		C:\Qt\5.14.1\msvc2017_64\include\QtGui\qtextformat.h
 
 release\pawn.obj: ..\Chess\pawn.cpp ..\Chess\pawn.h \
 		..\Chess\piece.h \

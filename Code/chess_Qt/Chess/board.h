@@ -23,13 +23,13 @@ public:
 //	void printBoard() const;
     Piece *getPiece(QPoint p);
 
-//	void changePawn(Pawn *);
-
-	Board();
+    void placePieces();
 	~Board();
 
 signals:
     void moved(QPoint, QPoint);
+    void placedPiece(Piece*);
+    void promoted(Piece*);
 
 private:
 	static const int SIZE_BOARD = 8;

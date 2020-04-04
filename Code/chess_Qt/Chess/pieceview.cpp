@@ -2,8 +2,8 @@
 
 PieceView::PieceView(QColor color, QString path) : m_color{color} {
 
-    QPixmap pawn(path);
-    setPixmap(pawn);
+    QPixmap piece(path);
+    setPixmap(piece);
 }
 
 void PieceView::select() {

@@ -3,16 +3,9 @@
 void Board::changePawn(Pawn *p)
 {
     QPoint posP = p->getPos();
-
-	if (p->getColor() == Qt::black)
-	{
-        m_board[posP.x()][posP.y()] = new Queen('Q', Qt::black, posP);
-	}
-	else
-	{
-        m_board[posP.x()][posP.y()] = new Queen('Q', Qt::white, posP);
-	}
-	delete p;
+    m_board[posP.x()][posP.y()] = new Queen('Q', p->getColor(), posP);
+    emit promoted(p);
+    delete p;
 };
 
 bool Board::SafePos(Piece *movingpiece, QPoint next)
@@ -31,7 +24,7 @@ bool Board::SafePos(Piece *movingpiece, QPoint next)
 							return false;
 					}
 					else
-						return false;
+                        return false;
 				}
 			}
 		}
@@ -63,14 +56,16 @@ void Board::move(QPoint current, QPoint next, bool realMove)
     m_board[next.x()][next.y()] = movingpiece;
     m_board[current.x()][current.y()] = nullptr;
 	movingpiece->setPos(next);
-	if (realMove)
-	{
-        if (auto pawn = dynamic_cast<Pawn *>(movingpiece))
-			pawn->increaseTurnCount();
+    if (realMove) {
         delete nextpiece;
         emit moved(current * 100, next * 100);
 
-	}
+        if (auto pawn = dynamic_cast<Pawn *>(movingpiece)) {
+            pawn->increaseTurnCount();
+            if (pawn->getPos().y() == 0 || pawn->getPos().y() == SIZE_BOARD - 1)
+                changePawn(pawn);
+        }
+    }
 };
 
 bool Board::Validmove(QPoint current, QPoint next, QColor playercolor)
@@ -138,7 +133,7 @@ Piece *Board::getPiece(QPoint p)
     return m_board[p.x()][p.y()];
 };
 
-Board::Board()
+void Board::placePieces()
 {
 	QColor PieceColor{};
     QPoint tempPos{};
@@ -158,6 +153,7 @@ Board::Board()
 			{
 				p_ptr = new Pawn{'P', PieceColor, tempPos};
                 m_board[x][y] = p_ptr;
+                emit placedPiece(p_ptr);
 			}
             else if (y == 0 || y == 7)
 			{
@@ -172,6 +168,7 @@ Board::Board()
                 else if (x == 4) //King
 					p_ptr = new King{'K', PieceColor, tempPos};
                 m_board[x][y] = p_ptr;
+                emit placedPiece(p_ptr);
 			}
 			else
                 m_board[x][y] = nullptr;
