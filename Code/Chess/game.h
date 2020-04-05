@@ -22,6 +22,7 @@ public:
 
 signals:
     void gameOver();
+    void promote(Pawn*);
 
 private:
     Board* m_board;

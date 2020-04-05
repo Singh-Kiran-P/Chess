@@ -49,6 +49,10 @@ void Game::nextturn()
 
 void Game::move(const QPoint &currPos, const QPoint &nextPos) {
     if (m_turn->doMove(currPos, nextPos)) {
+        Pawn* promotionPawn = m_board->checkPromotions();
+        if (promotionPawn != nullptr)
+            emit promote(promotionPawn);
+
         m_whiteplayer->GenerateMoves();
         m_blackplayer->GenerateMoves();
 
@@ -59,7 +63,6 @@ void Game::move(const QPoint &currPos, const QPoint &nextPos) {
         nextturn();
     }
 }
-
 
 void Game::setBoard(Board* board) {
     m_board = board;

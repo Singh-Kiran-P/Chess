@@ -15,11 +15,12 @@ class BoardScene : public QGraphicsScene
 public:
     BoardScene(Game* game);
     void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);
+    void clearSelection();
 
 public slots:
     void movedpiece(QPoint, QPoint);
     void placePixMap(Piece*);
-    void promotePixMap(Pawn*);
+    void promotePixMap(QString, Pawn* pawn);
 
 signals:
     void doMove(PieceView*, QGraphicsItem*);

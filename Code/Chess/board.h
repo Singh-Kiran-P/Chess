@@ -15,7 +15,8 @@ public:
     bool Validmove(QPoint current, QPoint next, QColor playercolor);
     void move(QPoint current, QPoint next, bool realMove = false);
 
-    void changePawn(Pawn *);
+    void changePawn(QString type, Pawn *);
+    Pawn* checkPromotions();
 
     void placePieces();
 	~Board();
@@ -23,7 +24,6 @@ public:
 signals:
     void moved(QPoint, QPoint);
     void placedPiece(Piece*);
-    void promoted(Pawn*);
 
 private:
 	static const int SIZE_BOARD = 8;

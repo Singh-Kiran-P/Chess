@@ -1,11 +1,29 @@
 #include "board.h"
 
-void Board::changePawn(Pawn *p)
+void Board::changePawn(QString type, Pawn *p)
 {
     QPoint posP = p->getPos();
-    m_board[posP.x()][posP.y()] = new Queen(p->getColor(), posP);
+    if (type == "Queen")
+        m_board[posP.x()][posP.y()] = new Queen{p->getColor(), posP};
+    else if (type == "Rook")
+            m_board[posP.x()][posP.y()] = new Rook{p->getColor(), posP};
+    else if (type == "Knight")
+            m_board[posP.x()][posP.y()] = new Knight{p->getColor(), posP};
+    else if (type == "Bishop")
+            m_board[posP.x()][posP.y()] = new Bishop{p->getColor(), posP};
+
     delete p;
 };
+
+Pawn* Board::checkPromotions() {
+    for (int row = 0; row < SIZE_BOARD; row++) {
+        if (m_board[row][0] != nullptr && m_board[row][0]->getId() == 'P')
+            return static_cast<Pawn*>(m_board[row][0]);
+        else if (m_board[row][SIZE_BOARD - 1] != nullptr && m_board[row][SIZE_BOARD - 1]->getId() == 'P')
+            return static_cast<Pawn*>(m_board[row][SIZE_BOARD - 1]);
+    }
+    return nullptr;
+}
 
 bool Board::SafePos(const Piece *movingpiece,const QPoint &next)
 {
@@ -59,11 +77,8 @@ void Board::move(QPoint current, QPoint next, bool realMove)
         delete nextpiece;
         emit moved(current * 100, next * 100);
 
-        if (auto pawn = dynamic_cast<Pawn *>(movingpiece)) {
+        if (auto pawn = dynamic_cast<Pawn *>(movingpiece))
             pawn->increaseTurnCount();
-            if (pawn->getPos().y() == 0 || pawn->getPos().y() == SIZE_BOARD - 1)
-                emit promoted(pawn);
-        }
     }
 };
 

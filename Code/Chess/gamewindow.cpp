@@ -121,8 +121,10 @@ void GameWindow::gamestart(int vsAI) {
     else
         player2 = "AI";
 
+    gameStarted = true;
     game = new Game{player1, player2, vsAI};
     connect(game, SIGNAL(gameOver()), this, SLOT(gameOver()));
+    connect(game, SIGNAL(promote(Pawn*)), this, SLOT(getPromotionPiece(Pawn*)));
 
     BoardScene* board = new BoardScene{game};
     connect(board, SIGNAL(doMove(PieceView*, QGraphicsItem*)), this, SLOT(move(PieceView*, QGraphicsItem*)));
@@ -138,10 +140,34 @@ void GameWindow::move(PieceView* movingpiece, QGraphicsItem* nextpiece) {
         QPoint currPos = movingpiece->scenePos().toPoint() / 100;
         QPoint nextPos = nextpiece->scenePos().toPoint() / 100;
         game->move(currPos, nextPos);
+
+        if (gameStarted) {
+            auto boardScene = static_cast<BoardScene*>(scene);
+            boardScene->clearSelection();
+        }
     }
 }
 
+void GameWindow::getPromotionPiece(Pawn* pawn) {
+    QString selection = "Queen";
+    if (auto humanplayer = dynamic_cast<HumanPlayer*>(game->currentPlayer())) {
+        QMessageBox ChoosePromotion{QMessageBox::NoIcon, "Promotion", "Pick a piece to promote your pawn to:"};
+        QPushButton* queenButton = ChoosePromotion.addButton("Queen", QMessageBox::AcceptRole);
+        ChoosePromotion.addButton("Rook", QMessageBox::AcceptRole);
+        ChoosePromotion.addButton("Knight", QMessageBox::AcceptRole);
+        ChoosePromotion.addButton("Bishop", QMessageBox::AcceptRole);
+        ChoosePromotion.setEscapeButton(queenButton);
+        ChoosePromotion.show();
+        ChoosePromotion.exec();
+        selection = ChoosePromotion.clickedButton()->text();
+    }
+
+    auto boardScene = static_cast<BoardScene*>(scene);
+    boardScene->promotePixMap(selection, pawn);
+}
+
 void GameWindow::gameOver() {
+    gameStarted = false;
     QMessageBox GameOver;
     GameOver.setWindowTitle("Checkmate");
     GameOver.setText(game->currentPlayer()->name() + " has won!");
