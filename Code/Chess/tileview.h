@@ -1,7 +1,6 @@
 #ifndef TILEVIEW_H
 #define TILEVIEW_H
 
-#include <QDebug>
 #include <QGraphicsView>
 #include <QGraphicsRectItem>
 #include <QGraphicsSceneMouseEvent>

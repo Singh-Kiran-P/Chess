@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 #include <QMainWindow>
 #include <QApplication>
+#include <QMenuBar>
 
 #include "game.h"
 #include "button.h"
@@ -14,7 +15,6 @@
 #include <QGraphicsScene>
 #include <QMessageBox>
 #include <QInputDialog>
-#include <QGraphicsSceneMouseEvent>
 
 class GameWindow : public QMainWindow
 {
@@ -22,16 +22,19 @@ class GameWindow : public QMainWindow
 
 public:
     GameWindow(QWidget *parent = nullptr);
+    void buildMenuBar();
     void mainMenu();
+    void mainMenuButtons();
 
 public slots:
 
     void newgame();
     void gamestart(int);
     void loadgame();
+    void savegame();
     void move(PieceView* movingpiece, QGraphicsItem* nextpiece);
     void gameOver();
-    void quitGame();
+    void quitgame();
     void backButton();
 
 private:

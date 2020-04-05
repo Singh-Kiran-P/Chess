@@ -5,17 +5,19 @@ GameWindow::GameWindow(QWidget *parent) : QMainWindow(parent) {
     mainMenu();
 }
 
-void GameWindow::mainMenu() {
-    scene = new QGraphicsScene{};
-    view = new QGraphicsView{scene};
+void GameWindow::buildMenuBar() {
+    QAction* menuSave = new QAction("save");
+    QAction* menuLoad = new QAction("load");
+    QAction* menuQuit = new QAction("quit");
+    menuBar()->addAction(menuSave);
+    menuBar()->addAction(menuLoad);
+    menuBar()->addAction(menuQuit);
+    connect(menuSave, SIGNAL(triggered()), this, SLOT(savegame()));
+    connect(menuLoad, SIGNAL(triggered()), this, SLOT(loadgame()));
+    connect(menuQuit, SIGNAL(triggered()), this, SLOT(quitgame()));
+}
 
-    view->setSceneRect(0, 0, 800, 800);
-    setFixedSize(800, 875);
-    view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setCentralWidget(view);
-    view->show();
-
+void GameWindow::mainMenuButtons() {
     int xButtonPos;
     Button* newGameButton = new Button("New game");
     xButtonPos = view->sceneRect().width()/2 - newGameButton->boundingRect().width()/2;
@@ -30,10 +32,25 @@ void GameWindow::mainMenu() {
     scene->addItem(LoadGamebutton);
 
     Button* quitButton = new Button("Quit");
-    connect(quitButton, SIGNAL(pressed()), this, SLOT(quitGame()));
+    connect(quitButton, SIGNAL(pressed()), this, SLOT(quitgame()));
     xButtonPos = view->sceneRect().width()/2 - quitButton->boundingRect().width()/2;
     quitButton->setPos(xButtonPos, 450);
     scene->addItem(quitButton);
+}
+
+void GameWindow::mainMenu() {
+    game = nullptr;
+    scene = new QGraphicsScene{};
+    view = new QGraphicsView{scene};
+
+    view->setSceneRect(0, 0, 800, 800);
+    setFixedSize(800, 900);
+    view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setCentralWidget(view);
+    view->show();
+
+    mainMenuButtons();
 }
 
 void GameWindow::loadgame() {
@@ -42,6 +59,17 @@ void GameWindow::loadgame() {
     LoadGame.setText("Loading games has not been implemented yet.");
     LoadGame.addButton(QMessageBox::Ok);
     LoadGame.exec();
+}
+
+void GameWindow::savegame() {
+    QMessageBox saveGame{};
+    saveGame.setIcon(QMessageBox::Warning);
+    if (game == nullptr)
+        saveGame.setText("A game has not been started yet.");
+    else
+        saveGame.setText("Saving games has not been implemented yet.");
+    saveGame.addButton(QMessageBox::Ok);
+    saveGame.exec();
 }
 
 void GameWindow::newgame() {
@@ -123,11 +151,11 @@ void GameWindow::gameOver() {
 }
 
 void GameWindow::backButton() {
-    delete scene;
-    mainMenu();
+    scene->clear();
+    mainMenuButtons();
 }
 
-void GameWindow::quitGame() {
+void GameWindow::quitgame() {
     QApplication::quit();
 }
 

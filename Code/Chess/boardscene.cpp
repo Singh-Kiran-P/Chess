@@ -116,6 +116,11 @@ void BoardScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
         if (m_movingpiece != nullptr && m_movingpiece != item) {
             m_nextpiece = item;
             emit doMove(m_movingpiece, m_nextpiece);
+            if(m_movingpiece != nullptr) {
+                m_movingpiece->deselect();
+                m_movingpiece = nullptr;
+                m_nextpiece = nullptr;
+            }
         }
         else if (m_movingpiece == item) {
             m_movingpiece->deselect();

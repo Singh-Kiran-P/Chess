@@ -48,25 +48,18 @@ void Game::nextturn()
 };
 
 void Game::move(const QPoint &currPos, const QPoint &nextPos) {
-    m_whiteplayer->GenerateMoves();
-    m_blackplayer->GenerateMoves();
+    if (m_turn->doMove(currPos, nextPos)) {
+        m_whiteplayer->GenerateMoves();
+        m_blackplayer->GenerateMoves();
 
-    if (m_whiteplayer->numOfMoves() == 0 ||m_blackplayer->numOfMoves() == 0)
-        emit gameOver();
-    else {
-         if (m_turn->doMove(currPos, nextPos)) {
-
-            m_whiteplayer->GenerateMoves();
-            m_blackplayer->GenerateMoves();
-
-            if (m_whiteplayer->numOfMoves() == 0 ||m_blackplayer->numOfMoves() == 0) {
-                emit gameOver();
-                return;
-            }
-            nextturn();
+        if (m_whiteplayer->numOfMoves() == 0 ||m_blackplayer->numOfMoves() == 0) {
+            emit gameOver();
+            return;
         }
+        nextturn();
     }
 }
+
 
 void Game::setBoard(Board* board) {
     m_board = board;

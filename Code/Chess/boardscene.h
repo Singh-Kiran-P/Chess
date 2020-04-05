@@ -6,7 +6,6 @@
 #include "pieceview.h"
 #include "board.h"
 
-#include <QDebug>
 #include <QGraphicsItem>
 #include <QGraphicsScene>
 
