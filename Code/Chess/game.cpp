@@ -1,5 +1,4 @@
 #include "game.h"
-using namespace std;
 
 Game::Game(const QString &p1,const  QString &p2, int vsAI)
 {
@@ -53,6 +52,10 @@ void Game::move(const QPoint &currPos, const QPoint &nextPos) {
         Pawn* promotionPawn = m_board->checkPromotions();
         if (promotionPawn != nullptr)
             emit promote(promotionPawn);
+
+        Piece* checkKing = m_board->checkedKing();
+        if (checkKing != nullptr)
+            emit checkedKing(checkKing->getColor());
 
         m_whiteplayer->GenerateMoves();
         m_blackplayer->GenerateMoves();

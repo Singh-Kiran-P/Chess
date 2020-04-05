@@ -65,6 +65,15 @@ Piece* Board::FindKing(QColor color)
 	return nullptr;
 };
 
+Piece* Board::checkedKing() {
+    for (auto KingColor : {Qt::white, Qt::black}) {
+        Piece* King = FindKing(KingColor);
+        if (!SafePos(King, King->getPos()))
+            return King;
+    }
+    return nullptr;
+}
+
 void Board::move(QPoint current, QPoint next, bool realMove)
 {
     Piece *movingpiece = getPiece(current);

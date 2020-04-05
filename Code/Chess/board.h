@@ -17,6 +17,7 @@ public:
 
     void changePawn(QString type, Pawn *);
     Pawn* checkPromotions();
+    Piece* checkedKing();
 
     void placePieces();
 	~Board();

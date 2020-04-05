@@ -5,6 +5,7 @@ BoardScene::BoardScene(Game* game) {
     m_board = new Board{};
     connect(m_board, SIGNAL(moved(QPoint, QPoint)), this, SLOT(movedpiece(QPoint, QPoint)));
     connect(m_board, SIGNAL(placedPiece(Piece*)), this, SLOT(placePixMap(Piece*)));
+    connect(game, SIGNAL(checkedKing(QColor)), this, SLOT(setCheckEffect(QColor)));
     game->setBoard(m_board);
 
     for (int y = 0; y < 8; y++) {
@@ -37,6 +38,9 @@ BoardScene::BoardScene(Game* game) {
 }
 
 void BoardScene::movedpiece(QPoint curr, QPoint next) {
+    m_whiteKing->setCheckEffect(false);
+    m_blackKing->setCheckEffect(false);
+
     if (m_nexttile == nullptr)
         m_nexttile = getNextItem(next);
     for (auto childPieces : m_nexttile->childItems())
@@ -81,6 +85,13 @@ void BoardScene::placePixMap(Piece* piece) {
     auto PieceItem = new PieceView(piece->getColor(), path);
     auto tile = itemAt(pos, QTransform());
     PieceItem->setParentItem(tile);
+
+    if (piece->getId() == 'K') {
+        if (piece->getColor() == Qt::white)
+            m_whiteKing = PieceItem;
+        else
+            m_blackKing = PieceItem;
+    }
 }
 
 void BoardScene::promotePixMap(QString type, Pawn* pawn) {
@@ -107,6 +118,13 @@ void BoardScene::clearSelection() {
     m_movingpiece = nullptr;
     m_nexttile = nullptr;
     }
+}
+
+void BoardScene::setCheckEffect(QColor color) {
+    if (color == Qt::white)
+        m_whiteKing->setCheckEffect(true);
+    else if (color == Qt::black)
+        m_blackKing->setCheckEffect(true);
 }
 
 PieceView* BoardScene::getMovingPiece(QPoint pos) {

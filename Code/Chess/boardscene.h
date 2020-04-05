@@ -21,6 +21,7 @@ public slots:
     void movedpiece(QPoint, QPoint);
     void placePixMap(Piece*);
     void promotePixMap(QString, Pawn* pawn);
+    void setCheckEffect(QColor);
 
 signals:
     void doMove(PieceView*, QGraphicsRectItem*);
@@ -29,6 +30,8 @@ private:
     Board* m_board;
     PieceView* getMovingPiece(QPoint pos);
     QGraphicsRectItem* getNextItem(QPoint pos);
+    PieceView* m_whiteKing;
+    PieceView* m_blackKing;
     PieceView* m_movingpiece = nullptr;
     QGraphicsRectItem* m_nexttile = nullptr;
 };

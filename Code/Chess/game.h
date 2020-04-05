@@ -23,6 +23,7 @@ public:
 signals:
     void gameOver();
     void promote(Pawn*);
+    void checkedKing(QColor);
 
 private:
     Board* m_board;

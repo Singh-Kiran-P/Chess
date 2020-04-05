@@ -7,7 +7,7 @@
 #include <QGraphicsRectItem>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsDropShadowEffect>
-#include <QString>
+#include <QGraphicsColorizeEffect>
 
 class PieceView : public QGraphicsPixmapItem {
 public:
@@ -16,9 +16,12 @@ public:
     QColor color() const;
     void select();
     void deselect();
+    void setCheckEffect(bool);
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
 private:
     QColor m_color;
+    QGraphicsDropShadowEffect* m_selectEffect;
+    QColor kingTileColor;
 };
 
 #endif // PIECEVIEW_H
