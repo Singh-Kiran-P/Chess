@@ -48,6 +48,7 @@ void Game::nextturn()
 };
 
 void Game::move(const QPoint &currPos, const QPoint &nextPos) {
+    m_turn->GenerateMoves();
     if (m_turn->doMove(currPos, nextPos)) {
         Pawn* promotionPawn = m_board->checkPromotions();
         if (promotionPawn != nullptr)

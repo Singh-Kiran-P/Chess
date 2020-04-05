@@ -37,17 +37,16 @@ BoardScene::BoardScene(Game* game) {
 }
 
 void BoardScene::movedpiece(QPoint curr, QPoint next) {
-    QGraphicsItem* parent = itemAt(next, QTransform());
-    if (auto i = dynamic_cast<QGraphicsPixmapItem*>(parent)) {
-        parent = parent->parentItem();
-        delete itemAt(next, QTransform());
-    }
-    else {
-        for (auto child : parent->childItems())
-            delete child;
-    }
-    for (auto movingpiece : itemAt(curr, QTransform())->childItems())
-        movingpiece->setParentItem(parent);
+    if (m_nexttile == nullptr)
+        m_nexttile = getNextItem(next);
+    for (auto childPieces : m_nexttile->childItems())
+        delete childPieces;
+
+    if (m_movingpiece == nullptr)
+        m_movingpiece = getMovingPiece(curr);
+
+    m_movingpiece->setParentItem(m_nexttile);
+    clearSelection();
 }
 
 void BoardScene::placePixMap(Piece* piece) {
@@ -86,52 +85,71 @@ void BoardScene::placePixMap(Piece* piece) {
 
 void BoardScene::promotePixMap(QString type, Pawn* pawn) {
     QString path = ":/images/";
+
+    if (m_movingpiece == nullptr)
+        m_movingpiece = getMovingPiece(pawn->getPos() * 100);
+
     if (m_movingpiece->color() == Qt::white)
         path += "white/";
     else
         path += "black/";
+
     path += type.toLower();
 
-    if (m_movingpiece == nullptr) {
-        QGraphicsItem* item = itemAt(pawn->getPos()*100, QTransform());
-        if (auto pawnView = dynamic_cast<PieceView*>(item))
-            m_movingpiece = pawnView;
-        else {
-            for (auto pieceView : item->childItems())
-                m_movingpiece = static_cast<PieceView*>(pieceView);
-        }
-    }
     m_movingpiece->setPixmap(path);
     m_board->changePawn(type, pawn);
+    clearSelection();
 }
 
 void BoardScene::clearSelection() {
     if (m_movingpiece != nullptr) {
     m_movingpiece->deselect();
     m_movingpiece = nullptr;
-    m_nextpiece = nullptr;
+    m_nexttile = nullptr;
     }
 }
 
-void BoardScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
-    if (event->button() == Qt::LeftButton) {
-        auto item = itemAt(event->scenePos(), QTransform());
-        if (m_movingpiece != nullptr && m_movingpiece != item) {
-            m_nextpiece = item;
-            emit doMove(m_movingpiece, m_nextpiece);
+PieceView* BoardScene::getMovingPiece(QPoint pos) {
+    QGraphicsItem* selection = itemAt(pos, QTransform());
+    if (auto selectedPiece = dynamic_cast<PieceView*>(selection))
+        return selectedPiece;
+    else {
+        for (auto childPiece : selection->childItems()) {
+            if (auto selectedPiece = dynamic_cast<PieceView*>(childPiece))
+                return selectedPiece;
         }
-        else if (m_movingpiece == item) {
-            m_movingpiece->deselect();
-            m_movingpiece = nullptr;
+    return nullptr;
+    }
+}
+
+QGraphicsRectItem* BoardScene::getNextItem(QPoint pos) {
+    QGraphicsItem* selection = itemAt(pos, QTransform());
+    if (auto selectedSquare = dynamic_cast<QGraphicsRectItem*>(selection))
+        return selectedSquare;
+    else {
+        if (auto parentSquare = dynamic_cast<QGraphicsRectItem*>(selection->parentItem()))
+            return parentSquare;
+        }
+    return nullptr;
+}
+
+void BoardScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
+    QPoint clickPos = event->scenePos().toPoint();
+    if (clickPos.x() < 0 || clickPos.x() > 800 || clickPos.y() < 0 || clickPos.y() > 800)
+        return;
+
+    if (event->button() == Qt::LeftButton) {
+        if (m_movingpiece == nullptr) {
+            m_movingpiece = getMovingPiece(clickPos);
+            if (m_movingpiece != nullptr)
+                m_movingpiece->select();
+        }
+        else if (m_movingpiece == getMovingPiece(clickPos)) {
+                 clearSelection();
         }
         else {
-            if (auto pieceview = dynamic_cast<PieceView*>(item))
-                m_movingpiece = pieceview;
-            else {
-                for (auto child : item->childItems())
-                    m_movingpiece = static_cast<PieceView*>(child);
-            }
-                m_movingpiece->select();
+            m_nexttile = getNextItem(clickPos);
+            doMove(m_movingpiece, m_nexttile);
         }
     }
 }

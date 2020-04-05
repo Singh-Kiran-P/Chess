@@ -35,7 +35,7 @@ public slots:
     void gamestart(int);
     void loadgame();
     void savegame();
-    void move(PieceView* movingpiece, QGraphicsItem* nextpiece);
+    void move(PieceView* movingpiece, QGraphicsRectItem* nextpiece);
     void getPromotionPiece(Pawn*);
     void gameOver();
     void quitgame();

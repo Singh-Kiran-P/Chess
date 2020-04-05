@@ -23,12 +23,14 @@ public slots:
     void promotePixMap(QString, Pawn* pawn);
 
 signals:
-    void doMove(PieceView*, QGraphicsItem*);
+    void doMove(PieceView*, QGraphicsRectItem*);
 
 private:
     Board* m_board;
+    PieceView* getMovingPiece(QPoint pos);
+    QGraphicsRectItem* getNextItem(QPoint pos);
     PieceView* m_movingpiece = nullptr;
-    QGraphicsItem* m_nextpiece = nullptr;
+    QGraphicsRectItem* m_nexttile = nullptr;
 };
 
 #endif // BOARDVIEW_H

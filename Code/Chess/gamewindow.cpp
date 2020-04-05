@@ -127,7 +127,7 @@ void GameWindow::gamestart(int vsAI) {
     connect(game, SIGNAL(promote(Pawn*)), this, SLOT(getPromotionPiece(Pawn*)));
 
     BoardScene* board = new BoardScene{game};
-    connect(board, SIGNAL(doMove(PieceView*, QGraphicsItem*)), this, SLOT(move(PieceView*, QGraphicsItem*)));
+    connect(board, SIGNAL(doMove(PieceView*, QGraphicsRectItem*)), this, SLOT(move(PieceView*, QGraphicsRectItem*)));
     scene = board;
     view->setScene(scene);
 
@@ -135,7 +135,7 @@ void GameWindow::gamestart(int vsAI) {
         game->move();
 }
 
-void GameWindow::move(PieceView* movingpiece, QGraphicsItem* nextpiece) {
+void GameWindow::move(PieceView* movingpiece, QGraphicsRectItem* nextpiece) {
     if (game->currentPlayer()->color() == movingpiece->color()) {
         QPoint currPos = movingpiece->scenePos().toPoint() / 100;
         QPoint nextPos = nextpiece->scenePos().toPoint() / 100;
