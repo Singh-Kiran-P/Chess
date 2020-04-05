@@ -1,6 +1,6 @@
 #include "bishop.h"
 
-bool Bishop::moveRestrictions(Piece *nextpiece, QPoint nextPos)
+bool Bishop::moveRestrictions(const Piece *nextpiece, const QPoint &nextPos)
 {
 
     int curr_x = m_position.x();
@@ -24,4 +24,4 @@ bool Bishop::moveRestrictions(Piece *nextpiece, QPoint nextPos)
 		return false;
 };
 
-Bishop::Bishop(char id, QColor color, QPoint Pos) : Piece(id, color, Pos){};
+Bishop::Bishop(QColor color, QPoint Pos) : Piece('B', color, Pos){};

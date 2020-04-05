@@ -3,8 +3,8 @@
 class Knight : public Piece
 {
 public:
-    bool moveRestrictions(Piece *nextpiece, QPoint nextPos);
-    Knight(char id, QColor color, QPoint Pos);
+    bool moveRestrictions(const Piece *nextpiece, const QPoint &nextPos);
+    Knight(QColor color, QPoint Pos);
 
 private:
 };

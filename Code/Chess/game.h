@@ -1,5 +1,4 @@
 #pragma once
-#include <ctime>
 #include "humanplayer.h"
 #include "AIplayer.h"
 
@@ -8,13 +7,13 @@
 class Game : public QObject
 { Q_OBJECT
 public:
-    Game(QString, QString, int);
+    Game(const QString&, const QString&, int);
 	~Game();
 
 	void nextturn();
     Player* currentPlayer();
-    QString whitePlayer() {return m_whiteplayer->name();};
-    QString blackPlayer() {return m_blackplayer->name();};
+    QString whitePlayer() const {return m_whiteplayer->name();};
+    QString blackPlayer() const {return m_blackplayer->name();};
 
 	void run();
     void move(const QPoint &currPos = QPoint{0, 0}, const QPoint &nextPos = QPoint{0, 0});
@@ -29,5 +28,4 @@ private:
     Player *m_whiteplayer;
     Player *m_blackplayer;
 	Player *m_turn;
-//	Moves m_moves;
 };

@@ -1,6 +1,6 @@
 #include "king.h"
 
-bool King::moveRestrictions(Piece *nextpiece, QPoint nextPos)
+bool King::moveRestrictions(const Piece *nextpiece, const QPoint &nextPos)
 {
 
     int curr_x = m_position.x();
@@ -24,4 +24,4 @@ bool King::moveRestrictions(Piece *nextpiece, QPoint nextPos)
 		return false;
 };
 
-King::King(char id, QColor color, QPoint Pos) : Piece(id, color, Pos){};
+King::King(QColor color, QPoint Pos) : Piece('K', color, Pos){};

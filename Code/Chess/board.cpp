@@ -3,12 +3,11 @@
 void Board::changePawn(Pawn *p)
 {
     QPoint posP = p->getPos();
-    m_board[posP.x()][posP.y()] = new Queen('Q', p->getColor(), posP);
-    emit promoted(p);
+    m_board[posP.x()][posP.y()] = new Queen(p->getColor(), posP);
     delete p;
 };
 
-bool Board::SafePos(Piece *movingpiece, QPoint next)
+bool Board::SafePos(const Piece *movingpiece,const QPoint &next)
 {
     for (int y = 0; y < SIZE_BOARD; y++)
 	{
@@ -63,7 +62,7 @@ void Board::move(QPoint current, QPoint next, bool realMove)
         if (auto pawn = dynamic_cast<Pawn *>(movingpiece)) {
             pawn->increaseTurnCount();
             if (pawn->getPos().y() == 0 || pawn->getPos().y() == SIZE_BOARD - 1)
-                changePawn(pawn);
+                emit promoted(pawn);
         }
     }
 };
@@ -102,7 +101,7 @@ bool Board::Validmove(QPoint current, QPoint next, QColor playercolor)
 		return false;
 };
 
-bool Board::noBlockers(QPoint current, QPoint next) const
+bool Board::noBlockers(const QPoint &current, const QPoint &next) const
 { // Checks every position between current and next for pieces
     int curr_x{current.x()};
     int curr_y{current.y()};
@@ -128,7 +127,7 @@ bool Board::noBlockers(QPoint current, QPoint next) const
 	return true;
 };
 
-Piece *Board::getPiece(QPoint p)
+Piece *Board::getPiece(const QPoint &p) const
 {
     return m_board[p.x()][p.y()];
 };
@@ -151,22 +150,22 @@ void Board::placePieces()
 				PieceColor = Qt::white; // bottom of board is white
             if (y == 1 || y == 6)
 			{
-				p_ptr = new Pawn{'P', PieceColor, tempPos};
+                p_ptr = new Pawn{PieceColor, tempPos};
                 m_board[x][y] = p_ptr;
                 emit placedPiece(p_ptr);
 			}
             else if (y == 0 || y == 7)
 			{
                 if (x == 0 || x == 7) // Rooks
-					p_ptr = new Rook{'R', PieceColor, tempPos};
+                    p_ptr = new Rook{PieceColor, tempPos};
                 else if (x == 1 || x == 6) //Knight
-					p_ptr = new Knight{'N', PieceColor, tempPos};
+                    p_ptr = new Knight{PieceColor, tempPos};
                 else if (x == 2 || x == 5) //Bishop
-					p_ptr = new Bishop{'B', PieceColor, tempPos};
+                    p_ptr = new Bishop{PieceColor, tempPos};
                 else if (x == 3) //Queen
-					p_ptr = new Queen{'Q', PieceColor, tempPos};
+                    p_ptr = new Queen{PieceColor, tempPos};
                 else if (x == 4) //King
-					p_ptr = new King{'K', PieceColor, tempPos};
+                    p_ptr = new King{PieceColor, tempPos};
                 m_board[x][y] = p_ptr;
                 emit placedPiece(p_ptr);
 			}

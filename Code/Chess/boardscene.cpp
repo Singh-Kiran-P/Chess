@@ -5,7 +5,7 @@ BoardScene::BoardScene(Game* game) {
     m_board = new Board{};
     connect(m_board, SIGNAL(moved(QPoint, QPoint)), this, SLOT(movedpiece(QPoint, QPoint)));
     connect(m_board, SIGNAL(placedPiece(Piece*)), this, SLOT(placePixMap(Piece*)));
-    connect(m_board, SIGNAL(promoted(Piece*)), this, SLOT(promotePixMap(Piece*)));
+    connect(m_board, SIGNAL(promoted(Pawn*)), this, SLOT(promotePixMap(Pawn*)));
     game->setBoard(m_board);
 
     for (int y = 0; y < 8; y++) {
@@ -41,14 +41,20 @@ void BoardScene::movedpiece(QPoint curr, QPoint next) {
     QGraphicsItem* parent = itemAt(next, QTransform());
     if (auto i = dynamic_cast<QGraphicsPixmapItem*>(parent)) {
         parent = parent->parentItem();
-        removeItem(itemAt(next, QTransform()));
+        delete itemAt(next, QTransform());
     }
     else {
         for (auto child : parent->childItems())
-            removeItem(child);
+            delete child;
     }
     for (auto movingpiece : itemAt(curr, QTransform())->childItems())
         movingpiece->setParentItem(parent);
+
+    if (m_movingpiece != nullptr) {
+        m_movingpiece->deselect();
+        m_movingpiece = nullptr;
+        m_nextpiece = nullptr;
+    }
 }
 
 void BoardScene::placePixMap(Piece* piece) {
@@ -85,18 +91,23 @@ void BoardScene::placePixMap(Piece* piece) {
     PieceItem->setParentItem(tile);
 }
 
-void BoardScene::promotePixMap(Piece* piece) {
+void BoardScene::promotePixMap(Pawn* toPromote) {
     QString path = ":/images/";
-    if (piece->getColor() == Qt::white)
+    if (toPromote->getColor() == Qt::white)
         path += "white/queen.png";
     else
         path += "black/queen.png";
 
-    auto tile = itemAt(piece->getPos() * 100, QTransform());
-    PieceView* pawn = new PieceView(piece->getColor(), path);
-    for (auto child : tile->childItems())
-        delete child;
-    pawn->setParentItem(tile);
+    auto item = itemAt(toPromote->getPos() * 100, QTransform());
+    if (auto pawnview = dynamic_cast<PieceView*>(item))
+        pawnview->setPixmap(path);
+    else {
+        for (auto child : item->childItems()) {
+            auto pawnview = static_cast<PieceView*>(child);
+            pawnview->setPixmap(path);
+        }
+    m_board->changePawn(toPromote);
+    }
 }
 
 void BoardScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
@@ -104,22 +115,22 @@ void BoardScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
         auto item = itemAt(event->scenePos(), QTransform());
         if (m_movingpiece != nullptr && m_movingpiece != item) {
             m_nextpiece = item;
-            emit doMove(static_cast<PieceView*>(m_movingpiece), m_nextpiece);
+            emit doMove(m_movingpiece, m_nextpiece);
+        }
+        else if (m_movingpiece == item) {
+            m_movingpiece->deselect();
             m_movingpiece = nullptr;
             m_nextpiece = nullptr;
         }
-        else if (m_movingpiece == item) {
-            m_movingpiece = nullptr;
-        }
         else {
-            if (auto i = dynamic_cast<PieceView*>(item)) {
-                m_movingpiece = i;
-            }
+            if (auto pieceview = dynamic_cast<PieceView*>(item))
+                m_movingpiece = pieceview;
             else {
-                for (auto child : item->childItems()) {
+                for (auto child : item->childItems())
                     m_movingpiece = static_cast<PieceView*>(child);
-                }
             }
+            if (m_movingpiece != nullptr)
+                m_movingpiece->select();
         }
     }
 }

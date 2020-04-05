@@ -6,11 +6,6 @@ GameWindow::GameWindow(QWidget *parent) : QMainWindow(parent) {
 }
 
 void GameWindow::mainMenu() {
-    if (scene != nullptr) {
-        scene->clear();
-        delete scene;
-    }
-
     scene = new QGraphicsScene{};
     view = new QGraphicsView{scene};
 
@@ -51,6 +46,8 @@ void GameWindow::loadgame() {
 
 void GameWindow::newgame() {
     scene->clear();
+    delete game;
+    game = nullptr;
 
     int xButtonPos;
     Button* PlayerButton = new Button("Player vs. Player");
@@ -82,13 +79,16 @@ void GameWindow::newgame() {
 
 void GameWindow::gamestart(int vsAI) {
     QString player1;
-    while (player1.isEmpty())
-        player1 = QInputDialog::getText(nullptr, "Input player name", "Player 1's name", QLineEdit::Normal, "", nullptr, Qt::MSWindowsFixedSizeDialogHint | Qt::WindowSystemMenuHint | Qt::WindowTitleHint);
-
+    player1 = QInputDialog::getText(nullptr, "Input player name", "Player 1's name", QLineEdit::Normal, "", nullptr, Qt::MSWindowsFixedSizeDialogHint | Qt::WindowSystemMenuHint | Qt::WindowTitleHint);
+    if (player1 == "") {
+        return;
+    }
     QString player2;
     if (vsAI == 0) {
-        while (player2.isEmpty())
-            player2 = QInputDialog::getText(nullptr, "Input player name", "Player 2's name",  QLineEdit::Normal, "", nullptr, Qt::MSWindowsFixedSizeDialogHint | Qt::WindowSystemMenuHint | Qt::WindowTitleHint);
+        player2 = QInputDialog::getText(nullptr, "Input player name", "Player 2's name",  QLineEdit::Normal, "", nullptr, Qt::MSWindowsFixedSizeDialogHint | Qt::WindowSystemMenuHint | Qt::WindowTitleHint);
+        if (player2 == "") {
+            return;
+        }
     }
     else
         player2 = "AI";
@@ -96,8 +96,6 @@ void GameWindow::gamestart(int vsAI) {
     game = new Game{player1, player2, vsAI};
     connect(game, SIGNAL(gameOver()), this, SLOT(gameOver()));
 
-    scene->clear();
-    delete scene;
     BoardScene* board = new BoardScene{game};
     connect(board, SIGNAL(doMove(PieceView*, QGraphicsItem*)), this, SLOT(move(PieceView*, QGraphicsItem*)));
     scene = board;
@@ -125,6 +123,7 @@ void GameWindow::gameOver() {
 }
 
 void GameWindow::backButton() {
+    delete scene;
     mainMenu();
 }
 

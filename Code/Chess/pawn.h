@@ -7,9 +7,9 @@ public:
 	int turnCount() const;
 	void increaseTurnCount();
 
-    bool moveRestrictions(Piece *nextpiece, QPoint nextPos);
+    bool moveRestrictions(const Piece *nextpiece, const QPoint &nextPos);
 
-    Pawn(char id, QColor color, QPoint Pos);
+    Pawn(QColor color, QPoint Pos);
 
 private:
 	int m_turnCount = 0;

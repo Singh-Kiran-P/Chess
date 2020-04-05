@@ -1,6 +1,6 @@
 #include "queen.h"
 
-bool Queen::moveRestrictions(Piece *nextpiece, QPoint nextPos)
+bool Queen::moveRestrictions(const Piece *nextpiece, const QPoint &nextPos)
 {
 
     int curr_x = m_position.x();
@@ -24,4 +24,4 @@ bool Queen::moveRestrictions(Piece *nextpiece, QPoint nextPos)
 		return false;
 };
 
-Queen::Queen(char id, QColor color, QPoint Pos) : Piece(id, color, Pos){};
+Queen::Queen(QColor color, QPoint Pos) : Piece('Q', color, Pos){};

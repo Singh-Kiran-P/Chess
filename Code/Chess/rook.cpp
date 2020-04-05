@@ -1,6 +1,6 @@
 #include "rook.h"
 
-bool Rook::moveRestrictions(Piece *nextpiece, QPoint nextPos)
+bool Rook::moveRestrictions(const Piece *nextpiece, const QPoint &nextPos)
 {
 
     int curr_x = m_position.x();
@@ -24,4 +24,4 @@ bool Rook::moveRestrictions(Piece *nextpiece, QPoint nextPos)
 		return false;
 };
 
-Rook::Rook(char id, QColor color, QPoint Pos) : Piece(id, color, Pos){};
+Rook::Rook(QColor color, QPoint Pos) : Piece('R', color, Pos){};

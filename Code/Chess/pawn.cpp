@@ -10,7 +10,7 @@ void Pawn::increaseTurnCount()
 	m_turnCount++;
 };
 
-bool Pawn::moveRestrictions(Piece *nextpiece, QPoint nextPos)
+bool Pawn::moveRestrictions(const Piece *nextpiece, const QPoint &nextPos)
 {
 
     int curr_x = m_position.x();
@@ -60,4 +60,4 @@ bool Pawn::moveRestrictions(Piece *nextpiece, QPoint nextPos)
 	return false;
 };
 
-Pawn::Pawn(char id, QColor color, QPoint Pos) : Piece(id, color, Pos){};
+Pawn::Pawn(QColor color, QPoint Pos) : Piece('P', color, Pos){};

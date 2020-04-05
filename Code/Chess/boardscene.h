@@ -20,7 +20,7 @@ public:
 public slots:
     void movedpiece(QPoint, QPoint);
     void placePixMap(Piece*);
-    void promotePixMap(Piece*);
+    void promotePixMap(Pawn*);
 
 signals:
     void doMove(PieceView*, QGraphicsItem*);

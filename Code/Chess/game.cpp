@@ -1,14 +1,14 @@
 #include "game.h"
 using namespace std;
 
-Game::Game(QString p1, QString p2, int vsAI)
+Game::Game(const QString &p1,const  QString &p2, int vsAI)
 {
     Player* player1 = new HumanPlayer{p1, m_board};
-    Player* player2 = new HumanPlayer{p2, m_board};
+    Player* player2;;
     if(vsAI == 1) {
-        delete player2;
         player2 = new AIPlayer{"AI", m_board};
     }
+    else player2 = new HumanPlayer{p2, m_board};
 
     srand((unsigned int)time(nullptr)); // Use current time for random seed
     int coinflip{rand() % 2};

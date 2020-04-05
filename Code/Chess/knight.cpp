@@ -1,6 +1,6 @@
 #include "knight.h"
 
-bool Knight::moveRestrictions(Piece *nextpiece, QPoint nextPos)
+bool Knight::moveRestrictions(const Piece *nextpiece, const QPoint &nextPos)
 {
 
     int curr_x = m_position.x();
@@ -24,4 +24,4 @@ bool Knight::moveRestrictions(Piece *nextpiece, QPoint nextPos)
 		return false;
 };
 
-Knight::Knight(char id, QColor color, QPoint Pos) : Piece(id, color, Pos){};
+Knight::Knight(QColor color, QPoint Pos) : Piece('N', color, Pos){};

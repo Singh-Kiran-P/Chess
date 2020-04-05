@@ -20,8 +20,7 @@ public:
     bool Validmove(QPoint current, QPoint next, QColor playercolor);
     void move(QPoint current, QPoint next, bool realMove = false);
 
-//	void printBoard() const;
-    Piece *getPiece(QPoint p);
+    void changePawn(Pawn *);
 
     void placePieces();
 	~Board();
@@ -29,14 +28,14 @@ public:
 signals:
     void moved(QPoint, QPoint);
     void placedPiece(Piece*);
-    void promoted(Piece*);
+    void promoted(Pawn*);
 
 private:
 	static const int SIZE_BOARD = 8;
 
 	Piece *m_board[SIZE_BOARD][SIZE_BOARD];
-    void changePawn(Pawn *);
+    Piece *getPiece(const QPoint &p) const;
 	Piece *FindKing(QColor color);
-    bool SafePos(Piece *movingpiece, QPoint next);
-    bool noBlockers(QPoint current, QPoint next) const;
+    bool SafePos(const Piece *movingpiece, const QPoint &next);
+    bool noBlockers(const QPoint &current,const QPoint &next) const;
 };

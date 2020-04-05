@@ -37,7 +37,7 @@ public slots:
 private:
     QGraphicsScene* scene = nullptr;
     QGraphicsView* view = nullptr;
-    Game* game;
+    Game* game = nullptr;
 
 };
 

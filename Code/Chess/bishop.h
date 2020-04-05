@@ -4,9 +4,9 @@
 class Bishop : public Piece
 {
 public:
-    bool moveRestrictions(Piece *nextpiece, QPoint nextPos);
+    bool moveRestrictions(const Piece *nextpiece, const QPoint &nextPos);
 
-    Bishop(char id, QColor color, QPoint Pos);
+    Bishop(QColor color, QPoint Pos);
 
 private:
 };

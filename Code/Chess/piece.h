@@ -10,7 +10,7 @@ public:
     void setPos(QPoint p);
 
 	char getId();
-    virtual bool moveRestrictions(Piece *nextpiece, QPoint nextPos) = 0;
+    virtual bool moveRestrictions(const Piece *nextpiece, const QPoint &nextPos) = 0;
 
     Piece(char id, QColor color, QPoint Pos);
 
