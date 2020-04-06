@@ -1,10 +1,10 @@
 #include "game.h"
 
-Game::Game(const QString &p1,const  QString &p2, int vsAI)
+Game::Game(const QString &p1,const  QString &p2, bool vsAI)
 {
     Player* player1 = new HumanPlayer{p1, m_board};
     Player* player2;;
-    if(vsAI == 1) {
+    if(vsAI) {
         player2 = new AIPlayer{"AI", m_board};
     }
     else player2 = new HumanPlayer{p2, m_board};
@@ -60,11 +60,10 @@ void Game::move(const QPoint &currPos, const QPoint &nextPos) {
         m_whiteplayer->GenerateMoves();
         m_blackplayer->GenerateMoves();
 
-        if (m_whiteplayer->numOfMoves() == 0 ||m_blackplayer->numOfMoves() == 0) {
+        if (m_whiteplayer->numOfMoves() == 0 ||m_blackplayer->numOfMoves() == 0)
             emit gameOver();
-            return;
-        }
-        nextturn();
+        else
+            nextturn();
     }
 }
 

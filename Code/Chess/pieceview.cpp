@@ -32,11 +32,11 @@ void PieceView::deselect() {
 
 void PieceView::setCheckEffect(bool toggle) {
     auto parent = static_cast<QGraphicsRectItem*>(parentItem());
-    if (parent->brush().color() != Qt::darkRed)
+    if (parent->brush().color() != QColor{255, 50, 75})
         kingTileColor = parent->brush().color();
 
     if (toggle) {
-        parent->setBrush(Qt::darkRed);
+        parent->setBrush(QColor{255, 50, 75});
     }
     else {
         parent->setBrush(kingTileColor);

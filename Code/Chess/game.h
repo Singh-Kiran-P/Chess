@@ -7,7 +7,7 @@
 class Game : public QObject
 { Q_OBJECT
 public:
-    Game(const QString&, const QString&, int);
+    Game(const QString&, const QString&, bool);
 	~Game();
 
 	void nextturn();

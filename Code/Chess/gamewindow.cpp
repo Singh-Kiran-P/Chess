@@ -7,13 +7,15 @@ GameWindow::GameWindow(QWidget *parent) : QMainWindow(parent) {
 
 void GameWindow::buildMenuBar() {
     QAction* menuSave = new QAction("save");
-    QAction* menuLoad = new QAction("load");
-    QAction* menuQuit = new QAction("quit");
     menuBar()->addAction(menuSave);
-    menuBar()->addAction(menuLoad);
-    menuBar()->addAction(menuQuit);
     connect(menuSave, SIGNAL(triggered()), this, SLOT(savegame()));
+
+    QAction* menuLoad = new QAction("load");
+    menuBar()->addAction(menuLoad);
     connect(menuLoad, SIGNAL(triggered()), this, SLOT(loadgame()));
+
+    QAction* menuQuit = new QAction("quit");
+    menuBar()->addAction(menuQuit);
     connect(menuQuit, SIGNAL(triggered()), this, SLOT(quitgame()));
 }
 
@@ -81,22 +83,14 @@ void GameWindow::newgame() {
     Button* PlayerButton = new Button("Player vs. Player");
     xButtonPos = view->sceneRect().width()/2 - PlayerButton->boundingRect().width()/2;
     PlayerButton->setPos(xButtonPos, 250);
-
-    QSignalMapper *PlayerMap = new QSignalMapper;
-    connect(PlayerMap, SIGNAL(mapped(int)), this, SLOT(gamestart(int)));
-    connect(PlayerButton, SIGNAL(pressed()), PlayerMap, SLOT(map()));
-    PlayerMap->setMapping(PlayerButton, 0);
     scene->addItem(PlayerButton);
+    connect(PlayerButton, &Button::pressed, [=] { gamestart(false); });
 
     Button* AIButton = new Button("Player vs. AI");
     xButtonPos = view->sceneRect().width()/2 - PlayerButton->boundingRect().width()/2;
     AIButton->setPos(xButtonPos, 350);
-
-    QSignalMapper *AIMap = new QSignalMapper;
-    connect(AIMap, SIGNAL(mapped(int)), this, SLOT(gamestart(int)));
-    connect(AIButton, SIGNAL(pressed()), AIMap, SLOT(map()));
-    AIMap->setMapping(AIButton, 1);
     scene->addItem(AIButton);
+    connect(AIButton, &Button::pressed, [=] { gamestart(true); });
 
     Button* backButton = new Button("Back");
     connect(backButton, SIGNAL(pressed()), this, SLOT(backButton()));
@@ -105,7 +99,7 @@ void GameWindow::newgame() {
     scene->addItem(backButton);
 }
 
-void GameWindow::gamestart(int vsAI) {
+void GameWindow::gamestart(bool vsAI) {
     QString player1;
     player1 = QInputDialog::getText(nullptr, "Input player name", "Player 1's name", QLineEdit::Normal, "", nullptr, Qt::MSWindowsFixedSizeDialogHint | Qt::WindowSystemMenuHint | Qt::WindowTitleHint);
     if (player1 == "") {
@@ -140,11 +134,10 @@ void GameWindow::move(PieceView* movingpiece, QGraphicsRectItem* nextpiece) {
         QPoint currPos = movingpiece->scenePos().toPoint() / 100;
         QPoint nextPos = nextpiece->scenePos().toPoint() / 100;
         game->move(currPos, nextPos);
-
-        if (gameStarted) {
-            auto boardScene = static_cast<BoardScene*>(scene);
-            boardScene->clearSelection();
         }
+    if (gameStarted) {
+        auto boardScene = static_cast<BoardScene*>(scene);
+        boardScene->clearSelection();
     }
 }
 
@@ -152,11 +145,10 @@ void GameWindow::getPromotionPiece(Pawn* pawn) {
     QString selection = "Queen";
     if (auto humanplayer = dynamic_cast<HumanPlayer*>(game->currentPlayer())) {
         QMessageBox ChoosePromotion{QMessageBox::NoIcon, "Promotion", "Pick a piece to promote your pawn to:"};
-        QPushButton* queenButton = ChoosePromotion.addButton("Queen", QMessageBox::AcceptRole);
+        ChoosePromotion.addButton("Queen", QMessageBox::AcceptRole);
         ChoosePromotion.addButton("Rook", QMessageBox::AcceptRole);
         ChoosePromotion.addButton("Knight", QMessageBox::AcceptRole);
         ChoosePromotion.addButton("Bishop", QMessageBox::AcceptRole);
-        ChoosePromotion.setEscapeButton(queenButton);
         ChoosePromotion.show();
         ChoosePromotion.exec();
         selection = ChoosePromotion.clickedButton()->text();

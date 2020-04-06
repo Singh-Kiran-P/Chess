@@ -10,14 +10,11 @@
 #include "boardscene.h"
 #include "tileview.h"
 
-#include <QDebug>
 #include <QGraphicsView>
-#include <QSignalMapper>
 #include <QGraphicsScene>
 #include <QMessageBox>
 #include <QInputDialog>
 #include <QPushButton>
-#include <QDialog>
 
 class GameWindow : public QMainWindow
 {
@@ -32,7 +29,7 @@ public:
 public slots:
 
     void newgame();
-    void gamestart(int);
+    void gamestart(bool);
     void loadgame();
     void savegame();
     void move(PieceView* movingpiece, QGraphicsRectItem* nextpiece);
