@@ -5,12 +5,12 @@ QColor Piece::getColor() const
 	return m_color;
 };
 
-QPoint Piece::getPos()
+QPoint Piece::getPos() const
 {
 	return m_position;
 };
 
-void Piece::setPos(QPoint p)
+void Piece::setPos(const QPoint &p)
 {
 	m_position = p;
 };
