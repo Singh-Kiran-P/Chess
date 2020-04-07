@@ -1,6 +1,6 @@
 #include "board.h"
 
-void Board::changePawn(QString type, Pawn *p)
+void Board::changePawn(const QString &type, const Pawn *p)
 {
     QPoint posP = p->getPos();
     if (type == "Queen")
@@ -49,7 +49,7 @@ bool Board::SafePos(const Piece *movingpiece,const QPoint &next)
 	return true;
 };
 
-Piece* Board::FindKing(QColor color)
+Piece* Board::FindKing(const QColor &color)
 {
     for (int y = 0; y < SIZE_BOARD; y++)
     {
@@ -74,7 +74,7 @@ Piece* Board::checkedKing() {
     return nullptr;
 }
 
-void Board::move(QPoint current, QPoint next, bool realMove)
+void Board::move(const QPoint &current, const QPoint &next, bool realMove)
 {
     Piece *movingpiece = getPiece(current);
     Piece *nextpiece = getPiece(next);
@@ -91,7 +91,7 @@ void Board::move(QPoint current, QPoint next, bool realMove)
     }
 };
 
-bool Board::Validmove(QPoint current, QPoint next, QColor playercolor)
+bool Board::Validmove(const QPoint &current, const QPoint &next, const QColor &playercolor)
 {
     Piece *movingpiece = getPiece(current);
     Piece *nextpiece = getPiece(next);

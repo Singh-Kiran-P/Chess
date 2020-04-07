@@ -12,10 +12,10 @@
 class Board : public QObject {
     Q_OBJECT
 public:
-    bool Validmove(QPoint current, QPoint next, QColor playercolor);
-    void move(QPoint current, QPoint next, bool realMove = false);
+    bool Validmove(const QPoint &current, const QPoint &next, const QColor &playercolor);
+    void move(const QPoint &current, const QPoint &next, bool realMove = false);
 
-    void changePawn(QString type, Pawn *);
+    void changePawn(const QString &type, const Pawn *);
     Pawn* checkPromotions();
     Piece* checkedKing();
 
@@ -31,7 +31,7 @@ private:
 
 	Piece *m_board[SIZE_BOARD][SIZE_BOARD];
     Piece *getPiece(const QPoint &p) const;
-	Piece *FindKing(QColor color);
+    Piece *FindKing(const QColor &color);
     bool SafePos(const Piece *movingpiece, const QPoint &next);
     bool noBlockers(const QPoint &current,const QPoint &next) const;
 };

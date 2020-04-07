@@ -42,7 +42,7 @@ void BoardScene::movedpiece(QPoint curr, QPoint next) {
     m_blackKing->setCheckEffect(false);
 
     if (m_nexttile == nullptr)
-        m_nexttile = getNextItem(next);
+        m_nexttile = getNextTile(next);
     for (auto childPieces : m_nexttile->childItems())
         delete childPieces;
 
@@ -127,7 +127,7 @@ void BoardScene::setCheckEffect(QColor color) {
         m_blackKing->setCheckEffect(true);
 }
 
-PieceView* BoardScene::getMovingPiece(QPoint pos) {
+PieceView* BoardScene::getMovingPiece(const QPoint &pos) {
     QGraphicsItem* selection = itemAt(pos, QTransform());
     if (auto selectedPiece = dynamic_cast<PieceView*>(selection))
         return selectedPiece;
@@ -140,7 +140,7 @@ PieceView* BoardScene::getMovingPiece(QPoint pos) {
     }
 }
 
-QGraphicsRectItem* BoardScene::getNextItem(QPoint pos) {
+QGraphicsRectItem* BoardScene::getNextTile(const QPoint &pos) {
     QGraphicsItem* selection = itemAt(pos, QTransform());
     if (auto selectedSquare = dynamic_cast<QGraphicsRectItem*>(selection))
         return selectedSquare;
@@ -166,7 +166,7 @@ void BoardScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
                  clearSelection();
         }
         else {
-            m_nexttile = getNextItem(clickPos);
+            m_nexttile = getNextTile(clickPos);
             doMove(m_movingpiece, m_nexttile);
         }
     }

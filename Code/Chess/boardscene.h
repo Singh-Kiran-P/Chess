@@ -14,13 +14,13 @@ class BoardScene : public QGraphicsScene
     Q_OBJECT
 public:
     BoardScene(Game* game);
-    void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);
+    void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) override;
+    void promotePixMap(QString, Pawn* pawn);
     void clearSelection();
 
 public slots:
     void movedpiece(QPoint, QPoint);
     void placePixMap(Piece*);
-    void promotePixMap(QString, Pawn* pawn);
     void setCheckEffect(QColor);
 
 signals:
@@ -28,8 +28,8 @@ signals:
 
 private:
     Board* m_board;
-    PieceView* getMovingPiece(QPoint pos);
-    QGraphicsRectItem* getNextItem(QPoint pos);
+    PieceView* getMovingPiece(const QPoint &pos);
+    QGraphicsRectItem* getNextTile(const QPoint &pos);
     PieceView* m_whiteKing;
     PieceView* m_blackKing;
     PieceView* m_movingpiece = nullptr;

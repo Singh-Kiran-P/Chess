@@ -27,7 +27,6 @@ public:
     void mainMenuButtons();
 
 public slots:
-
     void newgame();
     void gamestart(bool);
     void loadgame();

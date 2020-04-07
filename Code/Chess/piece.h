@@ -6,8 +6,8 @@ class Piece
 {
 public:
 	QColor getColor() const;
-    QPoint getPos();
-    void setPos(QPoint p);
+    QPoint getPos() const;
+    void setPos(const QPoint &p);
 
 	char getId();
     virtual bool moveRestrictions(const Piece *nextpiece, const QPoint &nextPos) = 0;

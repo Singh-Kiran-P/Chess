@@ -15,7 +15,6 @@ public:
     QString whitePlayer() const {return m_whiteplayer->name();};
     QString blackPlayer() const {return m_blackplayer->name();};
 
-	void run();
     void move(const QPoint &currPos = QPoint{0, 0}, const QPoint &nextPos = QPoint{0, 0});
 
     void setBoard(Board* board);
